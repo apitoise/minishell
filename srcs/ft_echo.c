@@ -13,7 +13,29 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-int	ft_echo(char **cmd)
+static void	print_var(const char *res, t_varlist **lst)
+{
+	int			i;
+	t_varlist	*current;
+
+	i = 0;
+	if (!res[i])
+		ft_putchar_fd('$', 1);
+	if (*lst == NULL)
+		return ;
+	while (current->next)
+	{
+		if (!ft_strcmp(res, current->name))
+			ft_putstr_fd(current->content, 1);
+		else
+			current = current->next;
+	}
+	if (!ft_strcmp(res, current->name))
+		ft_putstr_fd(current->content, 1);
+	return ;
+}
+
+int	ft_echo(char **cmd, t_varlist **lst)
 {
 	int	i;
 	int n;
@@ -27,7 +49,10 @@ int	ft_echo(char **cmd)
 	while (cmd[i])
 	{
 		res = ft_trim(cmd[i]);
-		ft_putstr_fd(res, 2);
+		if (res[0] == '$')
+			print_var(res + 1, lst);
+		else
+			ft_putstr_fd(res, 2);
 		if (cmd[i + 1])
 			ft_putstr_fd(" ", 1);
 		free(res);

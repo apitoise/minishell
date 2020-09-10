@@ -33,7 +33,7 @@ void					print_tab(char **map);
 void					shell_init(void);
 void					init_struct(t_struct *st, char **env);
 void					ft_cd(char *path);
-int						ft_echo(char **cmd);
+int						ft_echo(char **cmd, t_varlist **lst);
 void					ft_exit(char **cmd);
 int						ft_pwd(char **cmd);
 int						ft_unset(t_struct *st);

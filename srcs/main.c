@@ -56,7 +56,7 @@ void	if_builtin(t_struct *st)
 	if (!ft_strcmp(st->cmd[0], "pwd"))
 		ft_pwd(st->cmd);
 	else if (!ft_strcmp(st->cmd[0], "echo"))
-		ft_echo(st->cmd);
+		ft_echo(st->cmd, &st->lst);
 	else if (!ft_strcmp(st->cmd[0], "exit"))
 		ft_exit(st->cmd);
 	else if (!ft_strcmp(st->cmd[0], "env"))

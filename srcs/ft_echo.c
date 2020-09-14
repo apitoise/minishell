@@ -13,12 +13,21 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-static void	print_var(const char *res, t_varlist **lst)
+static void	print_ret(t_struct *st)
+{
+	ft_putnbr_fd(st->ret, 1);
+	st->ret = 0;
+	return ;
+}
+
+static void	print_var(const char *res, t_varlist **lst, t_struct *st)
 {
 	int			i;
 	t_varlist	*current;
 
 	i = 0;
+	if (res[i] == '?')
+		return (print_ret(st));
 	if (!res[i])
 		ft_putchar_fd('$', 1);
 	if (*lst == NULL)
@@ -35,7 +44,7 @@ static void	print_var(const char *res, t_varlist **lst)
 	return ;
 }
 
-int	ft_echo(char **cmd, t_varlist **lst)
+int	ft_echo(char **cmd, t_varlist **lst, t_struct *st)
 {
 	int	i;
 	int n;
@@ -50,7 +59,7 @@ int	ft_echo(char **cmd, t_varlist **lst)
 	{
 		res = ft_trim(cmd[i]);
 		if (res[0] == '$')
-			print_var(res + 1, lst);
+			print_var(res + 1, lst, st);
 		else
 			ft_putstr_fd(res, 2);
 		if (cmd[i + 1])
@@ -60,5 +69,6 @@ int	ft_echo(char **cmd, t_varlist **lst)
 	}
 	if (!n)
 		ft_putstr_fd("\n", 1);
+	st->ret = 0;
 	return (0);
 }

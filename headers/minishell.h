@@ -26,14 +26,15 @@ typedef struct			s_struct
 	char				**cmd;
 	char				**env;
 	t_varlist			*lst;
+	int					ret;
 }						t_struct;
 
 void					print_tab(char **map);
 
 void					shell_init(void);
 void					init_struct(t_struct *st, char **env);
-void					ft_cd(char *path);
-int						ft_echo(char **cmd, t_varlist **lst);
+void					ft_cd(char *path, t_struct *st);
+int						ft_echo(char **cmd, t_varlist **lst, t_struct *st);
 void					ft_exit(char **cmd);
 int						ft_pwd(char **cmd);
 int						ft_unset(t_struct *st);

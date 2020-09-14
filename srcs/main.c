@@ -28,35 +28,12 @@ int		isok(t_struct *st, char *str)
 		return (0);
 }
 
-/*
-int		ft_dispatcher(t_struct *st)
-{
-	static char commande[7][7] = {{"cd"}, {"echo"}, {"pwd"}, {"export"}, {"unset"}, {"env"}, {"exit"}};
-	static int (*fct[7])(t_struct *st) = {ft_cd, ft_echo, ft_pwd, ft_export, ft_unset, ft_env, ft_exit}; // fonction a cree par la suite
-	int i;
-
-	i = 0;
-	while (i < 7)
-	{
-		if (!(ft_strcmp(st->s, commande[i])))
-		{
-			if (!(isok(st, commande[i])))
-				return ((fct[i])(st));
-			else
-				return (ft_error(st->s));
-		}
-		else
-			i++;
-	}
-	return (ft_error(st->s));
-}*/
-
 void	if_builtin(t_struct *st)
 {
 	if (!ft_strcmp(st->cmd[0], "pwd"))
 		ft_pwd(st->cmd);
 	else if (!ft_strcmp(st->cmd[0], "echo"))
-		ft_echo(st->cmd, &st->lst);
+		ft_echo(st->cmd, &st->lst, st);
 	else if (!ft_strcmp(st->cmd[0], "exit"))
 		ft_exit(st->cmd);
 	else if (!ft_strcmp(st->cmd[0], "env"))
@@ -64,7 +41,7 @@ void	if_builtin(t_struct *st)
 	else if (!ft_strcmp(st->cmd[0], "unset"))
 		ft_unset(st);
 	else if (!ft_strcmp(st->cmd[0], "cd"))
-		ft_cd(st->cmd[1]);
+		ft_cd(st->cmd[1], st);
 	else if (ft_strchr(st->cmd[0], '='))
 		ft_export(st->cmd, &st->lst, 1);
 	else if (!ft_strcmp(st->cmd[0], "export"))
@@ -74,6 +51,7 @@ void	if_builtin(t_struct *st)
 		ft_putstr_fd("bash: ", 1);
 		ft_putstr_fd(st->cmd[0], 1);
 		ft_putstr_fd(" command not found\n", 1);
+		st->ret = 127;
 	}
 }
 
@@ -108,11 +86,6 @@ int		main(int ac, char **av, char **env)
 		{
 			st.cmd = ft_split(tmp, ' ');
 			if_builtin(&st);
-			//if (st.cmd[0] == NULL)
-			//	ft_error("");
-			//print_map(st.cmd);
-			//ft_dispatcher(&st);
-			//free(st.s);
 			shell_init();
 		}
 	}

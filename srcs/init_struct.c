@@ -19,5 +19,6 @@ void	init_struct(t_struct *st, char **env)
 	st->cmd = NULL;
 	st->lst = NULL;
 	st->env = get_env(env);
+	st->ret = 0;
 	return ;
 }

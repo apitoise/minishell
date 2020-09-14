@@ -13,7 +13,18 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-void	ft_cd(char *path)
+void	ft_cd(char *path, t_struct *st)
 {
-	chdir(path);
+	int		test;
+
+	test = chdir(path);
+	if (test == -1 && path)
+	{
+		ft_putstr_fd("bash: cd: ", 1);
+		ft_putstr_fd(path, 1);
+		ft_putstr_fd(": ", 1);
+		ft_putstr_fd(strerror(errno), 1);
+		ft_putchar_fd('\n', 1);
+		st->ret = 1;
+	}
 }

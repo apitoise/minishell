@@ -20,3 +20,11 @@ int		ft_error(char *s)
     ft_putstr_fd("\n", 2);
 	return (errno);
 }
+
+void	not_cmd(char *str, t_struct *st)
+{
+		ft_putstr_fd("bash: ", 1);
+		ft_putstr_fd(str, 1);
+		ft_putstr_fd(" : command not found\n", 1);
+		st->ret = 127;
+}

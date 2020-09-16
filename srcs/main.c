@@ -22,7 +22,8 @@ int		isok(t_struct *st, char *str)
 	i = ft_strlen(st->s) - 1;
 	if (i == len)
 		return (0);
-	if (i > len && (st->s[len + 1] != '\n' || st->s[len + 1] != ' ' || st->s[len + 1] != '\0'))
+	if (i > len && (st->s[len + 1] != '\n'
+		|| st->s[len + 1] != ' ' || st->s[len + 1] != '\0'))
 		return (1);
 	else
 		return (0);
@@ -43,31 +44,12 @@ void	if_builtin(t_struct *st)
 	else if (!ft_strcmp(st->cmd[0], "cd"))
 		ft_cd(st->cmd[1], st);
 	else if (ft_strchr(st->cmd[0], '='))
-		ft_export(st->cmd, &st->lst, 1);
+		ft_export(st, 1);
 	else if (!ft_strcmp(st->cmd[0], "export"))
-		ft_export(st->cmd, &st->lst, 2);
+		ft_export(st, 2);
 	else
-	{
-		ft_putstr_fd("bash: ", 1);
-		ft_putstr_fd(st->cmd[0], 1);
-		ft_putstr_fd(" command not found\n", 1);
-		st->ret = 127;
-	}
+		not_cmd(st->cmd[0], st);
 }
-
-void print_tab(char **map)
-{
-    int i;
-
-    i = 0;
-    if (!map)
-        return ;
-    while (map && map[i])
-    {
-        ft_putendl_fd(map[i++], 1);
-    }
-}
-
 
 int		main(int ac, char **av, char **env)
 {

@@ -13,6 +13,14 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
+void			ft_free(char **cmd, t_varlist **lst, int f)
+{
+	(void)cmd;
+	(void)lst;
+	(void)f;
+	printf("OK\n");
+}
+
 void 			printList(t_varlist **lst)
 {
 	t_varlist	*current;
@@ -58,6 +66,41 @@ static int		is_ok(char c)
 		return (1);
 } 
 
+static int			check_error(t_struct *st, int f)
+{
+	int	i;
+
+	i = 0;
+	while (st->cmd[f])
+	{
+		if (st->cmd[f][0] == '=')
+		{
+			not_cmd(st->cmd[f], st);
+			return (1);
+		}
+		else
+		{
+			while (st->cmd[f][i] != '=' && st->cmd[f][i])
+			{
+				if (!is_ok(st->cmd[f][i]))
+					i++;
+				else
+				{
+					not_cmd(st->cmd[f], st);
+					return (1);
+				}
+			}
+			if (st->cmd[f][i] == '\0')
+			{
+				not_cmd(st->cmd[f], st);
+				return (1);
+			}
+			f++;
+		}
+	}
+	return (0);
+}
+
 static int		is_same(char *str, t_varlist **lst)
 {
 	t_varlist	*current;
@@ -92,54 +135,65 @@ static void		modif_list(char *name, char *content, t_varlist **lst)
 	free(name);
 }
 
-void			create_elem(char **cmd, t_varlist **lst, int f)
+void			create_elem(int f, t_struct *st)
 {
 	int			i;
 	int			j;
 	char		*name;
 	char		*content;
 
-	i = 0;
-	while (cmd[f][i] != '=')
+	if (!(check_error(st, f)))
 	{
-		if (!is_ok(cmd[f][i]))
-			i++;
-		else
-			return ;
+		while (st->cmd[f])
+		{
+			i = 0;
+			while (st->cmd[f][i] != '=' && st->cmd[f][i])
+			{
+				if (!is_ok(st->cmd[f][i]))
+					i++;
+				else
+					return ;
+			}
+			if (st->cmd[f][i] == '\0')
+				ft_free(st->cmd, &st->lst, f);
+			if (!(name = malloc(sizeof(char) * i + 1)))
+				return ;
+			i = 0;
+			while (st->cmd[f][i] != '=')
+			{
+				name[i] = st->cmd[f][i];
+				i++;
+			}
+			name[i] = '\0';
+			i += 1;
+			if (!(content = malloc(sizeof(char) * ft_strlen(st->cmd[f] + i) + 1)))
+				return ;
+			j = 0;
+			while (st->cmd[f][i])
+			{
+				content[j] = st->cmd[f][i];
+				i++;
+				j++;
+			}
+			content[j] = '\0';
+			if (!is_same(name, &st->lst))
+				create_list(name, content, &st->lst);
+			else
+				modif_list(name, content, &st->lst);
+			f++;
+		}
 	}
-	name = malloc(sizeof(char) * i + 1);
-	i = 0;
-	while (cmd[f][i] != '=')
-	{
-		name[i] = cmd[f][i];
-		i++;
-	}
-	name[i] = '\0';
-	i += 1;
-	content = malloc(sizeof(char) * ft_strlen(cmd[f] + i) + 1);
-	j = 0;
-	while (cmd[f][i])
-	{
-		content[j] = cmd[f][i];
-		i++;
-		j++;
-	}
-	content[j] = '\0';
-	if (!is_same(name, lst))
-		return (create_list(name, content, lst));
-	else
-		return (modif_list(name, content, lst));
 }
 
-void			ft_export(char **cmd, t_varlist **lst, int f)
+void			ft_export(t_struct *st, int f)
 {
 	if (f == 2)
 	{
-		if (!cmd[1])
-			printList(lst);
+		if (!st->cmd[1])
+			printList(&st->lst);
 		else
-			return (create_elem(cmd, lst, 1));
+			return (create_elem(1, st));
 	}
 	else
-		return (create_elem(cmd, lst, 0));
+		return (create_elem(0, st));
 }

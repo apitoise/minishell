@@ -36,3 +36,16 @@ char			*ft_trim(char const *s1)
 	res = ft_substr(s1, start, len);
 	return (res);
 }
+
+void print_tab(char **map)
+{
+    int i;
+
+    i = 0;
+    if (!map)
+        return ;
+    while (map && map[i])
+    {
+        ft_putendl_fd(map[i++], 1);
+    }
+}

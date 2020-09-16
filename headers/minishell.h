@@ -38,12 +38,13 @@ int						ft_echo(char **cmd, t_varlist **lst, t_struct *st);
 void					ft_exit(char **cmd);
 int						ft_pwd(char **cmd);
 int						ft_unset(t_struct *st);
-void					ft_export(char **cmd, t_varlist **lst, int i);
+void					ft_export(t_struct *st, int i);
 
 int						ft_env(char **env);
 char					**get_env(char **env);
 
 int						ft_error(char *s);
+void					not_cmd(char *str, t_struct *st);
 
 char					*ft_trim(char const *s1);
 

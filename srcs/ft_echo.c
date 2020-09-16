@@ -32,6 +32,7 @@ static void	print_var(const char *res, t_varlist **lst, t_struct *st)
 		ft_putchar_fd('$', 1);
 	if (*lst == NULL)
 		return ;
+	current = *lst;
 	while (current->next)
 	{
 		if (!ft_strcmp(res, current->name))

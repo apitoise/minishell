@@ -13,14 +13,6 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-void			ft_free(char **cmd, t_varlist **lst, int f)
-{
-	(void)cmd;
-	(void)lst;
-	(void)f;
-	printf("OK\n");
-}
-
 void 			printList(t_varlist **lst)
 {
 	t_varlist	*current;
@@ -147,15 +139,6 @@ void			create_elem(int f, t_struct *st)
 		while (st->cmd[f])
 		{
 			i = 0;
-			while (st->cmd[f][i] != '=' && st->cmd[f][i])
-			{
-				if (!is_ok(st->cmd[f][i]))
-					i++;
-				else
-					return ;
-			}
-			if (st->cmd[f][i] == '\0')
-				ft_free(st->cmd, &st->lst, f);
 			if (!(name = malloc(sizeof(char) * i + 1)))
 				return ;
 			i = 0;

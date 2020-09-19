@@ -31,7 +31,12 @@ int		isok(t_struct *st, char *str)
 
 void	if_builtin(t_struct *st)
 {
-	if (!ft_strcmp(st->cmd[0], "pwd"))
+	if (st->cmd[0] == NULL)
+	{
+		st->cmd[0] = ft_strdup("");
+		return;
+	}
+	else if (!ft_strcmp(st->cmd[0], "pwd"))
 		ft_pwd(st->cmd);
 	else if (!ft_strcmp(st->cmd[0], "echo"))
 		ft_echo(st->cmd, &st->lst, st);

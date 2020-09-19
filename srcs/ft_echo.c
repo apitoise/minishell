@@ -37,8 +37,7 @@ static void	print_var(const char *res, t_varlist **lst, t_struct *st)
 	{
 		if (!ft_strcmp(res, current->name))
 			ft_putstr_fd(current->content, 1);
-		else
-			current = current->next;
+		current = current->next;
 	}
 	if (!ft_strcmp(res, current->name))
 		ft_putstr_fd(current->content, 1);

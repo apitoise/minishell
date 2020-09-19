@@ -19,6 +19,12 @@ typedef struct			s_varlist
 	void				*next;
 }						t_varlist;
 
+typedef struct 			s_strlist
+{
+	char				*str;
+	void				*next;
+}						t_strlist;
+
 typedef struct			s_struct
 {
 	int					exit;
@@ -39,6 +45,7 @@ void					ft_exit(char **cmd);
 int						ft_pwd(char **cmd);
 int						ft_unset(t_struct *st);
 void					ft_export(t_struct *st, int i);
+void					check_cmd(char **cmd, int i);
 
 int						ft_env(char **env);
 char					**get_env(char **env);

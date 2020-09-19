@@ -23,8 +23,11 @@ void 			printList(t_varlist **lst)
     while (current != NULL)
     {
     	ft_putstr_fd(current->name, 1);
-    	ft_putchar_fd('=', 1);
-    	ft_putstr_fd(current->content, 1);
+    	if (current->content != NULL)
+    	{
+    		ft_putchar_fd('=', 1);
+    		ft_putstr_fd(current->content, 1);
+    	}
     	ft_putchar_fd('\n', 1);
         current = current->next;
     }
@@ -67,7 +70,9 @@ static int			check_error(t_struct *st, int f)
 	{
 		if (st->cmd[f][0] == '=')
 		{
-			not_cmd(st->cmd[f], st);
+			ft_putstr_fd("bash: export: \"", 1);
+			ft_putstr_fd(st->cmd[f], 1);
+			ft_putstr_fd("\" : unvalable argument\n", 1);
 			return (1);
 		}
 		else

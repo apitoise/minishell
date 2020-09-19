@@ -46,15 +46,16 @@ static void	print_var(const char *res, t_varlist **lst, t_struct *st)
 
 int	ft_echo(char **cmd, t_varlist **lst, t_struct *st)
 {
-	int	i;
-	int n;
-	char *res;
+	int			i;
+	int 		n;
+	char 		*res;
 
 	i = 1;
 	n = 0;
 	if (cmd[1] && !ft_strcmp(cmd[1], "-n"))
 		n = 1;
 	i += n;
+	check_cmd(cmd, i);
 	while (cmd[i])
 	{
 		res = ft_trim(cmd[i]);

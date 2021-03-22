@@ -22,13 +22,11 @@ static void	print_ret(t_struct *st)
 
 static void	print_var(const char *res, t_varlist **lst, t_struct *st)
 {
-	int			i;
 	t_varlist	*current;
 
-	i = 0;
-	if (res[i] == '?')
+	if (res[0] == '?')
 		return (print_ret(st));
-	if (!res[i])
+	if (!res[0])
 		ft_putchar_fd('$', 1);
 	if (*lst == NULL)
 		return ;

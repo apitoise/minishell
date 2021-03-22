@@ -54,5 +54,6 @@ int						ft_error(char *s);
 void					not_cmd(char *str, t_struct *st);
 
 char					*ft_trim(char const *s1);
+void					init_lstenv(char **env, t_struct *st);
 
 #endif

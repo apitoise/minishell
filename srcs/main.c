@@ -59,25 +59,32 @@ void	if_builtin(t_struct *st)
 int		main(int ac, char **av, char **env)
 {
 	t_struct	st;
-	int			ret;
+	int		ret;
 	char		*tmp;
+	char		**commands;
+	int		i;
 
 	(void)ac;
 	(void)av;
 	tmp = NULL;
+	commands = NULL;
 	init_struct(&st, env);
 	shell_init();
 	while (!(st.exit))
 	{
 		while ((ret = get_next_line(1, &tmp)) > 0 && !(st.exit))
 		{
-			st.cmd = ft_split(tmp, ' ');
-			if_builtin(&st);
+			commands = ft_split(tmp, ';');
+			i = 0;
+			while (commands[i])
+			{
+				st.cmd = ft_split(commands[i], ' ');
+				if_builtin(&st);
+				i++;
+			}
 			shell_init();
 		}
 	}
 	ft_free_tab(st.env);
 	return (0);
 }
-
-

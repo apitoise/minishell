@@ -13,26 +13,6 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-void 			printList(t_varlist **lst)
-{
-	t_varlist	*current;
-
-    if (*lst == NULL)
-        return ;
-    current = *lst;
-    while (current != NULL)
-    {
-    	ft_putstr_fd(current->name, 1);
-    	if (current->content != NULL)
-    	{
-    		ft_putchar_fd('=', 1);
-    		ft_putstr_fd(current->content, 1);
-    	}
-    	ft_putchar_fd('\n', 1);
-        current = current->next;
-    }
-}
-
 static void		create_list(char *name, char *content, t_varlist **lst)
 {
 	t_varlist	*current;
@@ -178,7 +158,7 @@ void			ft_export(t_struct *st, int f)
 	if (f == 2)
 	{
 		if (!st->cmd[1])
-			printList(&st->lst);
+			print_list(&st->lst);
 		else
 			return (create_elem(1, st));
 	}

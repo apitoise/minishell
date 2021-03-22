@@ -49,3 +49,24 @@ void print_tab(char **map)
         ft_putendl_fd(map[i++], 1);
     }
 }
+
+void 			print_list(t_varlist **lst)
+{
+	t_varlist	*current;
+
+    if (*lst == NULL)
+        return ;
+    current = *lst;
+    while (current != NULL)
+    {
+    	ft_putstr_fd(current->name, 1);
+    	if (current->content != NULL)
+    	{
+    		ft_putchar_fd('=', 1);
+    		ft_putstr_fd(current->content, 1);
+    	}
+    	ft_putchar_fd('\n', 1);
+        current = current->next;
+    }
+}
+

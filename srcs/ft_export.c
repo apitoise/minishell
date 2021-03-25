@@ -13,7 +13,7 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-static void		create_list(char *name, char *content, t_varlist **lst)
+static void		create_list(char *name, char *content, int visible, t_varlist **lst)
 {
 	t_varlist	*current;
 	t_varlist	*new;
@@ -21,6 +21,7 @@ static void		create_list(char *name, char *content, t_varlist **lst)
 	new = malloc(sizeof(t_varlist));
 	new->name = name;
 	new->content = content;
+	new->visible = visible;
 	new->next = NULL;
 	if (*lst == NULL)
 		*lst = new;
@@ -100,7 +101,7 @@ static int		is_same(char *str, t_varlist **lst)
 	}
 }
 
-static void		modif_list(char *name, char *content, t_varlist **lst)
+static void		modif_list(char *name, char *content, int visible, t_varlist **lst)
 {
 	t_varlist	*current;
 
@@ -110,9 +111,11 @@ static void		modif_list(char *name, char *content, t_varlist **lst)
 	free(current->content);
 	current->content = content;
 	free(name);
+	if (visible == 1 && current->visible == 0)
+		current->visible = 1;
 }
 
-void			create_elem(int f, t_struct *st)
+void			create_elem(int f, int visible, t_struct *st)
 {
 	int			i;
 	int			j;
@@ -145,9 +148,9 @@ void			create_elem(int f, t_struct *st)
 			}
 			content[j] = '\0';
 			if (!is_same(name, &st->lst))
-				create_list(name, content, &st->lst);
+				create_list(name, content, visible, &st->lst);
 			else
-				modif_list(name, content, &st->lst);
+				modif_list(name, content, visible, &st->lst);
 			f++;
 		}
 	}
@@ -160,8 +163,8 @@ void			ft_export(t_struct *st, int f)
 		if (!st->cmd[1])
 			print_list(&st->lst);
 		else
-			return (create_elem(1, st));
+			return (create_elem(1, 1, st));
 	}
 	else
-		return (create_elem(0, st));
+		return (create_elem(0, 0, st));
 }

@@ -59,13 +59,16 @@ void 			print_list(t_varlist **lst)
     current = *lst;
     while (current != NULL)
     {
-    	ft_putstr_fd(current->name, 1);
-    	if (current->content != NULL)
-    	{
-    		ft_putchar_fd('=', 1);
-    		ft_putstr_fd(current->content, 1);
-    	}
-    	ft_putchar_fd('\n', 1);
+	if (current->visible == 1)
+	{
+   	 	ft_putstr_fd(current->name, 1);
+    		if (current->content != NULL)
+		{
+			ft_putchar_fd('=', 1);
+			ft_putstr_fd(current->content, 1);
+	    	}
+		ft_putchar_fd('\n', 1);
+	}
         current = current->next;
     }
 }

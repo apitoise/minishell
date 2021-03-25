@@ -21,6 +21,7 @@ static void		create_list(char *name, char *content, t_varlist **lst)
 	new = malloc(sizeof(t_varlist));
 	new->name = name;
 	new->content = content;
+	new->visible = 1;
 	new->next = NULL;
 	if (*lst == NULL)
 		*lst = new;
@@ -99,8 +100,7 @@ char	**get_env(char **env)
 	return (our_env);
 }
 
-int		ft_env(char **env)
+void	ft_env(t_struct *st)
 {
-	print_tab(env);
-	return (0);
+	print_list(&st->lst);
 }

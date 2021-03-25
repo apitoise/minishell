@@ -16,6 +16,7 @@ typedef struct			s_varlist
 {
 	char				*name;
 	char				*content;
+	int				visible;
 	void				*next;
 }						t_varlist;
 
@@ -48,7 +49,7 @@ int						ft_unset(t_struct *st);
 void					ft_export(t_struct *st, int i);
 void					check_cmd(char **cmd, int i);
 
-int						ft_env(char **env);
+void					ft_env(t_struct *st);
 char					**get_env(char **env);
 
 int						ft_error(char *s);

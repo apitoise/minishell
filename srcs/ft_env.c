@@ -100,7 +100,11 @@ char	**get_env(char **env)
 	return (our_env);
 }
 
+<<<<<<< HEAD
 void	ft_env(t_struct *st)
+=======
+void		ft_env(t_struct *st)
+>>>>>>> cd9f7330d583ed04169fa089a4dc0aa61e46aecc
 {
 	print_list(&st->lst);
 }

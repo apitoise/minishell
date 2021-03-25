@@ -101,7 +101,11 @@ static int		is_same(char *str, t_varlist **lst)
 	}
 }
 
+<<<<<<< HEAD
 static void		modif_list(char *name, char *content, int visible, t_varlist **lst)
+=======
+void		modif_list(char *name, char *content, t_varlist **lst)
+>>>>>>> cd9f7330d583ed04169fa089a4dc0aa61e46aecc
 {
 	t_varlist	*current;
 
@@ -110,9 +114,13 @@ static void		modif_list(char *name, char *content, int visible, t_varlist **lst)
 		current = current->next;
 	free(current->content);
 	current->content = content;
+<<<<<<< HEAD
 	free(name);
 	if (visible == 1 && current->visible == 0)
 		current->visible = 1;
+=======
+//	free(name);
+>>>>>>> cd9f7330d583ed04169fa089a4dc0aa61e46aecc
 }
 
 void			create_elem(int f, int visible, t_struct *st)

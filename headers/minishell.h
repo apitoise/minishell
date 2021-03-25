@@ -46,9 +46,10 @@ void					ft_exit(char **cmd);
 int						ft_pwd(char **cmd);
 int						ft_unset(t_struct *st);
 void					ft_export(t_struct *st, int i);
+void					modif_list(char *name, char *content, t_varlist **lst);
 void					check_cmd(char **cmd, int i);
 
-int						ft_env(char **env);
+void					ft_env(t_struct *st);
 char					**get_env(char **env);
 
 int						ft_error(char *s);

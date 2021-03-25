@@ -100,7 +100,7 @@ static int		is_same(char *str, t_varlist **lst)
 	}
 }
 
-static void		modif_list(char *name, char *content, t_varlist **lst)
+void		modif_list(char *name, char *content, t_varlist **lst)
 {
 	t_varlist	*current;
 
@@ -109,7 +109,7 @@ static void		modif_list(char *name, char *content, t_varlist **lst)
 		current = current->next;
 	free(current->content);
 	current->content = content;
-	free(name);
+//	free(name);
 }
 
 void			create_elem(int f, t_struct *st)

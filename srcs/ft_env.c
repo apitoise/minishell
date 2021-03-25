@@ -99,8 +99,7 @@ char	**get_env(char **env)
 	return (our_env);
 }
 
-int		ft_env(char **env)
+void		ft_env(t_struct *st)
 {
-	print_tab(env);
-	return (0);
+	print_list(&st->lst);
 }

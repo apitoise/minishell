@@ -20,7 +20,6 @@ static void		modif_pwd(char *name, char *content, t_varlist **lst)
 	current = *lst;
 	while (ft_strcmp(current->name, name) && current->next)
 		current = current->next;
-	free(current->content);
 	current->content = content;
 }
 
@@ -31,7 +30,7 @@ void    		ft_cd(char *path, t_struct *st)
         char    		oldpwd[PATH_MAX];
 
         getcwd(oldpwd, PATH_MAX);
-		modif_pwd("OLDPWD", oldpwd, &st->lst);
+	modif_pwd("OLDPWD", oldpwd, &st->lst);
         if (!path)
                 path = "../../../../../../../../";
         test = chdir(path);

@@ -38,7 +38,7 @@ typedef struct			s_struct
 
 void					print_tab(char **map);
 void					print_list(t_varlist **lst);
-
+void					ft_chevron(t_struct *st);
 void					shell_init(void);
 void					init_struct(t_struct *st, char **env);
 void					ft_cd(char *path, t_struct *st);

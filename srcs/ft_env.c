@@ -102,5 +102,5 @@ char	**get_env(char **env)
 
 void	ft_env(t_struct *st)
 {
-	print_list(&st->lst);
+	printlist_env(&st->lst);
 }

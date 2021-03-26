@@ -42,6 +42,29 @@ static int		is_ok(char c)
 		return (1);
 } 
 
+static int		is_same(char *str, t_varlist **lst)
+{
+	t_varlist	*current;
+
+	if (*lst == NULL)
+		return (0);
+	else
+	{
+		current = *lst;
+		while (current->next)
+		{
+			if (!ft_strcmp(current->name, str))
+				return (1);
+			else
+				current = current->next;
+		}
+		if (!ft_strcmp(current->name, str))
+			return (1);
+		return (0);
+	}
+}
+
+#include <stdio.h>
 static int			check_error(t_struct *st, int f)
 {
 	int	i;
@@ -68,37 +91,19 @@ static int			check_error(t_struct *st, int f)
 					return (1);
 				}
 			}
-			if (st->cmd[f][i] == '\0')
+			/*if (st->cmd[f][i] == '\0')
 			{
-				not_cmd(st->cmd[f], st);
-				return (1);
-			}
+				if (!is_same(st->cmd[f], &st->lst))
+					create_list(st->cmd[f], "", 1, &st->lst);
+				else
+					return (0);
+				return (0);
+				printf("testok\n");
+			}*/
 			f++;
 		}
 	}
 	return (0);
-}
-
-static int		is_same(char *str, t_varlist **lst)
-{
-	t_varlist	*current;
-
-	if (*lst == NULL)
-		return (0);
-	else
-	{
-		current = *lst;
-		while (current->next)
-		{
-			if (!ft_strcmp(current->name, str))
-				return (1);
-			else
-				current = current->next;
-		}
-		if (!ft_strcmp(current->name, str))
-			return (1);
-		return (0);
-	}
 }
 
 static void		modif_list(char *name, char *content, int visible, t_varlist **lst)
@@ -121,12 +126,17 @@ void			create_elem(int f, int visible, t_struct *st)
 	int			j;
 	char		*name;
 	char		*content;
+	t_varlist	*current;
 
-	if (!(check_error(st, f)))
+	if (check_error(st, f))
+		return ;
+	while (st->cmd[f])
 	{
-		while (st->cmd[f])
+		if (ft_strchr(st->cmd[f], '='))
 		{
 			i = 0;
+			while (st->cmd[f][i] != '=')
+				i++;
 			if (!(name = malloc(sizeof(char) * i + 1)))
 				return ;
 			i = 0;
@@ -151,8 +161,29 @@ void			create_elem(int f, int visible, t_struct *st)
 				create_list(name, content, visible, &st->lst);
 			else
 				modif_list(name, content, visible, &st->lst);
-			f++;
 		}
+		else
+		{
+			if (is_same(st->cmd[f], &st->lst))
+			{
+				current = st->lst;
+				while (current->next)
+				{
+					if (!ft_strcmp(current->name, st->cmd[f]))
+					{
+						current->visible = 1;
+						return ;
+					}
+					else
+						current = current->next;
+				}
+				if (!ft_strcmp(current->name, st->cmd[f]))
+					current->visible = 1;
+			}
+			else
+				create_list(st->cmd[f], NULL, 1, &st->lst);
+		}
+		f++;
 	}
 }
 
@@ -161,7 +192,7 @@ void			ft_export(t_struct *st, int f)
 	if (f == 2)
 	{
 		if (!st->cmd[1])
-			print_list(&st->lst);
+			printlist_export(&st->lst);
 		else
 			return (create_elem(1, 1, st));
 	}

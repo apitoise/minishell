@@ -37,7 +37,8 @@ typedef struct			s_struct
 }						t_struct;
 
 void					print_tab(char **map);
-void					print_list(t_varlist **lst);
+void					printlist_env(t_varlist **lst);
+void					printlist_export(t_varlist **lst);
 
 void					shell_init(void);
 void					init_struct(t_struct *st, char **env);

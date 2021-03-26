@@ -50,7 +50,7 @@ void print_tab(char **map)
     }
 }
 
-void 			print_list(t_varlist **lst)
+void 			printlist_env(t_varlist **lst)
 {
 	t_varlist	*current;
 
@@ -61,15 +61,55 @@ void 			print_list(t_varlist **lst)
     {
 	if (current->visible == 1)
 	{
-   	 	ft_putstr_fd(current->name, 1);
     		if (current->content != NULL)
 		{
-			ft_putchar_fd('=', 1);
+   	 		ft_putstr_fd(current->name, 1);
+			ft_putstr_fd("=", 1);
 			ft_putstr_fd(current->content, 1);
+			ft_putchar_fd('\n', 1);
 	    	}
-		ft_putchar_fd('\n', 1);
 	}
         current = current->next;
+    }
+}
+
+void 			printlist_export(t_varlist **lst)
+{
+	t_varlist	*current;
+	t_varlist	*tmp;
+	char		*prevname;
+
+    if (*lst == NULL)
+        return ;
+    current = *lst;
+    while (true)
+    {
+	    prevname = "";
+	    tmp = current;
+	    while (current != NULL)
+	    {
+		i = 0;
+		while (prevname[i] == current->name[i] && prevname[i])
+			i++;
+		if (prevname[i] < current->name[i])
+		{
+			i = 0;
+			while (tmp->name[i] == current->name[i] && tmp->name[i])
+				i++;
+			if (tmp->name[i] > current->name[i])
+				tmp = current;
+		}
+		current = current->next;
+	    }
+		if (tmp->visible == 1 && tmp->content)
+		{
+	   	 	ft_putstr_fd(current->name, 1);
+			ft_putchar_fd('=', 1);
+			ft_putstr_fd(tmp->content, 1);
+			ft_putchar_fd('\n', 1);
+		}
+ 	       current = current->next;
+ 	   }
     }
 }
 

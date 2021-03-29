@@ -64,7 +64,6 @@ static int		is_same(char *str, t_varlist **lst)
 	}
 }
 
-#include <stdio.h>
 static int			check_error(t_struct *st, int f)
 {
 	int	i;
@@ -91,15 +90,6 @@ static int			check_error(t_struct *st, int f)
 					return (1);
 				}
 			}
-			/*if (st->cmd[f][i] == '\0')
-			{
-				if (!is_same(st->cmd[f], &st->lst))
-					create_list(st->cmd[f], "", 1, &st->lst);
-				else
-					return (0);
-				return (0);
-				printf("testok\n");
-			}*/
 			f++;
 		}
 	}

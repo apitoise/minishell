@@ -76,40 +76,45 @@ void 			printlist_env(t_varlist **lst)
 void 			printlist_export(t_varlist **lst)
 {
 	t_varlist	*current;
-	t_varlist	*tmp;
-	char		*prevname;
+	t_varlist	tmp;
+	char		*lastwrit;
+	int		i;
 
-    if (*lst == NULL)
-        return ;
-    current = *lst;
-    while (true)
-    {
-	    prevname = "";
-	    tmp = current;
-	    while (current != NULL)
-	    {
+	if (*lst == NULL)
+		return ;
+	current = *lst;
+	lastwrit = "";
+	tmp.name = "";
+	while (current != NULL)
+	{
 		i = 0;
-		while (prevname[i] == current->name[i] && prevname[i])
+		while (lastwrit[i] == current->name[i] && lastwrit[i] && current->name[i])
 			i++;
-		if (prevname[i] < current->name[i])
+		if (current->name[i] > lastwrit[i])
 		{
-			i = 0;
-			while (tmp->name[i] == current->name[i] && tmp->name[i])
-				i++;
-			if (tmp->name[i] > current->name[i])
-				tmp = current;
+			if (!tmp.name[0] || tmp.name == lastwrit)
+				tmp = *current;
+			else
+			{
+				i = 0;
+				while (tmp.name[i] == current->name[i] && tmp.name[i] && current->name[i])
+					i++;
+				if (current->name[i] < tmp.name[i])
+					tmp = *current;
+			}
 		}
-		current = current->next;
-	    }
-		if (tmp->visible == 1 && tmp->content)
+		if (current->next == NULL && tmp.name != lastwrit)
 		{
-	   	 	ft_putstr_fd(current->name, 1);
-			ft_putchar_fd('=', 1);
-			ft_putstr_fd(tmp->content, 1);
-			ft_putchar_fd('\n', 1);
+		 	ft_putstr_fd("export ", 1);
+		 	ft_putstr_fd(tmp.name, 1);
+			ft_putstr_fd("='", 1);
+			ft_putstr_fd(tmp.content, 1);
+			ft_putstr_fd("'\n", 1);
+			lastwrit = tmp.name;
+			current = *lst;
 		}
- 	       current = current->next;
- 	   }
-    }
+		else
+			current = current->next;
+	}
 }
 

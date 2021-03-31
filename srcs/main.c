@@ -39,7 +39,9 @@ void	if_builtin(t_struct *st)
 	else if (!ft_strcmp(st->cmd[0], "pwd"))
 		ft_pwd(st->cmd);
 	else if (!ft_strcmp(st->cmd[0], ">"))
-		ft_chevron(st);
+		ft_chevron(st, 0);
+	else if (!ft_strcmp(st->cmd[0], ">>"))
+		ft_chevron(st, 0);
 	else if (!ft_strcmp(st->cmd[0], "echo"))
 		ft_echo(st->cmd, &st->lst, st);
 	else if (!ft_strcmp(st->cmd[0], "exit"))
@@ -56,6 +58,24 @@ void	if_builtin(t_struct *st)
 		ft_export(st, 2);
 	else
 		not_cmd(st->cmd[0], st);
+}
+
+void	cmd_analysis(t_struct *st)
+{
+	int	i;
+
+	i = 0;
+	while (st->cmd[i])
+	{
+		if (!ft_strcmp(st->cmd[i], ">") || !ft_strcmp(st->cmd[i], ">>")
+			|| !ft_strcmp(st->cmd[i], "<"))
+		{
+			ft_chevron(st, 0);
+			return ;
+		}
+		i++;
+	}
+	if_builtin(st);
 }
 
 int		main(int ac, char **av, char **env)
@@ -81,7 +101,7 @@ int		main(int ac, char **av, char **env)
 			while (commands[i])
 			{
 				st.cmd = ft_split(commands[i], ' ');
-				if_builtin(&st);
+				cmd_analysis(&st);
 				i++;
 			}
 			shell_init();

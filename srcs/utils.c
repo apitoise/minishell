@@ -105,11 +105,11 @@ void 			printlist_export(t_varlist **lst)
 		}
 		if (current->next == NULL && tmp.name != lastwrit)
 		{
-		 	ft_putstr_fd("export ", 1);
+		 	ft_putstr_fd("declare -x ", 1);
 		 	ft_putstr_fd(tmp.name, 1);
-			ft_putstr_fd("='", 1);
+			ft_putstr_fd("=\"", 1);
 			ft_putstr_fd(tmp.content, 1);
-			ft_putstr_fd("'\n", 1);
+			ft_putstr_fd("\"\n", 1);
 			lastwrit = tmp.name;
 			current = *lst;
 		}

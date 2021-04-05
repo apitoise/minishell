@@ -103,7 +103,7 @@ void 			printlist_export(t_varlist **lst)
 					tmp = *current;
 			}
 		}
-		if (current->next == NULL && tmp.name != lastwrit)
+		if (current->next == NULL && tmp.name != lastwrit && tmp.visible == 1)
 		{
 		 	ft_putstr_fd("declare -x ", 1);
 		 	ft_putstr_fd(tmp.name, 1);

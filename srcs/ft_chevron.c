@@ -1,39 +1,48 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-static void     single_chevron(t_struct *st, int i, int with_echo)
+static void     single_chevron(t_struct *st, int i)
 {
-    printf("%d", with_echo);
-    open(st->cmd[i + 1], O_TRUNC);
-    open(st->cmd[i + 1], O_CREAT);
+    int new_fd;
+
+    if ((new_fd = open(st->cmd[i + 1], O_TRUNC | O_CREAT)) < 0)
+        return ;
+  //  close(st->fd);
+    if ((st->fd = dup2(st->fd, new_fd)) < 0)
+        return ;
+    close(new_fd);
 }
 
-static void     double_chevron(t_struct *st, int i, int with_echo)
+static void     double_chevron(t_struct *st, int i)
 {
-    printf("%d", with_echo);
-    open(st->cmd[i + 1], O_CREAT);
+    int new_fd;
+
+    if ((new_fd = open(st->cmd[i + 1], O_CREAT)) < 0)
+        return ;
+    close(STDOUT_FILENO);
+    if ((st->fd = dup2(st->fd, new_fd)) < 0)
+        return ;
+    close(new_fd);
 }
 
-int       ft_chevron(t_struct *st, int i)
+void    do_chevrons(t_struct *st)
 {
-    int with_echo;
+    int i;
 
-    with_echo = 0;
-    if (!st->cmd[i + 1])
-        return printf("bash: Syntax error: new line unexpected\n");
-    with_echo = 0;
-    if (!(ft_strcmp(st->cmd[i], "echo")))
-        with_echo = 2;
-    if (!(ft_strcmp(st->cmd[i], ">")))
-        single_chevron(st, i, with_echo);
-    else
-        double_chevron(st, i, with_echo);
-    i += 2 + with_echo;
-    if (st->cmd[i])
+	if (st->cmd[0] == NULL)
+	{
+		st->cmd[0] = ft_strdup("");
+		return;
+	}
+    i = 0;
+    while(st->cmd[i])
     {
-        if ((!(ft_strcmp(st->cmd[i], ">"))) || (!(ft_strcmp(st->cmd[i], ">>"))))
-            return ft_chevron(st, i);
+        if (!ft_strcmp(st->cmd[i], ">"))
+            single_chevron(st, i);
+        else if (!ft_strcmp(st->cmd[i], ">>"))
+            double_chevron(st, i);
+        // else if (!ft_strcmp(st->cmd[i], "<"))
+        //     left_chevron(st, i);
+        i++;
     }
-//    return printf("bash: %s: not found\n", st->cmd[i]);
-    return (0);
 }

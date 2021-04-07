@@ -20,8 +20,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 
-	if (!s1 || !s2)
+	if (!s2)
 		return (NULL);
+	if (!s1)
+		s1 = ft_strdup("");
 	i = ft_strlen(s1) + ft_strlen(s2);
 	if (!(res = (char *)malloc(sizeof(char) * (i + 1))))
 		return (NULL);

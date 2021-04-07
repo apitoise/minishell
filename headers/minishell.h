@@ -5,6 +5,9 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
 # include <string.h>
 # include <limits.h>
 # include <errno.h>
@@ -54,6 +57,7 @@ void					ft_env(t_struct *st);
 char					**get_env(char **env);
 
 int						ft_error(char *s);
+void					ft_checkpath(t_struct *st);
 void					not_cmd(char *str, t_struct *st);
 
 char					*ft_trim(char const *s1);

@@ -53,7 +53,7 @@ void	if_builtin(t_struct *st)
 	else if (!ft_strcmp(st->cmd[0], "export"))
 		ft_export(st, 2);
 	else
-		not_cmd(st->cmd[0], st);
+		ft_checkpath(st);
 }
 
 int		main(int ac, char **av, char **env)

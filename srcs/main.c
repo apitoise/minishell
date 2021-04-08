@@ -25,6 +25,9 @@ static void	cmd_analysis(char **commands, t_struct *st)
 			return ;
 		do_chevrons(st);						
 		do_builtin(st);
+		close(st->fd);
+		if (dup2(st->stdout_copy, 1) < 0)
+			return ;
 		i++;
 	}
 }
@@ -48,13 +51,13 @@ int			main(int ac, char **av, char **env)
 		{
 			commands = ft_split(tmp, ';');
 			cmd_analysis(commands, &st);
-			if (st.result)
-			{
-				if (st.ret != 127)
-					ft_putstr_fd(st.result, st.fd);
-				free(st.result);
-				st.result = NULL;
-			}
+			// if (st.result)
+			// {
+			// 	if (st.ret != 127)
+			// 		ft_putstr_fd(st.result, STDOUT_FILENO);
+			// 	free(st.result);
+			// 	st.result = NULL;
+			// }
 			shell_init();
 		}
 	}

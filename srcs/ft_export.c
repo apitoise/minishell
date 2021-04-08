@@ -51,9 +51,9 @@ static int			check_error(t_struct *st, int f)
 	{
 		if (st->cmd[f][0] == '=')
 		{
-			ft_putstr_fd("bash: export: \"", 1);
-			ft_putstr_fd(st->cmd[f], 1);
-			ft_putstr_fd("\" : unvalable argument\n", 1);
+			ft_putstr_fd("bash: export: \"", 2);
+			ft_putstr_fd(st->cmd[f], 2);
+			ft_putstr_fd("\" : unvalable argument\n", 2);
 			return (1);
 		}
 		else

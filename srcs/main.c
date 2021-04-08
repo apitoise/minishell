@@ -50,13 +50,6 @@ int			main(int ac, char **av, char **env)
 		{
 			commands = ft_split(tmp, ';');
 			cmd_analysis(commands, &st);
-			// if (st.result)
-			// {
-			// 	if (st.ret != 127)
-			// 		ft_putstr_fd(st.result, STDOUT_FILENO);
-			// 	free(st.result);
-			// 	st.result = NULL;
-			// }
 			shell_init();
 		}
 	}

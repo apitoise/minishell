@@ -28,7 +28,7 @@ void            do_builtin(t_struct *st)
     int i;
 
     i = 0;
-        if (st->cmd[0] == NULL)
+	if (st->cmd[0] == NULL)
 	{
 		st->cmd[0] = ft_strdup("");
 		return;

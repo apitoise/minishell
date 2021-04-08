@@ -6,7 +6,7 @@
 /*   By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 21:22:41 by cnotin            #+#    #+#             */
-/*   Updated: 2020/08/26 19:31:00 by cnotin           ###   ########.fr       */
+/*   Updated: 2021/04/08 13:09:47 by fcadet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static void	cmd_analysis(char **commands, t_struct *st)
 			return ;
 		do_chevrons(st);						
 		do_builtin(st);
-		close(st->fd);
-		if (dup2(st->stdout_copy, 1) < 0)
+		if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
 			return ;
 		i++;
 	}

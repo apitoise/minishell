@@ -10,8 +10,6 @@
 # include <errno.h>
 //# define BUFFER_SIZE 42
 
-int						EXIT_CODE;
-
 typedef struct			s_varlist
 {
 	char				*name;

@@ -6,7 +6,7 @@
 /*   By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 21:23:32 by cnotin            #+#    #+#             */
-/*   Updated: 2020/08/26 18:41:19 by cnotin           ###   ########.fr       */
+/*   Updated: 2021/04/08 13:09:37 by fcadet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_echo(char **cmd, t_varlist **lst, t_struct *st)
 		if (res[0] == '$')
 			print_var(res + 1, lst, st);
 		else
-		ft_putstr_fd(res, 2);
+			ft_putstr_fd(res, 1);
 		if (cmd[i + 1])
 			ft_putstr_fd(" ", 1);
 		free(res);

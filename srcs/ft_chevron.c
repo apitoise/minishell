@@ -5,22 +5,17 @@ static void     single_chevron(t_struct *st, int i)
 {
     int new_fd;
 
-    if (st->fd >= 0)
+    if (st->fd >= 0) {
         close(st->fd);
-    if ((new_fd = open(st->cmd[i + 1], O_RDWR | O_TRUNC | O_CREAT)) < 0)
-    {
-        write(st->stdout_copy, "ICI\n", 4);
+	}
+	///!!!attention segfault
+    if ((new_fd = open(st->cmd[i + 1], O_WRONLY | O_TRUNC | O_CREAT, 0666)) < 0)
         return ;
-    }
-    ft_putnbr_fd(new_fd, st->stdout_copy);
     close(STDOUT_FILENO);
-    if (dup(new_fd) < 0)
-    {
-        write(st->stdout_copy, "ICIPP\n", 6);
+    if (dup(new_fd) < 0) {
         return ;
-    }
-    st->fd = new_fd;
-    
+	}
+	close(new_fd);
 }
 
 static void     double_chevron(t_struct *st, int i)

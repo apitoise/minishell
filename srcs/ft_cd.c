@@ -36,11 +36,11 @@ void    		ft_cd(char *path, t_struct *st)
         test = chdir(path);
         if (test == -1 && path)
         {
-                ft_putstr_fd("bash: cd: ", 1);
-                ft_putstr_fd(path, 1);
-                ft_putstr_fd(": ", 1);
-                ft_putstr_fd(strerror(errno), 1);
-                ft_putchar_fd('\n', 1);
+                ft_putstr_fd("bash: cd: ", 2);
+                ft_putstr_fd(path, 2);
+                ft_putstr_fd(": ", 2);
+                ft_putstr_fd(strerror(errno), 2);
+                ft_putchar_fd('\n', 2);
                 st->ret = 1;
         }
     	getcwd(newpwd, PATH_MAX);

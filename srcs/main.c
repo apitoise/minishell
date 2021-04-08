@@ -6,36 +6,30 @@
 /*   By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 21:22:41 by cnotin            #+#    #+#             */
-/*   Updated: 2020/08/26 19:31:00 by cnotin           ###   ########.fr       */
+/*   Updated: 2021/04/08 13:09:47 by fcadet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-int		isok(t_struct *st, char *str)
+static void	cmd_analysis(char **commands, t_struct *st)
 {
-	int		i;
-	int		len;
+	int	i;
 
-	len = ft_strlen(str);
-	i = ft_strlen(st->s) - 1;
-	if (i == len)
-		return (0);
-	if (i > len && (st->s[len + 1] != '\n'
-		|| st->s[len + 1] != ' ' || st->s[len + 1] != '\0'))
-		return (1);
-	else
-		return (0);
-}
-
-void	if_builtin(t_struct *st)
-{
-	if (st->cmd[0] == NULL)
+	i = 0;
+	while (commands[i])
 	{
-		st->cmd[0] = ft_strdup("");
-		return;
+		st->cmd = ft_split_cmd(commands[i], ' ');
+		if (first_check(st))
+			return ;
+		do_chevrons(st);						
+		do_builtin(st);
+		if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
+			return ;
+		i++;
 	}
+<<<<<<< HEAD
 	else if (!ft_strcmp(st->cmd[0], "pwd"))
 		ft_pwd(st->cmd);
 	else if (!ft_strcmp(st->cmd[0], "echo"))
@@ -54,15 +48,16 @@ void	if_builtin(t_struct *st)
 		ft_export(st, 2);
 	else
 		ft_checkpath(st);
+=======
+>>>>>>> arthur
 }
 
-int		main(int ac, char **av, char **env)
+int			main(int ac, char **av, char **env)
 {
 	t_struct	st;
-	int		ret;
+	int			ret;
 	char		*tmp;
 	char		**commands;
-	int		i;
 
 	(void)ac;
 	(void)av;
@@ -75,13 +70,7 @@ int		main(int ac, char **av, char **env)
 		while ((ret = get_next_line(1, &tmp)) > 0 && !(st.exit))
 		{
 			commands = ft_split(tmp, ';');
-			i = 0;
-			while (commands[i])
-			{
-				st.cmd = ft_split(commands[i], ' ');
-				if_builtin(&st);
-				i++;
-			}
+			cmd_analysis(commands, &st);
 			shell_init();
 		}
 	}

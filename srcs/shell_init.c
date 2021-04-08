@@ -13,7 +13,7 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-void	shell_init(void)
+void	shell_init()
 {
 	ft_putstr_fd("@minishell> ", 1);
 }

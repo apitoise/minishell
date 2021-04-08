@@ -18,6 +18,9 @@ void	init_struct(t_struct *st, char **env)
 	st->s = NULL;
 	st->cmd = NULL;
 	st->lst = NULL;
+	st->result = NULL;
+	st->stdout_copy = dup(1);
+	st->fd = -1;
 	st->env = get_env(env);
 	st->ret = 0;
 	init_lstenv(env, st);

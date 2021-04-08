@@ -21,6 +21,8 @@ INC = -I headers/minishell.h
 LIB = libft/libft.a
 
 SRCS =  srcs/ft_cd.c \
+		srcs/do_builtin.c \
+		srcs/ft_chevron.c \
 		srcs/ft_echo.c \
 		srcs/ft_env.c \
 		srcs/ft_exit.c \
@@ -28,7 +30,9 @@ SRCS =  srcs/ft_cd.c \
 		srcs/ft_pwd.c \
 		srcs/ft_unset.c \
 		srcs/init_struct.c \
+		srcs/first_check.c \
 		srcs/main.c \
+		srcs/utils_bis.c \
 		srcs/shell_init.c \
 		srcs/ft_error.c \
 		srcs/utils.c \

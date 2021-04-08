@@ -29,10 +29,7 @@ void		check_cmd(char **cmd, int i)
 		while (cmd[i][j] && !ok)
 		{
 			if (cmd[i][j] == '\'' || cmd[i][j] == '\"')
-			{
 				ok = check_str(cmd, i, j + 1, cmd[i][j]);
-				printf("%d\n", ok);
-			}
 			j++;
 		}
 		i++;

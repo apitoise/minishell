@@ -20,7 +20,7 @@ static void     if_builtin(t_struct *st)
 	else if (!ft_strcmp(st->cmd[0], "export"))
 		ft_export(st, 2);
 	else
-		not_cmd(st->cmd[0], st);
+		ft_checkpath(st);
 }
 
 char      **ft_subtab(t_struct *st)

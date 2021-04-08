@@ -29,27 +29,6 @@ static void	cmd_analysis(char **commands, t_struct *st)
 			return ;
 		i++;
 	}
-<<<<<<< HEAD
-	else if (!ft_strcmp(st->cmd[0], "pwd"))
-		ft_pwd(st->cmd);
-	else if (!ft_strcmp(st->cmd[0], "echo"))
-		ft_echo(st->cmd, &st->lst, st);
-	else if (!ft_strcmp(st->cmd[0], "exit"))
-		ft_exit(st->cmd);
-	else if (!ft_strcmp(st->cmd[0], "env"))
-		ft_env(st);
-	else if (!ft_strcmp(st->cmd[0], "unset"))
-		ft_unset(st);
-	else if (!ft_strcmp(st->cmd[0], "cd"))
-		ft_cd(st->cmd[1], st);
-	else if (ft_strchr(st->cmd[0], '='))
-		ft_export(st, 1);
-	else if (!ft_strcmp(st->cmd[0], "export"))
-		ft_export(st, 2);
-	else
-		ft_checkpath(st);
-=======
->>>>>>> arthur
 }
 
 int			main(int ac, char **av, char **env)

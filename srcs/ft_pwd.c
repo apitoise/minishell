@@ -22,8 +22,8 @@ int	ft_pwd(char **cmd)
 		return (ft_error(""));
 	else
 	{
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd(path, 1);
+		ft_putstr_fd("\n", 1);
 	}
 	return (0);
 }

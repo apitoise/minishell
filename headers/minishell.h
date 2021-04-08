@@ -43,16 +43,12 @@ typedef struct			s_struct
 }						t_struct;
 
 void					print_tab(char **map);
-<<<<<<< HEAD
 void					printlist_env(t_varlist **lst);
 void					printlist_export(t_varlist **lst);
-
 void					shell_init(void);
-=======
 void					print_list(t_varlist **lst);
 void					do_chevrons(t_struct *st);
 void					shell_init();
->>>>>>> arthur
 void					init_struct(t_struct *st, char **env);
 void					ft_cd(char *path, t_struct *st);
 int						ft_echo(char **cmd, t_varlist **lst, t_struct *st);

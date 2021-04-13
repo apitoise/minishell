@@ -11,9 +11,8 @@ static void     single_chevron(t_struct *st, int i)
         return ;
     close(STDOUT_FILENO);
     if (dup(new_fd) < 0)
-    {
         return ;
-    }
+    st->stdout_fd = new_fd;
 	close(new_fd);
 }
 
@@ -27,9 +26,8 @@ static void     double_chevron(t_struct *st, int i)
         return ;
     close(STDOUT_FILENO);
     if (dup(new_fd) < 0)
-    {
         return ;
-    }
+    st->stdout_fd = new_fd;
 	close(new_fd);
 }
 
@@ -42,15 +40,14 @@ static int     left_chevron(t_struct *st, int i)
     if ((new_fd = open(st->cmd[i + 1], O_RDONLY, 0666)) < 0)
     {
         ft_putstr_fd("minishell: ", 2);
-        ft_putstr_fd(st->cmd[i], 2);
+        ft_putstr_fd(st->cmd[i + 1], 2);
         ft_putstr_fd(": No such file or directory\n", 2);
         return (1);
     }
-    if (!st->cmd[i + 2])
-        return (0);
     close(STDIN_FILENO);
     if (dup(new_fd) < 0)
         return (0);
+    st->stdin_fd = new_fd;
     close(new_fd);
     return (0);
 }

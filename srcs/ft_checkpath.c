@@ -38,10 +38,10 @@ static void	ft_exec(char *filepath, t_struct *st)
 	else if (p == 0)
 	{
 		if (execve(filepath, st->cmd, st->env) == -1)
-			printf("Error\n"); //must deal with error
+			printf("Error!!\n"); //must deal with error
 	}
 	else
-		printf("Error\n"); //must deal with error
+		printf("Error!\n"); //must deal with error
 }
 
 static int	ft_checkfile(char *filepath)

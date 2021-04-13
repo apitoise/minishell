@@ -59,7 +59,8 @@ int	ft_echo(char **cmd, t_varlist **lst, t_struct *st)
 		res = ft_trim(cmd[i]);
 		if (res[0] == '$')
 			print_var(res + 1, lst, st);
-		else if (!ft_strcmp(res, ">") || !ft_strcmp(res, ">>"))
+		else if (!ft_strcmp(res, ">") || !ft_strcmp(res, ">>")
+		|| !ft_strcmp(res, "<"))
 			i++;
 		else
 		{

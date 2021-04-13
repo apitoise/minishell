@@ -23,7 +23,7 @@ static void     if_builtin(t_struct *st)
 		ft_checkpath(st);
 }
 
-char      **ft_subtab(t_struct *st)
+static char      **ft_subtab(t_struct *st)
 {
     int     i;
     int     len;
@@ -33,7 +33,7 @@ char      **ft_subtab(t_struct *st)
     while (!ft_strcmp(st->cmd[i], ">")
     || !ft_strcmp(st->cmd[i], ">>")
     || !ft_strcmp(st->cmd[i], "<"))
-        i += 2;
+            i += 2;
     len = 0;
     while (st->cmd[i + len])
         len++;
@@ -50,6 +50,23 @@ char      **ft_subtab(t_struct *st)
     return (res);
 }
 
+static int      no_builtin(t_struct *st)
+{
+    int i;
+
+    i = 0;
+    while (!ft_strcmp(st->cmd[i], ">")
+    || !ft_strcmp(st->cmd[i], ">>")
+    || !ft_strcmp(st->cmd[i], "<"))
+    {
+        if (!st->cmd[i + 2])
+            return (1);
+        else
+            i += 2;
+    }
+    return (0);
+}
+
 void            do_builtin(t_struct *st)
 {
     if (st->cmd[0] == NULL)
@@ -57,6 +74,8 @@ void            do_builtin(t_struct *st)
 		st->cmd[0] = ft_strdup("");
 		return ;
 	}
+    if ((no_builtin(st)) == 1)
+        return ;
     if (!ft_strcmp(st->cmd[0], ">")
     || !ft_strcmp(st->cmd[0], ">>")
     || !ft_strcmp(st->cmd[0], "<"))

@@ -29,8 +29,8 @@ int		first_check(t_struct *st)
 			return (1);
 		}
 		else if ((st->cmd[i][0] == '>' || st->cmd[i][0] == '<')
-		&& (st->cmd[i + 1][0] == '>' || st->cmd[i][0] == '<'
-		|| st->cmd[i][0] == '|'))
+		&& (st->cmd[i + 1][0] == '>' || st->cmd[i + 1][0] == '<'
+		|| st->cmd[i + 1][0] == '|'))
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
 			ft_putstr_fd(st->cmd[i], 2);

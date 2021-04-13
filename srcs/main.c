@@ -16,16 +16,24 @@
 static void	cmd_analysis(char **commands, t_struct *st)
 {
 	int	i;
+	int	err;
 
 	i = 0;
+	err = 0;
 	while (commands[i])
 	{
 		st->cmd = ft_split_cmd(commands[i], ' ');
 		if (first_check(st))
 			return ;
-		do_chevrons(st);						
-		do_builtin(st);
+		err = do_chevrons(st);
+		if (!err)
+		{
+			st->cmd = del_chevron(st);
+			do_builtin(st);
+		}
 		if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
+			return ;
+		if (dup2(st->stdin_copy, STDIN_FILENO) < 0)
 			return ;
 		i++;
 	}

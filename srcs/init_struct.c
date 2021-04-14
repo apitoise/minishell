@@ -23,6 +23,7 @@ void	init_struct(t_struct *st, char **env)
 	st->stdin_copy = dup(0);
 	st->stdout_fd = -1;
 	st->stdin_fd = -1;
+	st->pipe = 0;
 	st->env = get_env(env);
 	st->ret = 0;
 	init_lstenv(env, st);

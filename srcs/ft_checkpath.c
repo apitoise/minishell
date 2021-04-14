@@ -28,7 +28,7 @@ static void	ft_freepathtab(char **pathtab)
 	pathtab = NULL;
 }
 
-static void	ft_exec(char *filepath, t_struct *st)
+static void	ft_exec(char **cmd, char *filepath, t_struct *st)
 {
 	pid_t	p;
 
@@ -37,7 +37,7 @@ static void	ft_exec(char *filepath, t_struct *st)
 		waitpid(p, NULL, 0);
 	else if (p == 0)
 	{
-		if (execve(filepath, st->cmd, st->env) == -1)
+		if (execve(filepath, cmd, st->env) == -1)
 			printf("Error!!\n"); //must deal with error
 	}
 	else
@@ -62,7 +62,7 @@ static char	*ft_finalpath(char *s1, char *s2)
 	return (tmp2);
 }
 
-static void	ft_checkpath2(char *path, t_struct *st)
+static void	ft_checkpath2(char **cmd, char *path, t_struct *st)
 {
 	char	**pathtab;
 	char	*filepath;
@@ -73,10 +73,10 @@ static void	ft_checkpath2(char *path, t_struct *st)
 	i = 0;
 	while (pathtab[i])
 	{
-		filepath = ft_finalpath(pathtab[i], st->cmd[0]);
+		filepath = ft_finalpath(pathtab[i], cmd[0]);
 		if (ft_checkfile(filepath))
 		{
-			ft_exec(filepath, st);
+			ft_exec(cmd, filepath, st);
 			free(filepath);
 			return ;
 		}
@@ -87,11 +87,11 @@ static void	ft_checkpath2(char *path, t_struct *st)
 			i++;
 		}
 	}
-	not_cmd(st->cmd[0], st);
+	not_cmd(cmd[0], st);
 	ft_freepathtab(pathtab);
 }
 
-void		ft_checkpath(t_struct *st)
+void		ft_checkpath(char **cmd, t_struct *st)
 {
 	t_varlist	*tmp;
 
@@ -100,8 +100,8 @@ void		ft_checkpath(t_struct *st)
 		tmp = tmp->next;
 	if (!tmp)
 	{
-		not_cmd(st->cmd[0], st);
+		not_cmd(cmd[0], st);
 	}
 	else
-		ft_checkpath2(tmp->content, st);
+		ft_checkpath2(cmd, tmp->content, st);
 }

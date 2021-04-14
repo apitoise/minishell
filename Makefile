@@ -24,6 +24,7 @@ SRCS =  srcs/ft_cd.c \
 		srcs/do_builtin.c \
 		srcs/ft_chevron.c \
 		srcs/del_chevron.c \
+		srcs/routine.c \
 		srcs/ft_echo.c \
 		srcs/ft_env.c \
 		srcs/ft_exit.c \

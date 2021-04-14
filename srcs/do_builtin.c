@@ -1,36 +1,36 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-static void     if_builtin(t_struct *st)
+static void     if_builtin(char **cmd, t_struct *st)
 {
-	if (!ft_strcmp(st->cmd[0], "pwd"))
-		ft_pwd(st->cmd);
-	else if (!ft_strcmp(st->cmd[0], "echo"))
-		ft_echo(st->cmd, &st->lst, st);
-	else if (!ft_strcmp(st->cmd[0], "exit"))
-		ft_exit(st->cmd);
-	else if (!ft_strcmp(st->cmd[0], "env"))
+	if (!ft_strcmp(cmd[0], "pwd"))
+		ft_pwd(cmd);
+	else if (!ft_strcmp(cmd[0], "echo"))
+		ft_echo(cmd, &st->lst, st);
+	else if (!ft_strcmp(cmd[0], "exit"))
+		ft_exit(cmd);
+	else if (!ft_strcmp(cmd[0], "env"))
 		ft_env(st);
-	else if (!ft_strcmp(st->cmd[0], "unset"))
-		ft_unset(st);
-	else if (!ft_strcmp(st->cmd[0], "cd"))
-		ft_cd(st->cmd[1], st);
-	else if (ft_strchr(st->cmd[0], '='))
-		ft_export(st, 1);
-	else if (!ft_strcmp(st->cmd[0], "export"))
-		ft_export(st, 2);
+	else if (!ft_strcmp(cmd[0], "unset"))
+		ft_unset(cmd, st);
+	else if (!ft_strcmp(cmd[0], "cd"))
+		ft_cd(cmd[1], st);
+	else if (ft_strchr(cmd[0], '='))
+		ft_export(cmd, st, 1);
+	else if (!ft_strcmp(cmd[0], "export"))
+		ft_export(cmd, st, 2);
 	else
-		ft_checkpath(st);
+		ft_checkpath(cmd, st);
 }
 
-void            do_builtin(t_struct *st)
+void            do_builtin(char **cmd, t_struct *st)
 {
-    if (st->cmd[0] == NULL)
+    if (cmd[0] == NULL)
 	{
-		st->cmd[0] = ft_strdup("");
+		cmd[0] = ft_strdup("");
 		return ;
 	}
-    if (!ft_strcmp(st->cmd[0], ""))
+    if (!ft_strcmp(cmd[0], ""))
         return ;
-    if_builtin(st);
+    if_builtin(cmd, st);
 }

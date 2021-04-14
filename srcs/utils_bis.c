@@ -73,7 +73,7 @@ static char	*ft_malloc_w(char const *s, char c)
 	return (word);
 }
 
-char		**ft_split_cmd(char const *s, char c)
+char		**ft_split_cmd(char const *s, char c, t_struct *st)
 {
 	char	**tab;
 	int		i;
@@ -90,6 +90,8 @@ char		**ft_split_cmd(char const *s, char c)
 			s++;
         if (*s && (*s == '>' || *s == '<' || *s == '|'))
         {
+			if (*s == '|')
+				st->pipe++;
             spec = *s;
             tab[i] = ft_malloc_chevron(s, *s);
             i++;

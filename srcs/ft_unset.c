@@ -13,7 +13,7 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-int	ft_clrelem(t_struct *st, int i)
+int	ft_clrelem(char **cmd, t_struct *st, int i)
 {
 	t_varlist	*curelem;
 	t_varlist	*prvelem;
@@ -22,12 +22,12 @@ int	ft_clrelem(t_struct *st, int i)
 		return (0);
 	curelem = st->lst;
 	prvelem = NULL;
-	while (ft_strcmp(curelem->name, st->cmd[i]) && curelem->next)
+	while (ft_strcmp(curelem->name, cmd[i]) && curelem->next)
 	{
 		prvelem = curelem;
 		curelem = curelem->next;
 	}
-	if (!ft_strcmp(curelem->name, st->cmd[i]))
+	if (!ft_strcmp(curelem->name, cmd[i]))
 	{
 		free(curelem->name);
 		free(curelem->content);
@@ -40,14 +40,14 @@ int	ft_clrelem(t_struct *st, int i)
 	return (0);
 }
 
-int	ft_unset(t_struct *st)
+int	ft_unset(char **cmd, t_struct *st)
 {
 	int	i;
 
 	i = 1;
-	while (st->cmd[i])
+	while (cmd[i])
 	{
-		ft_clrelem(st, i);
+		ft_clrelem(cmd, st, i);
 		i++;
 	}
 	return (0);

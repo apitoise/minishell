@@ -64,29 +64,29 @@ static int		is_same(char *str, t_varlist **lst)
 	}
 }
 
-static int			check_error(t_struct *st, int f)
+static int			check_error(char **cmd, t_struct *st, int f)
 {
 	int	i;
 
 	i = 0;
-	while (st->cmd[f])
+	while (cmd[f])
 	{
-		if (st->cmd[f][0] == '=')
+		if (cmd[f][0] == '=')
 		{
 			ft_putstr_fd("bash: export: \"", 2);
-			ft_putstr_fd(st->cmd[f], 2);
+			ft_putstr_fd(cmd[f], 2);
 			ft_putstr_fd("\" : unvalable argument\n", 2);
 			return (1);
 		}
 		else
 		{
-			while (st->cmd[f][i] != '=' && st->cmd[f][i])
+			while (cmd[f][i] != '=' && cmd[f][i])
 			{
-				if (!is_ok(st->cmd[f][i]))
+				if (!is_ok(cmd[f][i]))
 					i++;
 				else
 				{
-					not_cmd(st->cmd[f], st);
+					not_cmd(cmd[f], st);
 					return (1);
 				}
 			}
@@ -110,7 +110,7 @@ static void		modif_list(char *name, char *content, int visible, t_varlist **lst)
 		current->visible = 1;
 }
 
-void			create_elem(int f, int visible, t_struct *st)
+void			create_elem(char **cmd, int f, int visible, t_struct *st)
 {
 	int			i;
 	int			j;
@@ -118,31 +118,31 @@ void			create_elem(int f, int visible, t_struct *st)
 	char		*content;
 	t_varlist	*current;
 
-	if (check_error(st, f))
+	if (check_error(cmd, st, f))
 		return ;
-	while (st->cmd[f])
+	while (cmd[f])
 	{
-		if (ft_strchr(st->cmd[f], '='))
+		if (ft_strchr(cmd[f], '='))
 		{
 			i = 0;
-			while (st->cmd[f][i] != '=')
+			while (cmd[f][i] != '=')
 				i++;
 			if (!(name = malloc(sizeof(char) * i + 1)))
 				return ;
 			i = 0;
-			while (st->cmd[f][i] != '=')
+			while (cmd[f][i] != '=')
 			{
-				name[i] = st->cmd[f][i];
+				name[i] = cmd[f][i];
 				i++;
 			}
 			name[i] = '\0';
 			i += 1;
-			if (!(content = malloc(sizeof(char) * ft_strlen(st->cmd[f] + i) + 1)))
+			if (!(content = malloc(sizeof(char) * ft_strlen(cmd[f] + i) + 1)))
 				return ;
 			j = 0;
-			while (st->cmd[f][i])
+			while (cmd[f][i])
 			{
-				content[j] = st->cmd[f][i];
+				content[j] = cmd[f][i];
 				i++;
 				j++;
 			}
@@ -154,12 +154,12 @@ void			create_elem(int f, int visible, t_struct *st)
 		}
 		else
 		{
-			if (is_same(st->cmd[f], &st->lst))
+			if (is_same(cmd[f], &st->lst))
 			{
 				current = st->lst;
 				while (current->next)
 				{
-					if (!ft_strcmp(current->name, st->cmd[f]))
+					if (!ft_strcmp(current->name, cmd[f]))
 					{
 						current->visible = 1;
 						return ;
@@ -167,25 +167,25 @@ void			create_elem(int f, int visible, t_struct *st)
 					else
 						current = current->next;
 				}
-				if (!ft_strcmp(current->name, st->cmd[f]))
+				if (!ft_strcmp(current->name, cmd[f]))
 					current->visible = 1;
 			}
 			else
-				create_list(st->cmd[f], NULL, 1, &st->lst);
+				create_list(cmd[f], NULL, 1, &st->lst);
 		}
 		f++;
 	}
 }
 
-void			ft_export(t_struct *st, int f)
+void			ft_export(char **cmd, t_struct *st, int f)
 {
 	if (f == 2)
 	{
-		if (!st->cmd[1])
+		if (!cmd[1])
 			printlist_export(&st->lst);
 		else
-			return (create_elem(1, 1, st));
+			return (create_elem(cmd, 1, 1, st));
 	}
 	else
-		return (create_elem(0, 0, st));
+		return (create_elem(cmd, 0, 0, st));
 }

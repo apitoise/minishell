@@ -1,19 +1,6 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-static void free_cmd(t_struct *st)
-{
-    int i;
-
-    i = 0;
-    while (st->cmd[i])
-    {
-        free(st->cmd[i]);
-        i++;
-    }
-    free(st->cmd);
-}
-
 static int  get_len(t_struct *st)
 {
     int len;
@@ -69,6 +56,7 @@ static char     **get_res(t_struct *st, int len)
             j++;
         }
     }
+    res[j] = NULL;
     return (res);
 }
 
@@ -87,6 +75,6 @@ char    **del_chevron(t_struct *st)
     }
     else
         res = get_res(st, len);
-    free_cmd(st);
+    ft_free_tab(st->cmd);
     return (res);
 }

@@ -1,7 +1,7 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-static void     if_builtin(char **cmd, t_struct *st)
+static void     if_builtin(char **cmd, t_struct *st, pid_t pid)
 {
 	if (!ft_strcmp(cmd[0], "pwd"))
 		ft_pwd(cmd);
@@ -20,10 +20,10 @@ static void     if_builtin(char **cmd, t_struct *st)
 	else if (!ft_strcmp(cmd[0], "export"))
 		ft_export(cmd, st, 2);
 	else
-		ft_checkpath(cmd, st);
+		ft_checkpath(cmd, st, pid);
 }
 
-void            do_builtin(char **cmd, t_struct *st)
+void            do_builtin(char **cmd, t_struct *st, pid_t pid)
 {
     if (cmd[0] == NULL)
 	{
@@ -32,5 +32,5 @@ void            do_builtin(char **cmd, t_struct *st)
 	}
     if (!ft_strcmp(cmd[0], ""))
         return ;
-    if_builtin(cmd, st);
+    if_builtin(cmd, st, pid);
 }

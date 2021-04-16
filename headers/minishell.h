@@ -63,7 +63,7 @@ int						ft_unset(char **cmd, t_struct *st);
 void					ft_export(char **cmd, t_struct *st, int i);
 int						first_check(t_struct *st);
 void					ft_env(t_struct *st);
-void					do_builtin(char **cmd, t_struct *st, pid_t pid);
+void					do_builtin(char **cmd, t_struct *st);
 void					do_routine(t_struct *st);
 void					do_pipe(t_struct *st);
 char					**get_env(char **env);

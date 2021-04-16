@@ -10,9 +10,12 @@ void        do_routine(t_struct *st)
 	{
 		st->cmd = del_chevron(st);
         if (st->pipe > 0)
+        {
             do_pipe(st);
+            st->pipe = 0;
+        }
         else
-		    do_builtin(st->cmd, st, -1);
+		    do_builtin(st->cmd, st);
 	}
 	if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
 		return ;

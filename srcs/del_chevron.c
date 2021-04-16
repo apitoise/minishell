@@ -1,20 +1,20 @@
 #include "../headers/minishell.h"
 #include "../libft/libft.h"
 
-static int  get_len(t_struct *st)
+static int  get_len(char **cmd)
 {
     int len;
     int i;
 
     len = 0;
     i = 0;
-    while(st->cmd[i])
+    while(cmd[i])
     {
-        if (!ft_strcmp(st->cmd[i], ">")
-        || !ft_strcmp(st->cmd[i], ">>")
-        || !ft_strcmp(st->cmd[i], "<"))
+        if (!ft_strcmp(cmd[i], ">")
+        || !ft_strcmp(cmd[i], ">>")
+        || !ft_strcmp(cmd[i], "<"))
         {
-            if (!st->cmd[i + 2])
+            if (!cmd[i + 2])
                 return (len);
             else
                 i += 2;
@@ -28,7 +28,7 @@ static int  get_len(t_struct *st)
     return (len);
 }
 
-static char     **get_res(t_struct *st, int len)
+static char     **get_res(char **cmd, int len)
 {
     int     i;
     int     j;
@@ -38,20 +38,20 @@ static char     **get_res(t_struct *st, int len)
         return (NULL);
     i = 0;
     j = 0;
-    while(st->cmd[i])
+    while(cmd[i])
     {
-        if (!ft_strcmp(st->cmd[i], ">")
-        || !ft_strcmp(st->cmd[i], ">>")
-        || !ft_strcmp(st->cmd[i], "<"))
+        if (!ft_strcmp(cmd[i], ">")
+        || !ft_strcmp(cmd[i], ">>")
+        || !ft_strcmp(cmd[i], "<"))
         {
-            if (!st->cmd[i + 2])
+            if (!cmd[i + 2])
                 return (res);
             else
                 i += 2;
         }
         else
         {
-            res[j] = ft_strdup(st->cmd[i]);
+            res[j] = ft_strdup(cmd[i]);
             i++;
             j++;
         }
@@ -60,12 +60,12 @@ static char     **get_res(t_struct *st, int len)
     return (res);
 }
 
-char    **del_chevron(t_struct *st)
+char    **del_chevron(char **cmd)
 {
     int     len;
     char    **res;
 
-    len = get_len(st);
+    len = get_len(cmd);
     if (len == 0)
     {
         if (!(res = (char **)malloc(sizeof(char *) * 1)))
@@ -74,7 +74,7 @@ char    **del_chevron(t_struct *st)
         return (res);
     }
     else
-        res = get_res(st, len);
-    ft_free_tab(st->cmd);
+        res = get_res(cmd, len);
+    ft_free_tab(cmd);
     return (res);
 }

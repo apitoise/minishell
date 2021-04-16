@@ -3,19 +3,18 @@
 
 void        do_routine(t_struct *st)
 {
-    int     err;
-
-    err = do_chevrons(st);
-	if (!err)
-	{
-		st->cmd = del_chevron(st);
-        if (st->pipe > 0)
+    if (st->pipe > 0)
+    {
+        do_pipe(st);
+        st->pipe = 0;
+    }
+    else
+    {
+        if (!do_chevrons(st->cmd, st))
         {
-            do_pipe(st);
-            st->pipe = 0;
-        }
-        else
+            st->cmd = del_chevron(st->cmd);
 		    do_builtin(st->cmd, st);
+        }
 	}
 	if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
 		return ;

@@ -40,7 +40,13 @@ SRCS =  srcs/ft_cd.c \
 		srcs/ft_error.c \
 		srcs/utils.c \
 		srcs/ft_echo_bis.c \
-		srcs/ft_checkpath.c
+		srcs/ft_checkpath.c \
+		srcs/parse_cmdline/ft_parsecmdline.c \
+		srcs/parse_cmdline/parsecmdline_checknewline.c \
+		srcs/parse_cmdline/parsecmdline_dollar.c \
+		srcs/parse_cmdline/parsecmdline_addbslash.c \
+		srcs/parse_cmdline/parsecmdline_rmbslash.c \
+		srcs/parse_cmdline/parsecmdline_utils.c
 
 OBJS = $(SRCS:.c=.o)
 

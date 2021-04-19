@@ -74,4 +74,13 @@ void					not_cmd(char *str, t_struct *st);
 char					*ft_trim(char const *s1);
 void					init_lstenv(char **env, t_struct *st);
 
+int						ft_parsecmdline(char **s, t_struct *st);
+int						ft_checknewline(char *s);
+int						ft_dollar(char **s1, t_struct *st);
+int						ft_addbslash(char **s);
+int						ft_rmbslash(char **s, int i, int j);
+int						ft_tkorqt(char *str, int i);
+int						ft_freestr(char *str);
+int						ft_isspechar(char c);
+
 #endif

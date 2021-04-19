@@ -1,5 +1,5 @@
-#include "../headers/minishell.h"
-#include "../libft/libft.h"
+#include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
 static int	check_str(char **cmd, int i, int j, char c)
 {

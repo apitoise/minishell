@@ -1,5 +1,5 @@
-#include "../headers/minishell.h"
-#include "../libft/libft.h"
+#include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
 static int  get_len(char **cmd)
 {

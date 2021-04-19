@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
-#include "../libft/libft.h"
+#include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
 int	ft_clrelem(char **cmd, t_struct *st, int i)
 {

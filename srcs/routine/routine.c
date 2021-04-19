@@ -1,5 +1,5 @@
-#include "../headers/minishell.h"
-#include "../libft/libft.h"
+#include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
 void        do_routine(t_struct *st)
 {

@@ -1,5 +1,5 @@
-#include "../headers/minishell.h"
-#include "../libft/libft.h"
+#include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
 static char **cmd_before_pipe(char **cmd, int pipe_nb)
 {

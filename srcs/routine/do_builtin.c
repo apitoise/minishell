@@ -1,5 +1,5 @@
-#include "../headers/minishell.h"
-#include "../libft/libft.h"
+#include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
 static void     if_builtin(char **cmd, t_struct *st)
 {

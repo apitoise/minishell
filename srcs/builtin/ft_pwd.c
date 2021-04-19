@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_init.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/25 21:22:52 by cnotin            #+#    #+#             */
-/*   Updated: 2020/08/25 21:22:54 by cnotin           ###   ########.fr       */
+/*   Created: 2020/08/25 21:23:08 by cnotin            #+#    #+#             */
+/*   Updated: 2020/08/25 21:41:08 by cnotin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
-#include "../libft/libft.h"
+#include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
-void	shell_init()
+int	ft_pwd(char **cmd)
 {
-	ft_putstr_fd("@minishell> ", 1);
+	char path[PATH_MAX];
+
+	(void)cmd;
+	if (!(getcwd(path, PATH_MAX)))
+		return (ft_error(""));
+	else
+	{
+		ft_putstr_fd(path, 1);
+		ft_putstr_fd("\n", 1);
+	}
+	return (0);
 }

@@ -45,6 +45,7 @@ typedef struct			s_struct
 	char				*result;
 }						t_struct;
 
+void					minishell(t_struct *st);
 void					print_tab(char **map);
 void					printlist_env(t_varlist **lst);
 void					printlist_export(t_varlist **lst);
@@ -61,7 +62,7 @@ int						ft_pwd(char **cmd);
 void					check_cmd(char **cmd, int i);
 int						ft_unset(char **cmd, t_struct *st);
 void					ft_export(char **cmd, t_struct *st, int i);
-int						first_check(t_struct *st);
+int						first_check(char **cmd);
 void					ft_env(t_struct *st);
 void					do_builtin(char **cmd, t_struct *st);
 void					do_routine(t_struct *st);

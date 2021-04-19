@@ -20,27 +20,28 @@ INC = -I headers/minishell.h
 
 LIB = libft/libft.a
 
-SRCS =  srcs/ft_cd.c \
-		srcs/do_builtin.c \
-		srcs/ft_chevron.c \
-		srcs/del_chevron.c \
-		srcs/do_pipe.c \
-		srcs/routine.c \
-		srcs/ft_echo.c \
-		srcs/ft_env.c \
-		srcs/ft_exit.c \
-		srcs/ft_export.c \
-		srcs/ft_pwd.c \
-		srcs/ft_unset.c \
-		srcs/init_struct.c \
-		srcs/first_check.c \
-		srcs/main.c \
-		srcs/utils_bis.c \
-		srcs/shell_init.c \
-		srcs/ft_error.c \
-		srcs/utils.c \
-		srcs/ft_echo_bis.c \
-		srcs/ft_checkpath.c \
+SRCS =  srcs/builtin/ft_cd.c \
+		srcs/routine/do_builtin.c \
+		srcs/routine/do_chevron.c \
+		srcs/routine/del_chevron.c \
+		srcs/routine/do_pipe.c \
+		srcs/routine/routine.c \
+		srcs/builtin/ft_echo.c \
+		srcs/builtin/ft_env.c \
+		srcs/builtin/ft_exit.c \
+		srcs/builtin/ft_export.c \
+		srcs/builtin/ft_pwd.c \
+		srcs/builtin/ft_unset.c \
+		srcs/utils/init_struct.c \
+		srcs/main_func/first_check.c \
+		srcs/main_func/main.c \
+		srcs/main_func/minishell.c \
+		srcs/utils/split_cmd.c \
+		srcs/utils/shell_init.c \
+		srcs/utils/ft_error.c \
+		srcs/utils/utils.c \
+		srcs/builtin/ft_echo_bis.c \
+		srcs/routine/ft_checkpath.c \
 		srcs/parse_cmdline/ft_parsecmdline.c \
 		srcs/parse_cmdline/parsecmdline_checknewline.c \
 		srcs/parse_cmdline/parsecmdline_dollar.c \

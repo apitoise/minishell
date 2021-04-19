@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/25 21:23:08 by cnotin            #+#    #+#             */
-/*   Updated: 2020/08/25 21:41:08 by cnotin           ###   ########.fr       */
+/*   Created: 2020/08/25 21:23:21 by cnotin            #+#    #+#             */
+/*   Updated: 2020/08/27 12:06:37 by cnotin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
-#include "../libft/libft.h"
+#include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
-int	ft_pwd(char **cmd)
+int		ft_error(char *s)
 {
-	char path[PATH_MAX];
+	ft_putstr_fd(s, 2);
+	//ft_putstr_fd(strerror(errno), 2);
+    ft_putstr_fd("\n", 2);
+	return (errno);
+}
 
-	(void)cmd;
-	if (!(getcwd(path, PATH_MAX)))
-		return (ft_error(""));
-	else
-	{
-		ft_putstr_fd(path, 1);
-		ft_putstr_fd("\n", 1);
-	}
-	return (0);
+void	not_cmd(char *str, t_struct *st)
+{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(" : command not found\n", 2);
+		st->ret = 127;
 }

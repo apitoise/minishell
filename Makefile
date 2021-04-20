@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/04/19 17:15:46 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/04/20 16:07:47 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/main_func/main.c \
 		srcs/main_func/minishell.c \
 		srcs/utils/split_cmd.c \
+		srcs/utils/split_cmdline.c \
 		srcs/utils/shell_init.c \
 		srcs/utils/ft_error.c \
 		srcs/utils/utils.c \

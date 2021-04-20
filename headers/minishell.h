@@ -69,6 +69,7 @@ void					do_routine(t_struct *st);
 void					do_pipe(t_struct *st);
 char					**get_env(char **env);
 char					**ft_split_cmd(const char *s, char c, t_struct *st);
+char					**ft_split_cmdline(char const *s, char c);
 int						ft_error(char *s);
 void					ft_checkpath(char **cmd, t_struct *st);
 void					not_cmd(char *str, t_struct *st);

@@ -31,7 +31,7 @@ void        minishell(t_struct *st)
 		{
 			if (!ft_parsecmdline(&tmp, st))
 			{
-				commands = ft_split(tmp, ';');
+				commands = ft_split_cmdline(tmp, ';');
 				cmd_analysis(commands, st);
 			}
 			shell_init();

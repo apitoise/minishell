@@ -6,7 +6,7 @@
 /*   By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:24:51 by cnotin            #+#    #+#             */
-/*   Updated: 2019/12/06 12:03:31 by cnotin           ###   ########.fr       */
+/*   Updated: 2021/04/20 13:17:42 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_isspechar(char c)
 
 int	ft_freestr(char *str)
 {
-	free(str);
+	if (str)
+		free(str);
 	return (1);
 }
 

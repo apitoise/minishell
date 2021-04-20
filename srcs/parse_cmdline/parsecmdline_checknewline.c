@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:24:51 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/04/20 13:15:41 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/04/20 15:06:27 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_checknewline(char *s)
 	i = -1;
 	while (s[++i])
 		;
-	if ((i && (s[i - 1] == '\\' || s[i - 1] == '>'
-		|| s[i - 1] == '<' || s[i - 1] == '|')) || ft_tkorqt(s, i))
+	if (((s[--i] == '\\' || s[i] == '>' || s[i] == '<' || s[i] == '|')
+		&& (!i || s[i - 1] != '\\')) || ft_tkorqt(s, ++i))
 	{
 		ft_putstr_fd("minishell : syntax error", 2);
 		ft_putstr_fd(" near unexpected token `newline'\n", 2);

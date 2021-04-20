@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2020/08/25 22:40:03 by cnotin           ###   ########.fr        #
+#    Updated: 2021/04/19 17:15:46 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/parse_cmdline/ft_parsecmdline.c \
 		srcs/parse_cmdline/parsecmdline_checknewline.c \
 		srcs/parse_cmdline/parsecmdline_dollar.c \
+		srcs/parse_cmdline/parsecmdline_dollarbis.c \
 		srcs/parse_cmdline/parsecmdline_addbslash.c \
 		srcs/parse_cmdline/parsecmdline_rmbslash.c \
 		srcs/parse_cmdline/parsecmdline_utils.c

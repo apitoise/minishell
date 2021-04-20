@@ -78,6 +78,8 @@ void					init_lstenv(char **env, t_struct *st);
 int						ft_parsecmdline(char **s, t_struct *st);
 int						ft_checknewline(char *s);
 int						ft_dollar(char **s1, t_struct *st);
+int						ft_dollar_d(char **s1, int *i, char **s2, t_struct *st);
+int						ft_dollar_cat(char **s2, char **tmp);
 int						ft_addbslash(char **s);
 int						ft_rmbslash(char **s, int i, int j);
 int						ft_tkorqt(char *str, int i);

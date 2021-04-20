@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_cmd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/20 18:49:15 by lgimenez          #+#    #+#             */
+/*   Updated: 2021/04/20 18:54:45 by lgimenez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
@@ -12,7 +24,11 @@ static int	ft_nb_w(char const *s, char c)
 	while (s[i])
 	{
 		while (s[i] && s[i] == c)
+		{
+			if (s[i] == '\\')
+				i++;
 			i++;
+		}
         if (s[i] && (s[i] == '>' || s[i] == '<' || s[i] == '|'))
         {
             spec = s[i];
@@ -25,7 +41,11 @@ static int	ft_nb_w(char const *s, char c)
 			nb++;
 			while (s[i] && s[i] != c && s[i] != '>' && s[i] != '<'
             && s[i] != '|')
+			{
+				if (s[i] == '\\')
+					i++;
 				i++;
+			}
 		}
 	}
 	return (nb);
@@ -59,15 +79,28 @@ static char	*ft_malloc_w(char const *s, char c)
 	i = 0;
 	while (s[i] && s[i] != c && s[i] != '>' && s[i] != '<'
     && s[i] != '|')
+	{
+		if (s[i] == '\\')
+			i++;
 		i++;
+	}
 	if (!(word = (char *)malloc(sizeof(char) * i + 1)))
 		return (NULL);
 	i = 0;
 	while (s[i] && s[i] != c && s[i] != '>' && s[i] != '<'
     && s[i] != '|')
 	{
-		word[i] = s[i];
-		i++;
+		if (s[i] == '\\')
+		{
+			word[i] = s[i];
+			word[i + 1] = s[i + 1];
+			i += 2;
+		}
+		else
+		{
+			word[i] = s[i];
+			i++;
+		}
 	}
 	word[i] = '\0';
 	return (word);
@@ -105,7 +138,11 @@ char		**ft_split_cmd(char const *s, char c, t_struct *st)
 			i++;
 			while (*s && (*s != c && *s != '>'
             && *s != '<' && *s != '|'))
+			{
+				if (*s == '\\')
+					s++;
 				s++;
+			}
 		}
 	}
 	tab[i] = NULL;

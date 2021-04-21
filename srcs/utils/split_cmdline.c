@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmdline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 11:24:51 by cnotin            #+#    #+#             */
-/*   Updated: 2021/04/20 16:33:11 by lgimenez         ###   ########.fr       */
+/*   Created: 2021/04/21 18:10:52 by lgimenez          #+#    #+#             */
+/*   Updated: 2021/04/21 18:37:23 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ static int	ft_nb_w(char const *s, char c)
 		{
 			nb++;
 			while (s[i] && s[i] != c)
+			{
+				if (s[i] == '\\')
+					i++;
 				i++;
+			}
 		}
 	}
 	return (nb);
@@ -48,7 +52,12 @@ static char	*ft_malloc_w(char const *s, char c)
 	while (s[i] && s[i] != c)
 	{
 		word[i] = s[i];
-		i++;
+		if (s[i] == '\\')
+		{
+			++i;
+			word[i] = s[i];
+		}
+		++i;
 	}
 	word[i] = '\0';
 	return (word);
@@ -67,16 +76,17 @@ char		**ft_split_cmdline(char const *s, char c)
 	while (*s)
 	{
 		while (*s && *s == c)
-		{
-			if (*(s++) == '\\')
-				s++;
-		}
+			s++;
 		if (*s && *s != c)
 		{
 			tab[i] = ft_malloc_w(s, c);
 			i++;
 			while (*s && *s != c)
+			{
+				if (*s == '\\')
+					s++;
 				s++;
+			}
 		}
 	}
 	tab[i] = NULL;

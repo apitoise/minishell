@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/04/20 18:50:07 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/04/21 17:40:42 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/routine/do_builtin.c \
 		srcs/routine/do_chevron.c \
 		srcs/routine/del_chevron.c \
+		srcs/routine/edit_cmd.c \
 		srcs/routine/do_pipe.c \
 		srcs/routine/routine.c \
 		srcs/builtin/ft_echo.c \

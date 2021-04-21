@@ -54,6 +54,7 @@ void					print_list(t_varlist **lst);
 int						do_chevrons(char **cmd, t_struct *st);
 void					shell_init();
 char					**del_chevron(char **cmd);
+void    				ft_edit_cmd(t_struct *st);
 void					init_struct(t_struct *st, char **env);
 void					ft_cd(char *path, t_struct *st);
 int						ft_echo(char **cmd, t_varlist **lst, t_struct *st);

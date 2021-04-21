@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:50 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/21 15:03:22 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/04/22 00:51:16 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 static void	if_builtin(char **cmd, t_struct *st)
 {
+
 	if (!ft_strcmp(cmd[0], "pwd"))
 		ft_pwd(cmd);
 	else if (!ft_strcmp(cmd[0], "echo"))
-		ft_echo(cmd, &st->lst, st);
+		ft_echo(cmd, st);
 	else if (!ft_strcmp(cmd[0], "env"))
 		ft_env(st);
 	else if (!ft_strcmp(cmd[0], "unset"))

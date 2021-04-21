@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/04/21 17:40:42 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/04/22 00:48:44 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/utils/shell_init.c \
 		srcs/utils/ft_error.c \
 		srcs/utils/utils.c \
-		srcs/builtin/ft_echo_bis.c \
 		srcs/routine/ft_checkpath.c \
 		srcs/parse_cmdline/ft_parsecmdline.c \
 		srcs/parse_cmdline/parsecmdline_checknewline.c \

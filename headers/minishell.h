@@ -71,12 +71,13 @@ char					**get_env(char **env);
 char					**ft_split_cmd(const char *s, char c, t_struct *st);
 char					**ft_split_cmdline(char const *s, char c);
 int						ft_error(char *s);
+int						ft_syntax_error(char *token);
 void					ft_checkpath(char **cmd, t_struct *st);
 void					not_cmd(char *str, t_struct *st);
 void					init_lstenv(char **env, t_struct *st);
 
 int						ft_parsecmdline(char **s, t_struct *st);
-int						ft_checknewline(char *s);
+int						ft_checkvalid(char *s);
 int						ft_dollar(char **s1, t_struct *st);
 int						ft_dollar_d(char **s1, int *i, char **s2, t_struct *st);
 int						ft_dollar_cat(char **s2, char **tmp);

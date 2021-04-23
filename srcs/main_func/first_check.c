@@ -6,20 +6,12 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:37 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:25:38 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/04/22 13:08:36 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
-
-static int	syntax_error(char *token)
-{
-	ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
-	ft_putstr_fd(token, 2);
-	ft_putstr_fd("'\n", 2);
-	return (1);
-}
 
 int			first_check(char **cmd)
 {
@@ -30,17 +22,17 @@ int			first_check(char **cmd)
 	{
 		if ((cmd[i][0] == '<' || cmd[i][0] == '|')
 		&& (ft_strlen(cmd[i]) > 1))
-			return (syntax_error(cmd[i]));
+			return (ft_syntax_error(cmd[i]));
 		else if ((!ft_strcmp(cmd[i], ">") || !ft_strcmp(cmd[i], ">>")
 		|| !ft_strcmp(cmd[i], "<") || !ft_strcmp(cmd[i], "|"))
 		&& !cmd[i + 1])
-			return (syntax_error("newline"));
+			return (ft_syntax_error("newline"));
 		else if (cmd[i][0] == '>' && ft_strlen(cmd[i]) > 2)
-			return (syntax_error(">"));
-		else if ((cmd[i][0] == '>' || cmd[i][0] == '<')
+			return (ft_syntax_error(">"));
+		else if ((cmd[i][0] == '>' || cmd[i][0] == '<' || cmd[i][0] == '|')
 		&& (cmd[i + 1][0] == '>' || cmd[i + 1][0] == '<'
 		|| cmd[i + 1][0] == '|'))
-			return (syntax_error(cmd[i]));
+			return (ft_syntax_error(cmd[i + 1]));
 		i++;
 	}
 	return (0);

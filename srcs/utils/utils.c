@@ -6,36 +6,12 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:28:04 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:28:05 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/04/22 00:44:26 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
-
-char			*ft_trim(char const *s1)
-{
-	size_t		end;
-	size_t		len;
-    size_t      start;
-	char		*res;
-    char        c;
-
-    start = 0;
-    c = 34;
-	if (!s1)
-		return (NULL);
-	if (s1[start] == '\0')
-		return (ft_strdup(""));
-    while (s1[start] == c)
-	    start++;
-	end = ft_strlen((char *)s1) - 1;
-	while (s1[end] == c)
-		end--;
-	len = end - start + 1;
-	res = ft_substr(s1, start, len);
-	return (res);
-}
 
 void print_tab(char **map)
 {

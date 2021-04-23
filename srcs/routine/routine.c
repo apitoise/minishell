@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:13 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:27:15 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/04/21 22:28:56 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void        do_routine(t_struct *st)
         if (!do_chevrons(st->cmd, st))
         {
             st->cmd = del_chevron(st->cmd);
+			ft_edit_cmd(st);
 		    do_builtin(st->cmd, st);
         }
 	}

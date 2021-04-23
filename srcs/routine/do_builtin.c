@@ -6,19 +6,20 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:50 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:26:53 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/04/22 00:51:16 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-static void     if_builtin(char **cmd, t_struct *st)
+static void	if_builtin(char **cmd, t_struct *st)
 {
+
 	if (!ft_strcmp(cmd[0], "pwd"))
 		ft_pwd(cmd);
 	else if (!ft_strcmp(cmd[0], "echo"))
-		ft_echo(cmd, &st->lst, st);
+		ft_echo(cmd, st);
 	else if (!ft_strcmp(cmd[0], "env"))
 		ft_env(st);
 	else if (!ft_strcmp(cmd[0], "unset"))
@@ -33,28 +34,31 @@ static void     if_builtin(char **cmd, t_struct *st)
 		ft_checkpath(cmd, st);
 }
 
-void            do_builtin(char **cmd, t_struct *st)
+void		do_builtin(char **cmd, t_struct *st)
 {
 	pid_t	pid;
 
-    if (cmd[0] == NULL)
+	if (cmd[0] == NULL)
 	{
 		cmd[0] = ft_strdup("");
 		return ;
 	}
-    if (!ft_strcmp(cmd[0], ""))
-        return ;
-	else if (!ft_strcmp(cmd[0], "exit"))
+	if (!ft_strcmp(cmd[0], ""))
+		return ;
+	if (!ft_strcmp(cmd[0], "exit"))
 		ft_exit(cmd);
-	pid = fork();
-	if (pid == 0)
-	{
-		dup2(st->stdin_fd, STDIN_FILENO);
-		dup2(st->stdout_fd, STDOUT_FILENO);
-		if_builtin(cmd, st);
-		close(STDOUT_FILENO);
-		close(STDIN_FILENO);
-	}
 	else
-		waitpid(pid, &st->ret, 0);
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			dup2(st->stdin_fd, STDIN_FILENO);
+			dup2(st->stdout_fd, STDOUT_FILENO);
+			if_builtin(cmd, st);
+			close(STDOUT_FILENO);
+			close(STDIN_FILENO);
+		}
+		else
+			waitpid(pid, &st->ret, 0);
+	}
 }

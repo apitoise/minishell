@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:24:51 by lgimenez          #+#    #+#             */
-/*   Updated: 2019/12/06 12:03:31 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/04/22 13:20:37 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,8 @@
 
 int	ft_parsecmdline(char **s, t_struct *st)
 {
-	if (!*s || ft_checknewline(*s) || ft_dollar(s, st) || ft_addbslash(s)
+	if (!*s || ft_checkvalid(*s) || ft_dollar(s, st) || ft_addbslash(s)
 		|| ft_rmbslash(s, -1, 0))
-	{
-		if (*s)
-			free(*s);
-		return (1);
-	}
-	printf("s: %s\n", *s);
+		return (ft_freestr(*s));
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2020/08/25 22:40:03 by cnotin           ###   ########.fr        #
+#    Updated: 2021/04/22 13:19:26 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/routine/do_builtin.c \
 		srcs/routine/do_chevron.c \
 		srcs/routine/del_chevron.c \
+		srcs/routine/edit_cmd.c \
 		srcs/routine/do_pipe.c \
 		srcs/routine/routine.c \
 		srcs/builtin/ft_echo.c \
@@ -37,14 +38,16 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/main_func/main.c \
 		srcs/main_func/minishell.c \
 		srcs/utils/split_cmd.c \
+		srcs/utils/split_cmdline.c \
 		srcs/utils/shell_init.c \
 		srcs/utils/ft_error.c \
+		srcs/utils/ft_syntax_error.c \
 		srcs/utils/utils.c \
-		srcs/builtin/ft_echo_bis.c \
 		srcs/routine/ft_checkpath.c \
 		srcs/parse_cmdline/ft_parsecmdline.c \
-		srcs/parse_cmdline/parsecmdline_checknewline.c \
+		srcs/parse_cmdline/parsecmdline_checkvalid.c \
 		srcs/parse_cmdline/parsecmdline_dollar.c \
+		srcs/parse_cmdline/parsecmdline_dollarbis.c \
 		srcs/parse_cmdline/parsecmdline_addbslash.c \
 		srcs/parse_cmdline/parsecmdline_rmbslash.c \
 		srcs/parse_cmdline/parsecmdline_utils.c

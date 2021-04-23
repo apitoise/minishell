@@ -10,6 +10,7 @@
 # include <sys/stat.h>
 # include <string.h>
 # include <limits.h>
+# include <termios.h>
 # include <errno.h>
 //# define BUFFER_SIZE 42
 

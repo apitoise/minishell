@@ -19,8 +19,6 @@ static void     if_builtin(char **cmd, t_struct *st)
 		ft_pwd(cmd);
 	else if (!ft_strcmp(cmd[0], "echo"))
 		ft_echo(cmd, &st->lst, st);
-	else if (!ft_strcmp(cmd[0], "exit"))
-		ft_exit(cmd);
 	else if (!ft_strcmp(cmd[0], "env"))
 		ft_env(st);
 	else if (!ft_strcmp(cmd[0], "unset"))
@@ -45,9 +43,9 @@ void            do_builtin(char **cmd, t_struct *st)
 		return ;
 	}
     if (!ft_strcmp(cmd[0], ""))
-	{
         return ;
-	}
+	else if (!ft_strcmp(cmd[0], "exit"))
+		ft_exit(cmd);
 	pid = fork();
 	if (pid == 0)
 	{

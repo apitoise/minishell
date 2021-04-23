@@ -50,7 +50,8 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/parse_cmdline/parsecmdline_dollarbis.c \
 		srcs/parse_cmdline/parsecmdline_addbslash.c \
 		srcs/parse_cmdline/parsecmdline_rmbslash.c \
-		srcs/parse_cmdline/parsecmdline_utils.c
+		srcs/parse_cmdline/parsecmdline_utils.c \
+		srcs/termcaps/get_history.c
 
 OBJS = $(SRCS:.c=.o)
 

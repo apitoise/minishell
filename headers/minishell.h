@@ -10,8 +10,15 @@
 # include <sys/stat.h>
 # include <string.h>
 # include <limits.h>
+# include <termios.h>
 # include <errno.h>
 //# define BUFFER_SIZE 42
+
+typedef struct			s_history
+{
+	char				*cmd;
+	void				*next;
+}						t_history;
 
 typedef struct			s_varlist
 {
@@ -37,6 +44,7 @@ typedef struct			s_struct
 	char				**env;
 	t_varlist			*lst;
 	t_cmdlist			*cmdlst;
+	t_history			*history;
 	int					ret;
 	int					stdout_fd;
 	int					stdin_fd;
@@ -75,6 +83,7 @@ int						ft_syntax_error(char *token);
 void					ft_checkpath(char **cmd, t_struct *st);
 void					not_cmd(char *str, t_struct *st);
 void					init_lstenv(char **env, t_struct *st);
+void					get_history(char *cmd, t_history **history);
 
 int						ft_parsecmdline(char **s, t_struct *st);
 int						ft_checkvalid(char *s);

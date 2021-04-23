@@ -41,6 +41,7 @@ void        minishell(t_struct *st)
 	{
 		while ((ret = get_next_line(1, &tmp)) > 0 && !(st->exit))
 		{
+			get_history(tmp, &st->history);
 			if (!ft_parsecmdline(&tmp, st))
 			{
 				commands = ft_split_cmdline(tmp, ';');

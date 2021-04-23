@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:28:04 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/22 00:44:26 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/04/23 18:08:53 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,55 @@
 
 void print_tab(char **map)
 {
-    int i;
+	int i;
 
-    i = 0;
-    if (!map)
-        return ;
-    while (map && map[i])
-    {
-        ft_putendl_fd(map[i++], 1);
-    }
+	i = -1;
+	if (!map)
+		return ;
+	while (map && map[++i])
+		ft_putendl_fd(map[i], 1);
 }
 
 void 			printlist_env(t_varlist **lst)
 {
 	t_varlist	*current;
 
-    if (*lst == NULL)
-        return ;
-    current = *lst;
-    while (current != NULL)
-    {
-	if (current->visible == 1)
+	if (*lst == NULL)
+		return ;
+	current = *lst;
+	while (current != NULL)
 	{
-    		if (current->content != NULL)
+		if (current->visible == 1)
 		{
-   	 		ft_putstr_fd(current->name, 1);
-			ft_putstr_fd("=", 1);
-			ft_putstr_fd(current->content, 1);
-			ft_putchar_fd('\n', 1);
-	    	}
+			if (current->content != NULL)
+			{
+				ft_putstr_fd(current->name, 1);
+				ft_putstr_fd("=", 1);
+				ft_putstr_fd(current->content, 1);
+				ft_putchar_fd('\n', 1);
+			}
+		}
+		current = current->next;
 	}
-        current = current->next;
-    }
+}
+
+static	void	putvar(char *name, char *content)
+{
+	ft_putstr_fd("declare -x ", 1);
+	ft_putstr_fd(name, 1);
+	if (content)
+	{
+		ft_putstr_fd("=\"", 1);
+		while (*content)
+		{
+			if (*content == '\\' || *content == '$')
+				ft_putchar_fd('\\', 1);
+			ft_putchar_fd(*content, 1);
+			content++;
+		}
+		ft_putchar_fd('"', 1);
+	}
+	ft_putchar_fd('\n', 1);
 }
 
 void 			printlist_export(t_varlist **lst)
@@ -79,13 +96,10 @@ void 			printlist_export(t_varlist **lst)
 					tmp = *current;
 			}
 		}
-		if (current->next == NULL && tmp.name != lastwrit && tmp.visible == 1)
+		if (current->next == NULL && tmp.name != lastwrit)
 		{
-		 	ft_putstr_fd("declare -x ", 1);
-		 	ft_putstr_fd(tmp.name, 1);
-			ft_putstr_fd("=\"", 1);
-			ft_putstr_fd(tmp.content, 1);
-			ft_putstr_fd("\"\n", 1);
+			if (tmp.visible && ft_strcmp(tmp.name, "_"))
+				putvar(tmp.name, tmp.content);
 			lastwrit = tmp.name;
 			current = *lst;
 		}

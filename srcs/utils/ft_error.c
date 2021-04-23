@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:29 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:27:30 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:17:21 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_error(char *s)
 
 void	not_cmd(char *str, t_struct *st)
 {
-		ft_putstr_fd("minishell: ", 2);
+//		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(" : command not found\n", 2);
 		st->ret = 127;

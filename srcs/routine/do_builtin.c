@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:50 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/22 00:51:16 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:27:13 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 static void	if_builtin(char **cmd, t_struct *st)
 {
-
 	if (!ft_strcmp(cmd[0], "pwd"))
 		ft_pwd(cmd);
 	else if (!ft_strcmp(cmd[0], "echo"))
@@ -39,13 +38,10 @@ void		do_builtin(char **cmd, t_struct *st)
 	pid_t	pid;
 
 	if (cmd[0] == NULL)
-	{
 		cmd[0] = ft_strdup("");
-		return ;
-	}
-	if (!ft_strcmp(cmd[0], ""))
-		return ;
-	if (!ft_strcmp(cmd[0], "exit"))
+	else if (!ft_strcmp(cmd[0], ""))
+		not_cmd(cmd[0], st);
+	else if (!ft_strcmp(cmd[0], "exit"))
 		ft_exit(cmd);
 	else
 	{

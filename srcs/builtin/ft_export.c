@@ -6,14 +6,14 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:07 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:25:09 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:59:41 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-static void		create_list(char *name, char *content, int visible, t_varlist **lst)
+static void	create_list(char *name, char *content, int visible, t_varlist **lst)
 {
 	t_varlist	*current;
 	t_varlist	*new;
@@ -34,7 +34,7 @@ static void		create_list(char *name, char *content, int visible, t_varlist **lst
 	}
 }
 
-static int		is_ok(char c)
+static int	is_ok(char c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (0);
@@ -42,7 +42,7 @@ static int		is_ok(char c)
 		return (1);
 } 
 
-static int		is_same(char *str, t_varlist **lst)
+static int	is_same(char *str, t_varlist **lst)
 {
 	t_varlist	*current;
 
@@ -64,7 +64,7 @@ static int		is_same(char *str, t_varlist **lst)
 	}
 }
 
-static int			check_error(char **cmd, t_struct *st, int f)
+static int	check_error(char **cmd, t_struct *st, int f)
 {
 	int	i;
 
@@ -96,7 +96,7 @@ static int			check_error(char **cmd, t_struct *st, int f)
 	return (0);
 }
 
-static void		modif_list(char *name, char *content, int visible, t_varlist **lst)
+static void	modif_list(char *name, char *content, int visible, t_varlist **lst)
 {
 	t_varlist	*current;
 
@@ -110,7 +110,7 @@ static void		modif_list(char *name, char *content, int visible, t_varlist **lst)
 		current->visible = 1;
 }
 
-void			create_elem(char **cmd, int f, int visible, t_struct *st)
+static void	create_elem(char **cmd, int f, int visible, t_struct *st)
 {
 	int			i;
 	int			j;
@@ -177,7 +177,7 @@ void			create_elem(char **cmd, int f, int visible, t_struct *st)
 	}
 }
 
-void			ft_export(char **cmd, t_struct *st, int f)
+void		ft_export(char **cmd, t_struct *st, int f)
 {
 	if (f == 2)
 	{

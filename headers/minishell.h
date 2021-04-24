@@ -3,6 +3,7 @@
 
 # include <unistd.h>
 # include <fcntl.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
@@ -11,6 +12,9 @@
 # include <string.h>
 # include <limits.h>
 # include <termios.h>
+# include <curses.h>
+# include <ncurses.h>
+# include <term.h>
 # include <errno.h>
 //# define BUFFER_SIZE 42
 
@@ -19,6 +23,24 @@ typedef struct			s_history
 	char				*cmd;
 	void				*next;
 }						t_history;
+
+typedef struct 			s_term
+{
+	int					column_term;
+	int					line_term;
+	char				*me;
+	char				*cm;
+	char				*sc;
+	char				*sf;
+	char				*rc;
+	char				*cd;
+	char				*cl;
+	char				*up;
+	char				*dw;
+	char				*term_type;
+	char				*str_tcapped;
+}						t_term;
+
 
 typedef struct			s_varlist
 {
@@ -45,6 +67,8 @@ typedef struct			s_struct
 	t_varlist			*lst;
 	t_cmdlist			*cmdlst;
 	t_history			*history;
+	t_term				term;
+	struct termios		terms;
 	int					ret;
 	int					stdout_fd;
 	int					stdin_fd;
@@ -84,6 +108,7 @@ void					ft_checkpath(char **cmd, t_struct *st);
 void					not_cmd(char *str, t_struct *st);
 void					init_lstenv(char **env, t_struct *st);
 void					get_history(char *cmd, t_history **history);
+void					init_termcap(t_term *term);
 
 int						ft_parsecmdline(char **s, t_struct *st);
 int						ft_checkvalid(char *s);

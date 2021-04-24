@@ -37,6 +37,7 @@ void        minishell(t_struct *st)
     commands = NULL;
     tmp = NULL;
     shell_init();
+	init_termcap(&st->term);
 	while (!(st->exit))
 	{
 		while ((ret = get_next_line(1, &tmp)) > 0 && !(st->exit))

@@ -36,7 +36,7 @@ static int	semicolon(char *s)
 	return (0);
 }
 
-static int	newline(char *s)
+static int	new_line(char *s)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ static int	newline(char *s)
 
 int			ft_checkvalid(char *s)
 {
-	if (semicolon(s) || newline(s))
+	if (semicolon(s) || new_line(s))
 		return (1);
 	return (0);
 }

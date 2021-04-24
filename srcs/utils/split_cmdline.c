@@ -65,12 +65,12 @@ static char	*ft_malloc_w(char const *s, char c)
 
 char		**ft_split_cmdline(char const *s, char c)
 {
-	char	**tab;
+	char	**tabl;
 	int		i;
 
 	if (!s)
 		return (NULL);
-	if (!(tab = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c) + 1))))
+	if (!(tabl = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c) + 1))))
 		return (NULL);
 	i = 0;
 	while (*s)
@@ -79,7 +79,7 @@ char		**ft_split_cmdline(char const *s, char c)
 			s++;
 		if (*s && *s != c)
 		{
-			tab[i] = ft_malloc_w(s, c);
+			tabl[i] = ft_malloc_w(s, c);
 			i++;
 			while (*s && *s != c)
 			{
@@ -89,6 +89,6 @@ char		**ft_split_cmdline(char const *s, char c)
 			}
 		}
 	}
-	tab[i] = NULL;
-	return (tab);
+	tabl[i] = NULL;
+	return (tabl);
 }

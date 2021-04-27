@@ -39,6 +39,7 @@ void        minishell(t_struct *st)
 	init_termcap(&st->term);
 	while (!(st->exit))
 	{
+		signal(SIGINT, ctrl_c);
 		tmp = get_input(st);
 		commands = ft_split_cmdline(tmp, ';');
 		cmd_analysis(commands, st);

@@ -32,7 +32,6 @@ void        minishell(t_struct *st)
 {
     char    **commands;
     char    *tmp;
-    int     ret;
 
     commands = NULL;
     tmp = NULL;
@@ -40,16 +39,22 @@ void        minishell(t_struct *st)
 	init_termcap(&st->term);
 	while (!(st->exit))
 	{
-		while ((ret = get_next_line(1, &tmp)) > 0 && !(st->exit))
-		{
-			get_history(tmp, &st->history);
-			if (!ft_parsecmdline(&tmp, st))
-			{
-				commands = ft_split_cmdline(tmp, ';');
-				cmd_analysis(commands, st);
-			}
-			shell_init();
-		}
+		tmp = get_input(st);
+		commands = ft_split_cmdline(tmp, ';');
+		cmd_analysis(commands, st);
+		free(tmp);
+		shell_init();
 	}
     ft_free_tab(st->env);
 }
+		// signal(SIGINT, ctrl_c);
+		// while ((ret = get_next_line(1, &tmp)) > 0 && !(st->exit))
+		// {
+		// 	get_history(tmp, &st->history);
+		// 	if (!ft_parsecmdline(&tmp, st))
+		// 	{
+		// 		commands = ft_split_cmdline(tmp, ';');
+		// 		cmd_analysis(commands, st);
+		// 	}
+		// 	shell_init();
+		// }

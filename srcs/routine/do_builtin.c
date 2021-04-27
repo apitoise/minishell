@@ -57,6 +57,7 @@ void		do_builtin(char **cmd, t_struct *st)
 			if_builtin(cmd, st);
 			close(STDOUT_FILENO);
 			close(STDIN_FILENO);
+			exit(0);
 		}
 		else
 			waitpid(pid, &st->ret, 0);

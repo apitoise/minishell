@@ -13,7 +13,18 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-void    init_termcap(t_term *term)
+static void raw_mode(t_term *term)
+{
+    struct termios  termios;
+
+    tcgetattr(STDIN_FILENO, &term->terms);
+    termios = term->terms;
+    termios.c_lflag &= ~(ECHO | ICANON);
+    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &termios) == -1)
+        return ;
+}
+
+void        init_termcap(t_term *term)
 {
     int     i;
     char    *term_type;
@@ -34,4 +45,5 @@ void    init_termcap(t_term *term)
     term->cl = tgetstr("cl", NULL);
     term->up = tgetstr("up", NULL);
     term->dw = tgetstr("dw", NULL);
+    raw_mode(term);
 }

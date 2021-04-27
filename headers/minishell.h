@@ -16,11 +16,12 @@
 # include <ncurses.h>
 # include <term.h>
 # include <errno.h>
-//# define BUFFER_SIZE 42
+# define MAX_FD 3000
 
 typedef struct			s_history
 {
 	char				*cmd;
+	int					linenbr;
 	void				*next;
 }						t_history;
 
@@ -28,6 +29,7 @@ typedef struct 			s_term
 {
 	int					column_term;
 	int					line_term;
+	struct termios		terms;
 	char				*me;
 	char				*cm;
 	char				*sc;
@@ -46,7 +48,7 @@ typedef struct			s_varlist
 {
 	char				*name;
 	char				*content;
-	int				visible;
+	int					visible;
 	void				*next;
 }						t_varlist;
 
@@ -66,9 +68,13 @@ typedef struct			s_struct
 	char				**env;
 	t_varlist			*lst;
 	t_cmdlist			*cmdlst;
-	t_history			*history;
 	t_term				term;
-	struct termios		terms;
+	t_history			*history;
+	int					nav;
+	int					hstline;
+	int					current_line;
+	char				**hst;
+	char				buff[5];
 	int					ret;
 	int					stdout_fd;
 	int					stdin_fd;
@@ -109,6 +115,9 @@ void					not_cmd(char *str, t_struct *st);
 void					init_lstenv(char **env, t_struct *st);
 void					get_history(char *cmd, t_history **history);
 void					init_termcap(t_term *term);
+void					ctrl_c(int useless);
+int						gnl_shell(int fd, char **line, t_struct *st);
+char					*get_input(t_struct *st);
 
 int						ft_parsecmdline(char **s, t_struct *st);
 int						ft_checkvalid(char *s);

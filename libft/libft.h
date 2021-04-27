@@ -32,6 +32,7 @@ int						ft_strcmp(const char *s1, const char *s2);
 int						ft_toupper(int c);
 int						ft_tolower(int c);
 int						ft_atoi(const char *str);
+int						ft_putchar(int c);
 
 t_list					*ft_lstnew(void *content);
 void					ft_lstadd_front(t_list **alst, t_list *new);

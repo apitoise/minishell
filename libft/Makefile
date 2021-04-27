@@ -29,7 +29,7 @@ SRC = 	ft_strlen.c ft_strdup.c ft_strchr.c ft_strrchr.c ft_strnstr.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_strdel.c ft_strcat.c \
 		ft_putendl_fd.c ft_putnbr_fd.c ft_itoa.c ft_itoa_base.c \
 		ft_free_tab.c ft_strncat.c ft_strcpy.c \
-		get_next_line.c 
+		get_next_line.c ft_putchar.c
 
 BSRC = 	ft_lstnew.c \
 		ft_lstdelone.c \

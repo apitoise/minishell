@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   ctrl_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/19 15:27:37 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:27:38 by apitoise         ###   ########.fr       */
+/*   Created: 2021/04/27 11:46:18 by apitoise          #+#    #+#             */
+/*   Updated: 2021/04/27 11:46:21 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
-void	init_struct(t_struct *st, char **env)
+void    ctrl_c(int useless)
 {
-	st->exit = 0;
-	st->s = NULL;
-	st->cmd = NULL;
-	st->lst = NULL;
-	st->history = NULL;
-	st->hstline = 0;
-	st->hst = malloc(sizeof(char *) * 1000);
-	st->hst[0] = NULL;
-	st->result = NULL;
-	st->stdout_copy = dup(1);
-	st->stdin_copy = dup(0);
-	st->stdout_fd = dup(1);
-	st->stdin_fd = dup(0);
-	st->pipe = 0;
-	st->env = get_env(env);
-	st->ret = 0;
-	init_lstenv(env, st);
-	return ;
+    (void)useless;
+    ft_putstr_fd("^C\n", 1);
+    shell_init();
+    tputs(tgetstr("sc", NULL), 1, ft_putchar);
 }

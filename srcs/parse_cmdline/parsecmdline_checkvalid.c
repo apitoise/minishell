@@ -13,13 +13,13 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-static int	semicolon(char *s)
+static int	semicolon(char *s, t_struct *st)
 {
 	int	i;
 	int j;
 
 	if (s[0] == ';')
-		return (ft_syntax_error(";"));
+		return (ft_syntax_error(";", st));
 	i = -1;
 	while (s[++i])
 	{
@@ -30,13 +30,13 @@ static int	semicolon(char *s)
 				--j;
 			if (j < 0 || s[j] == ';' || s[j] == '>' || s[j] == '<'
 				|| s[j] == '|')
-				return (ft_syntax_error(";"));
+				return (ft_syntax_error(";", st));
 		}
 	}
 	return (0);
 }
 
-static int	new_line(char *s)
+static int	new_line(char *s, t_struct *st)
 {
 	int	i;
 
@@ -46,13 +46,13 @@ static int	new_line(char *s)
 	if (i)
 		--i;
 	if (((s[i] == '\\') && (!i || s[i - 1] != '\\')) || ft_tkorqt(s, i + 1))
-		return (ft_syntax_error("newline"));
+		return (ft_syntax_error("newline", st));
 	return (0);
 }
 
-int			ft_checkvalid(char *s)
+int			ft_checkvalid(char *s, t_struct *st)
 {
-	if (semicolon(s) || new_line(s))
+	if (semicolon(s, st) || new_line(s, st))
 		return (1);
 	return (0);
 }

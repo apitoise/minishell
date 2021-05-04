@@ -16,7 +16,17 @@
 void    ctrl_c(int useless)
 {
     (void)useless;
-    ft_putstr_fd("^C\n", 1);
-    shell_init();
-    tputs(tgetstr("sc", NULL), 1, ft_putchar);
+    sig.sig_ret = 130;
+    sig.exit_status = 1;
+    if (sig.pid != 0)
+    {
+        ft_putstr_fd("\n", 1);
+        kill(sig.pid, SIGINT);
+        sig.pid = 0;
+    }
+    else
+    {
+        ft_putstr_fd("\n", 1);
+        shell_init();
+    }
 }

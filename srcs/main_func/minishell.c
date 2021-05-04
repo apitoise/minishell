@@ -21,7 +21,7 @@ static void cmd_analysis(char **commands, t_struct *st)
 	while (commands[i])
 	{
 		st->cmd = ft_split_cmd(commands[i], ' ', st);
-		if (first_check(st->cmd))
+		if (first_check(st->cmd, st))
 			return ;
 		do_routine(st);
 		i++;
@@ -32,30 +32,26 @@ void        minishell(t_struct *st)
 {
     char    **commands;
     char    *tmp;
+	int		ret;
 
     commands = NULL;
     tmp = NULL;
     shell_init();
-	init_termcap(&st->term);
 	while (!(st->exit))
 	{
+		signal(SIGQUIT, ctrl_backslash);
 		signal(SIGINT, ctrl_c);
-		tmp = get_input(st);
-		commands = ft_split_cmdline(tmp, ';');
-		cmd_analysis(commands, st);
-		free(tmp);
-		shell_init();
+		if (sig.sig_ret != 0)
+			st->ret = sig.sig_ret;
+		while ((ret = get_next_line(1, &tmp)) > 0 && !(st->exit))
+		{
+			get_history(tmp, &st->history);
+			if (!ft_parsecmdline(&tmp, st))
+			{
+				commands = ft_split_cmdline(tmp, ';');
+				cmd_analysis(commands, st);
+			}
+			shell_init();
+		}
 	}
-    ft_free_tab(st->env);
 }
-		// signal(SIGINT, ctrl_c);
-		// while ((ret = get_next_line(1, &tmp)) > 0 && !(st->exit))
-		// {
-		// 	get_history(tmp, &st->history);
-		// 	if (!ft_parsecmdline(&tmp, st))
-		// 	{
-		// 		commands = ft_split_cmdline(tmp, ';');
-		// 		cmd_analysis(commands, st);
-		// 	}
-		// 	shell_init();
-		// }

@@ -15,9 +15,13 @@
 
 void	ft_exit(char **cmd)
 {
+	if (cmd == NULL)
+	{
+		exit(EXIT_SUCCESS);
+		return ;
+	}
 	ft_putstr_fd("exit\n", 1);
 	ft_free_tab(cmd);
 	//a free au complet;
-	exit(0);
-	//return (0);
+	exit(EXIT_SUCCESS);
 }

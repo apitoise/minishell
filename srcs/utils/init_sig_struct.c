@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_syntax_error.c                                  :+:      :+:    :+:   */
+/*   init_sig_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 13:03:51 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/04/22 13:07:57 by lgimenez         ###   ########.fr       */
+/*   Created: 2021/05/03 15:38:17 by apitoise          #+#    #+#             */
+/*   Updated: 2021/05/03 15:38:18 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-int	ft_syntax_error(char *token, t_struct *st)
+void    init_sig_struct(void)
 {
-	ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
-	ft_putstr_fd(token, 2);
-	ft_putstr_fd("'\n", 2);
-	st->ret = 2;
-	return (1);
+    sig.exit_status = 0;
+    sig.pid = 0;
+    sig.sig_ret = 0;
 }

@@ -43,8 +43,7 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/utils/ft_error.c \
 		srcs/utils/ft_syntax_error.c \
 		srcs/utils/utils.c \
-		srcs/utils/gnl_shell.c \
-		srcs/utils/get_input.c \
+		srcs/utils/init_sig_struct.c \
 		srcs/routine/ft_checkpath.c \
 		srcs/parse_cmdline/ft_parsecmdline.c \
 		srcs/parse_cmdline/parsecmdline_checkvalid.c \
@@ -54,8 +53,8 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/parse_cmdline/parsecmdline_rmbslash.c \
 		srcs/parse_cmdline/parsecmdline_utils.c \
 		srcs/termcaps/get_history.c \
-		srcs/termcaps/init_termcap.c \
-		srcs/signals/ctrl_c.c
+		srcs/signals/ctrl_c.c \
+		srcs/signals/ctrl_backslash.c \
 
 
 OBJS = $(SRCS:.c=.o)
@@ -63,7 +62,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(LIB) $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
-		 @$(CC) $(CFLAG) -ltermcap -lncurses $(OBJS) -o $(NAME) $(LIB)
+		 @$(CC) $(CFLAG) -lncurses $(OBJS) -o $(NAME) $(LIB) -ltermcap
 
 $(LIB):
 		@make -C libft/ fclean

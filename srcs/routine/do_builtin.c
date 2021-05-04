@@ -36,8 +36,7 @@ static void	if_builtin(char **cmd, t_struct *st)
 
 void		do_builtin(char **cmd, t_struct *st)
 {
-	pid_t	pid;
-
+	pid_t	forking;
 	if (cmd[0] == NULL)
 	{
 		cmd[0] = ft_strdup("");
@@ -49,17 +48,21 @@ void		do_builtin(char **cmd, t_struct *st)
 		ft_exit(cmd);
 	else
 	{
-		pid = fork();
-		if (pid == 0)
+		forking = fork();
+		if (forking == 0)
 		{
 			dup2(st->stdin_fd, STDIN_FILENO);
 			dup2(st->stdout_fd, STDOUT_FILENO);
 			if_builtin(cmd, st);
 			close(STDOUT_FILENO);
 			close(STDIN_FILENO);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		else
-			waitpid(pid, &st->ret, 0);
+		{
+			sig.pid = forking;
+			waitpid(forking, &st->ret, 0);
+			sig.pid = 0;
+		}
 	}
 }

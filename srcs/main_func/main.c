@@ -19,6 +19,7 @@ int			main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	init_sig_struct();
 	init_struct(&st, env);
 	minishell(&st);
 	return (0);

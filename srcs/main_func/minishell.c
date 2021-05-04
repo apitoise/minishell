@@ -21,7 +21,7 @@ static void cmd_analysis(char **commands, t_struct *st)
 	while (commands[i])
 	{
 		st->cmd = ft_split_cmd(commands[i], ' ', st);
-		if (first_check(st->cmd))
+		if (first_check(st->cmd, st))
 			return ;
 		do_routine(st);
 		i++;
@@ -32,13 +32,17 @@ void        minishell(t_struct *st)
 {
     char    **commands;
     char    *tmp;
-    int     ret;
+	int		ret;
 
     commands = NULL;
     tmp = NULL;
     shell_init();
 	while (!(st->exit))
 	{
+		signal(SIGQUIT, ctrl_backslash);
+		signal(SIGINT, ctrl_c);
+		if (sig.sig_ret != 0)
+			st->ret = sig.sig_ret;
 		while ((ret = get_next_line(1, &tmp)) > 0 && !(st->exit))
 		{
 			get_history(tmp, &st->history);
@@ -50,5 +54,4 @@ void        minishell(t_struct *st)
 			shell_init();
 		}
 	}
-    ft_free_tab(st->env);
 }

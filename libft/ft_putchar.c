@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/19 15:24:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:24:21 by apitoise         ###   ########.fr       */
+/*   Created: 2021/04/27 13:58:37 by apitoise          #+#    #+#             */
+/*   Updated: 2021/04/27 13:58:39 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
-#include "../../libft/libft.h"
+#include "libft.h"
+#include <unistd.h>
 
-void	ft_exit(char **cmd)
+int    ft_putchar(int c)
 {
-	if (cmd == NULL)
-	{
-		exit(EXIT_SUCCESS);
-		return ;
-	}
-	ft_putstr_fd("exit\n", 1);
-	ft_free_tab(cmd);
-	//a free au complet;
-	exit(EXIT_SUCCESS);
+    write(1, &c, 1);
+    return (0);
 }

@@ -3,6 +3,7 @@
 
 # include <unistd.h>
 # include <fcntl.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
@@ -11,20 +12,49 @@
 # include <string.h>
 # include <limits.h>
 # include <termios.h>
+# include <curses.h>
+# include <ncurses.h>
+# include <term.h>
 # include <errno.h>
-//# define BUFFER_SIZE 42
+# define MAX_FD 3000
+
+typedef struct			s_sig
+{
+	pid_t	pid;
+	int		sig_ret;
+	int		exit_status;
+}						t_sig;
 
 typedef struct			s_history
 {
 	char				*cmd;
+	int					linenbr;
 	void				*next;
 }						t_history;
+
+typedef struct 			s_term
+{
+	int					column_term;
+	int					line_term;
+	struct termios		terms;
+	char				*me;
+	char				*cm;
+	char				*sc;
+	char				*sf;
+	char				*rc;
+	char				*cd;
+	char				*cl;
+	char				*up;
+	char				*dw;
+	char				*term_type;
+	char				*str_tcapped;
+}						t_term;
 
 typedef struct			s_varlist
 {
 	char				*name;
 	char				*content;
-	int				visible;
+	int					visible;
 	void				*next;
 }						t_varlist;
 
@@ -42,9 +72,16 @@ typedef struct			s_struct
 	char				*s;
 	char				**cmd;
 	char				**env;
+	pid_t				pid;
 	t_varlist			*lst;
 	t_cmdlist			*cmdlst;
+	t_term				term;
 	t_history			*history;
+	int					nav;
+	int					hstline;
+	int					current_line;
+	char				**hst;
+	char				buff[5];
 	int					ret;
 	int					stdout_fd;
 	int					stdin_fd;
@@ -52,6 +89,8 @@ typedef struct			s_struct
 	int					stdout_copy;
 	char				*result;
 }						t_struct;
+
+t_sig	sig;
 
 void					minishell(t_struct *st);
 void					print_tab(char **map);
@@ -64,13 +103,14 @@ void					shell_init();
 char					**del_chevron(char **cmd);
 void    				ft_edit_cmd(t_struct *st);
 void					init_struct(t_struct *st, char **env);
+void					init_sig_struct(void);
 void					ft_cd(char *path, t_struct *st);
 int						ft_echo(char **cmd, t_struct *st);
 void					ft_exit(char **cmd);
 int						ft_pwd(char **cmd);
 int						ft_unset(char **cmd, t_struct *st);
 void					ft_export(char **cmd, t_struct *st, int i);
-int						first_check(char **cmd);
+int						first_check(char **cmd, t_struct *st);
 void					ft_env(t_struct *st);
 void					do_builtin(char **cmd, t_struct *st);
 void					do_routine(t_struct *st);
@@ -79,14 +119,19 @@ char					**get_env(char **env);
 char					**ft_split_cmd(const char *s, char c, t_struct *st);
 char					**ft_split_cmdline(char const *s, char c);
 int						ft_error(char *s);
-int						ft_syntax_error(char *token);
+int						ft_syntax_error(char *token, t_struct *st);
 void					ft_checkpath(char **cmd, t_struct *st);
 void					not_cmd(char *str, t_struct *st);
 void					init_lstenv(char **env, t_struct *st);
 void					get_history(char *cmd, t_history **history);
+void					init_termcap(t_term *term);
+void					ctrl_c(int useless);
+void					ctrl_backslash(int useless);
+int						gnl_shell(int fd, char **line, t_struct *st);
+char					*get_input(t_struct *st);
 
 int						ft_parsecmdline(char **s, t_struct *st);
-int						ft_checkvalid(char *s);
+int						ft_checkvalid(char *s, t_struct *st);
 int						ft_dollar(char **s1, t_struct *st);
 int						ft_dollar_d(char **s1, int *i, char **s2, t_struct *st);
 int						ft_dollar_cat(char **s2, char **tmp);

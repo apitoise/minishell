@@ -12,7 +12,7 @@
 
 NAME = minishell
 
-CC = gcc
+CC = clang
 
 CFLAGS  = -Wall -Wextra -Werror
 
@@ -43,6 +43,7 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/utils/ft_error.c \
 		srcs/utils/ft_syntax_error.c \
 		srcs/utils/utils.c \
+		srcs/utils/init_sig_struct.c \
 		srcs/routine/ft_checkpath.c \
 		srcs/parse_cmdline/ft_parsecmdline.c \
 		srcs/parse_cmdline/parsecmdline_checkvalid.c \
@@ -51,20 +52,22 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/parse_cmdline/parsecmdline_addbslash.c \
 		srcs/parse_cmdline/parsecmdline_rmbslash.c \
 		srcs/parse_cmdline/parsecmdline_utils.c \
-		srcs/termcaps/get_history.c
+		srcs/termcaps/get_history.c \
+		srcs/signals/ctrl_c.c \
+		srcs/signals/ctrl_backslash.c \
+
 
 OBJS = $(SRCS:.c=.o)
-
 
 all: $(LIB) $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
-		 $(CC) $(CFLAG) -o $(NAME) $(OBJS) $(LIB)
+		 @$(CC) $(CFLAG) -lncurses $(OBJS) -o $(NAME) $(LIB) -ltermcap
 
 $(LIB):
 		@make -C libft/ fclean
 		@make -C ./libft
-		#@echo "\033[0;34mCompilation libft \033[0m \033[0;32m [OK] \033[0m"
+		@echo "\033[0;34mCompilation libft \033[0m \033[0;32m [OK] \033[0m"
 
 clean:
 		@make -C libft/ clean

@@ -15,7 +15,7 @@
 
 int	ft_parsecmdline(char **s, t_struct *st)
 {
-	if (!*s || ft_checkvalid(*s) || ft_dollar(s, st) || ft_addbslash(s)
+	if (!*s || ft_checkvalid(*s, st) || ft_dollar(s, st) || ft_addbslash(s)
 		|| ft_rmbslash(s, -1, 0))
 		return (ft_freestr(*s));
 	return (0);

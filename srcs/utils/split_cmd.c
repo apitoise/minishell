@@ -108,13 +108,13 @@ static char	*ft_malloc_w(char const *s, char c)
 
 char		**ft_split_cmd(char const *s, char c, t_struct *st)
 {
-	char	**tab;
+	char	**tabl;
 	int		i;
     char    spec;
 
 	if (!s)
 		return (NULL);
-	if (!(tab = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c) + 1))))
+	if (!(tabl = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c) + 1))))
 		return (NULL);
 	i = 0;
 	while (*s)
@@ -126,7 +126,7 @@ char		**ft_split_cmd(char const *s, char c, t_struct *st)
 			if (*s == '|')
 				st->pipe++;
             spec = *s;
-            tab[i] = ft_malloc_chevron(s, *s);
+            tabl[i] = ft_malloc_chevron(s, *s);
             i++;
             while (*s && *s == spec)
                 s++;
@@ -134,7 +134,7 @@ char		**ft_split_cmd(char const *s, char c, t_struct *st)
 		if (*s && (*s != c && *s != '>'
         && *s != '<' && *s != '|'))
 		{
-			tab[i] = ft_malloc_w(s, c);
+			tabl[i] = ft_malloc_w(s, c);
 			i++;
 			while (*s && (*s != c && *s != '>'
             && *s != '<' && *s != '|'))
@@ -145,6 +145,6 @@ char		**ft_split_cmd(char const *s, char c, t_struct *st)
 			}
 		}
 	}
-	tab[i] = NULL;
-	return (tab);
+	tabl[i] = NULL;
+	return (tabl);
 }

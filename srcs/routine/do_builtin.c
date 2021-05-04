@@ -36,10 +36,14 @@ static void	if_builtin(char **cmd, t_struct *st)
 void		do_builtin(char **cmd, t_struct *st)
 {
 	pid_t	forking;
+
 	if (cmd[0] == NULL)
 		cmd[0] = ft_strdup("");
 	else if (!ft_strcmp(cmd[0], ""))
+	{
+		printf("OK\n");
 		not_cmd(cmd[0], st);
+	}
 	else if (!ft_strcmp(cmd[0], "exit"))
 		ft_exit(cmd);
 	else

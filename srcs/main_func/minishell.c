@@ -22,7 +22,11 @@ static void cmd_analysis(char **commands, t_struct *st)
 	{
 		st->cmd = ft_split_cmd(commands[i], ' ', st);
 		if (first_check(st->cmd, st))
+		{
+			st->pipe = 0;
+			ft_free_tab(st->cmd);
 			return ;
+		}
 		do_routine(st);
 		i++;
 	}

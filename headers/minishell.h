@@ -32,13 +32,6 @@ typedef struct			s_varlist
 	void				*next;
 }						t_varlist;
 
-typedef	struct			s_cmdlist
-{
-	char				*cmd;
-	char				*arg;
-	void				*next;
-}						t_cmdlist;
-
 typedef struct			s_struct
 {
 	int					exit;
@@ -48,7 +41,6 @@ typedef struct			s_struct
 	char				**env;
 	pid_t				pid;
 	t_varlist			*lst;
-	t_cmdlist			*cmdlst;
 	int					ret;
 	int					stdout_fd;
 	int					stdin_fd;

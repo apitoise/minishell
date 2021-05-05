@@ -63,7 +63,6 @@ all: $(LIB) $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
 		 @$(CC) $(CFLAG) -lncurses $(OBJS) -o $(NAME) $(LIB) -ltermcap
-
 $(LIB):
 		@make -C libft/ fclean
 		@make -C ./libft

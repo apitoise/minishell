@@ -90,7 +90,7 @@ typedef struct			s_struct
 	char				*result;
 }						t_struct;
 
-t_sig	sig;
+extern t_sig			sig;
 
 void					minishell(t_struct *st);
 void					print_tab(char **map);

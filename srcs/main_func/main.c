@@ -6,12 +6,14 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:46 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:25:47 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:33:59 by fcadet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
+
+t_sig	sig;
 
 int			main(int ac, char **av, char **env)
 {

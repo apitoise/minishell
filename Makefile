@@ -52,7 +52,7 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/parse_cmdline/parsecmdline_addbslash.c \
 		srcs/parse_cmdline/parsecmdline_rmbslash.c \
 		srcs/parse_cmdline/parsecmdline_utils.c \
-		srcs/termcaps/get_history.c \
+		srcs/signals/get_signals.c \
 		srcs/signals/ctrl_c.c \
 		srcs/signals/ctrl_backslash.c \
 

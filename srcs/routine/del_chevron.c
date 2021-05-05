@@ -83,6 +83,7 @@ char    **del_chevron(char **cmd)
         if (!(res = (char **)malloc(sizeof(char *) * 1)))
             return (NULL);
         res[0] = ft_strdup("");
+        ft_free_tab(cmd);
         return (res);
     }
     else

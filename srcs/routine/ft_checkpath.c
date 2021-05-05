@@ -31,7 +31,7 @@ static void	ft_freepathtab(char **pathtab)
 static void	ft_exec(char **cmd, char *filepath, t_struct *st)
 {
 	if (execve(filepath, cmd, st->env) == -1)
-		printf("Error!!\n"); //must deal with error
+		return(not_cmd(cmd[0], st));
 }
 
 static int	ft_checkfile(char *filepath)
@@ -89,9 +89,7 @@ void		ft_checkpath(char **cmd, t_struct *st)
 	while (ft_strcmp(tmp->name, "PATH") && tmp)
 		tmp = tmp->next;
 	if (!tmp)
-	{
 		not_cmd(cmd[0], st);
-	}
 	else
 		ft_checkpath2(cmd, tmp->content, st);
 }

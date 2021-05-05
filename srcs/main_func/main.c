@@ -13,6 +13,8 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
+t_sig	sig;
+
 int			main(int ac, char **av, char **env)
 {
 	t_struct	st;

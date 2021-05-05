@@ -13,7 +13,30 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-void	ft_exit(char **cmd)
+static void	ft_varlstclear(t_varlist **lst, void (*del)(void*))
+{
+	t_varlist *current;
+
+	if (lst && del)
+	{
+		current = *lst;
+		while (current)
+		{
+			del(current->content);
+			del(current->name);
+			free(current);
+			current = current->next;
+		}
+		*lst = NULL;
+	}
+}
+
+static void	ft_del_elem(void *content)
+{
+	free(content);
+}
+
+void		ft_exit(char **cmd, t_struct *st)
 {
 	if (cmd == NULL)
 	{
@@ -22,6 +45,8 @@ void	ft_exit(char **cmd)
 	}
 	ft_putstr_fd("exit\n", 1);
 	ft_free_tab(cmd);
-	//a free au complet;
+	if (st->env)
+		ft_free_tab(st->env);
+	ft_varlstclear(&st->lst, &ft_del_elem);
 	exit(EXIT_SUCCESS);
 }

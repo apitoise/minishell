@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/04/22 13:19:26 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/05/04 15:20:49 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,9 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/parse_cmdline/parsecmdline_addbslash.c \
 		srcs/parse_cmdline/parsecmdline_rmbslash.c \
 		srcs/parse_cmdline/parsecmdline_utils.c \
-		srcs/termcaps/get_history.c
+		srcs/termcap/init_termcap.c \
+		srcs/termcap/getcmdline.c \
+		srcs/termcap/termcap_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -59,7 +61,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(LIB) $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
-		 $(CC) $(CFLAG) -o $(NAME) $(OBJS) $(LIB)
+		 $(CC) $(CFLAG) -o $(NAME) $(OBJS) $(LIB) -ltermcap
 
 $(LIB):
 		@make -C libft/ fclean

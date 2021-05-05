@@ -14,17 +14,11 @@
 # include <errno.h>
 //# define BUFFER_SIZE 42
 
-typedef struct			s_history
-{
-	char				*cmd;
-	void				*next;
-}						t_history;
-
 typedef struct			s_varlist
 {
 	char				*name;
 	char				*content;
-	int				visible;
+	int					visible;
 	void				*next;
 }						t_varlist;
 
@@ -35,6 +29,13 @@ typedef	struct			s_cmdlist
 	void				*next;
 }						t_cmdlist;
 
+typedef	struct			s_history
+{
+	char				*cmdline;
+	size_t				len;
+	size_t				capacity;
+}						t_history;
+
 typedef struct			s_struct
 {
 	int					exit;
@@ -44,13 +45,14 @@ typedef struct			s_struct
 	char				**env;
 	t_varlist			*lst;
 	t_cmdlist			*cmdlst;
-	t_history			*history;
 	int					ret;
 	int					stdout_fd;
 	int					stdin_fd;
 	int					stdin_copy;
 	int					stdout_copy;
 	char				*result;
+	unsigned int		capacmdline;
+//	t_history			*history;
 }						t_struct;
 
 void					minishell(t_struct *st);
@@ -83,7 +85,6 @@ int						ft_syntax_error(char *token);
 void					ft_checkpath(char **cmd, t_struct *st);
 void					not_cmd(char *str, t_struct *st);
 void					init_lstenv(char **env, t_struct *st);
-void					get_history(char *cmd, t_history **history);
 
 int						ft_parsecmdline(char **s, t_struct *st);
 int						ft_checkvalid(char *s);
@@ -95,5 +96,9 @@ int						ft_rmbslash(char **s, int i, int j);
 int						ft_tkorqt(char *str, int i);
 int						ft_freestr(char *str);
 int						ft_isspechar(char c);
+
+int						init_termcap(void);
+char					*getcmdline(t_struct *st);
+int						ft_putc(int c);
 
 #endif

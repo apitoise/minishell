@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:56 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:25:57 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:09:16 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,21 @@ static void cmd_analysis(char **commands, t_struct *st)
 
 void        minishell(t_struct *st)
 {
-    char    **commands;
-    char    *tmp;
-    int     ret;
+	char    **commands;
+	char    *cmdline;
 
-    commands = NULL;
-    tmp = NULL;
-    shell_init();
+	commands = NULL;
+	cmdline = NULL;
+	shell_init();
 	while (!(st->exit))
 	{
-		while ((ret = get_next_line(1, &tmp)) > 0 && !(st->exit))
+		cmdline = getcmdline(st);
+		if (!ft_parsecmdline(&cmdline, st))
 		{
-			get_history(tmp, &st->history);
-			if (!ft_parsecmdline(&tmp, st))
-			{
-				commands = ft_split_cmdline(tmp, ';');
-				cmd_analysis(commands, st);
-			}
-			shell_init();
+			commands = ft_split_cmdline(cmdline, ';');
+			cmd_analysis(commands, st);
 		}
+		shell_init();
 	}
     ft_free_tab(st->env);
 }

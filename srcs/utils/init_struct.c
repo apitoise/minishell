@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:37 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:27:38 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/04 22:31:26 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_struct(t_struct *st, char **env)
 	st->s = NULL;
 	st->cmd = NULL;
 	st->lst = NULL;
-	st->history = NULL;
 	st->result = NULL;
 	st->stdout_copy = dup(1);
 	st->stdin_copy = dup(0);

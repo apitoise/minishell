@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:50 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/22 16:27:13 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/04 00:03:47 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void		do_builtin(char **cmd, t_struct *st)
 			if_builtin(cmd, st);
 			close(STDOUT_FILENO);
 			close(STDIN_FILENO);
+			exit(0);
 		}
 		else
 			waitpid(pid, &st->ret, 0);

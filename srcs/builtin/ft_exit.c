@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:24:21 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/04 16:31:07 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 void	ft_exit(char **cmd)
 {
-	ft_putstr_fd("exit\n", 1);
-	ft_free_tab(cmd);
+	if (cmd)
+	{
+		ft_free_tab(cmd);
+	}
 	//a free au complet;
+	ft_putstr_fd("exit\n", 1);
 	exit(0);
 	//return (0);
 }

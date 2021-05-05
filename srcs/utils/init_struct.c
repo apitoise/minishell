@@ -18,10 +18,6 @@ void	init_struct(t_struct *st, char **env)
 	st->s = NULL;
 	st->cmd = NULL;
 	st->lst = NULL;
-	st->history = NULL;
-	st->hstline = 0;
-	st->hst = malloc(sizeof(char *) * 1000);
-	st->hst[0] = NULL;
 	st->result = NULL;
 	st->stdout_copy = dup(1);
 	st->stdin_copy = dup(0);

@@ -15,7 +15,6 @@
 
 void    init_sig_struct(void)
 {
-    sig.exit_status = 0;
     sig.pid = 0;
     sig.sig_ret = 0;
 }

@@ -16,9 +16,9 @@
 void    ctrl_backslash(int useless)
 {
     (void)useless;
-    sig.sig_ret = 131;
     if (sig.pid != 0)
     {
+        sig.sig_ret = 131;
         printf("Quit (core dumped)\n");
         kill(sig.pid, SIGQUIT);
         sig.pid = 0;

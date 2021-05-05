@@ -13,10 +13,36 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
+static void	do_fork(char **cmd, t_struct *st)
+{
+	pid_t	forking;
+
+	forking = fork();
+	if (forking == 0)
+	{
+		dup2(st->stdin_fd, STDIN_FILENO);
+		dup2(st->stdout_fd, STDOUT_FILENO);
+		ft_checkpath(cmd, st);
+		close(STDOUT_FILENO);
+		close(STDIN_FILENO);
+		exit(st->ret);
+	}
+	else
+	{
+		sig.pid = forking;
+		waitpid(forking, &st->ret, 0);
+		sig.pid = 0;
+	}
+}
+
 static void	if_builtin(char **cmd, t_struct *st)
 {
 	if (!ft_strcmp(cmd[0], "pwd"))
 		ft_pwd(cmd);
+	else if (!ft_strcmp(cmd[0], ""))
+		not_cmd(cmd[0], st);
+	else if (!ft_strcmp(cmd[0], "exit"))
+		ft_exit(cmd, st);
 	else if (!ft_strcmp(cmd[0], "echo"))
 		ft_echo(cmd, st);
 	else if (!ft_strcmp(cmd[0], "env"))
@@ -30,39 +56,14 @@ static void	if_builtin(char **cmd, t_struct *st)
 	else if (!ft_strcmp(cmd[0], "export"))
 		ft_export(cmd, st, 2);
 	else
-		ft_checkpath(cmd, st);
+		do_fork(cmd, st);
 }
 
 void		do_builtin(char **cmd, t_struct *st)
 {
-	pid_t	forking;
-
 	if (cmd[0] == NULL)
 		cmd[0] = ft_strdup("");
-	else if (!ft_strcmp(cmd[0], ""))
-	{
-		printf("OK\n");
-		not_cmd(cmd[0], st);
-	}
-	else if (!ft_strcmp(cmd[0], "exit"))
-		ft_exit(cmd);
-	else
-	{
-		forking = fork();
-		if (forking == 0)
-		{
-			dup2(st->stdin_fd, STDIN_FILENO);
-			dup2(st->stdout_fd, STDOUT_FILENO);
-			if_builtin(cmd, st);
-			close(STDOUT_FILENO);
-			close(STDIN_FILENO);
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
-			sig.pid = forking;
-			waitpid(forking, &st->ret, 0);
-			sig.pid = 0;
-		}
-	}
+	if_builtin(cmd, st);
+	if (st->ret > 0)
+		st->ret = st->ret / 256;
 }

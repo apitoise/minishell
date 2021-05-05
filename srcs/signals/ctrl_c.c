@@ -17,7 +17,6 @@ void    ctrl_c(int useless)
 {
     (void)useless;
     sig.sig_ret = 130;
-    sig.exit_status = 1;
     if (sig.pid != 0)
     {
         ft_putstr_fd("\n", 1);

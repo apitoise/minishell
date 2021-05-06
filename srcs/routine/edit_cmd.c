@@ -61,10 +61,11 @@ void		ft_edit_cmd(t_struct *st)
 {
 	int	i;
 
-	i = -1;
-	while (st->cmd[++i])
+	i = 0;
+	while (st->cmd[i])
 	{
 		rmquote(&(st->cmd[i]));
 		rmbslash(&(st->cmd[i]));
+		i++;
 	}
 }

@@ -25,9 +25,11 @@ void        do_routine(t_struct *st)
         if (!do_chevrons(st->cmd, st))
         {
             st->cmd = del_chevron(st->cmd);
-			ft_edit_cmd(st);
             if (ft_strcmp(st->cmd[0], ""))
+            {
+                ft_edit_cmd(st);
 		        do_builtin(st->cmd, st);
+            }
         }
 	}
 	if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)

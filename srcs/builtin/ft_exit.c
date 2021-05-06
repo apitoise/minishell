@@ -27,7 +27,6 @@ static void	ft_varlstclear(t_varlist **lst, void (*del)(void*))
 			free(current);
 			current = current->next;
 		}
-		*lst = NULL;
 	}
 }
 

@@ -46,6 +46,7 @@ static char     **get_res(char **cmd, int len)
     int     j;
     char    **res;
 
+    res = NULL;
     if (!(res = (char **)malloc(sizeof(char *) * (len + 1))))
         return (NULL);
     i = 0;
@@ -63,6 +64,7 @@ static char     **get_res(char **cmd, int len)
         }
         else
         {
+            res[j] = NULL;
             res[j] = ft_strdup(cmd[i]);
             i++;
             j++;
@@ -78,6 +80,7 @@ char    **del_chevron(char **cmd)
     char    **res;
 
     len = get_len(cmd);
+    res = NULL;
     if (len == 0)
     {
         if (!(res = (char **)malloc(sizeof(char *) * 1)))

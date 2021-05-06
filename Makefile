@@ -59,15 +59,10 @@ SRCS =  srcs/builtin/ft_cd.c \
 
 OBJS = $(SRCS:.c=.o)
 
-OBJSDIR = objs
-
 all: $(LIB) $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
 		 @$(CC) $(CFLAG) -lncurses $(OBJS) -o $(NAME) $(LIB) -ltermcap
-		 @mkdir $(OBJSDIR)
-		 @mv srcs/*/*.o $(OBJSDIR)
-
 $(LIB):
 		@make -C libft/ fclean
 		@make -C ./libft
@@ -75,7 +70,7 @@ $(LIB):
 
 clean:
 		@make -C libft/ clean
-		@rm -rf $(OBJSDIR)
+		@rm -rf $(OBJS)
 
 fclean: clean
 		@make -C libft/ fclean

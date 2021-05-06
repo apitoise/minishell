@@ -23,19 +23,6 @@ static void	ft_varlstclear(t_varlist **lst, void (*del)(void*))
 		del((*lst)->name);
 		free(*lst);
 	}
-/*
-	if (lst && del)
-	{
-		current = *lst;
-		while (current)
-		{
-			del(current->content);
-			del(current->name);
-			free(current);
-			current = current->next; <<< current deja free
-		}
-	}
-	*/
 }
 
 static void	ft_del_elem(void *content)

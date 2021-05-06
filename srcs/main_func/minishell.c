@@ -23,6 +23,7 @@ static void cmd_analysis(char **commands, t_struct *st)
 	while (commands[i])
 	{
 		st->cmd = ft_split_cmd(commands[i], ' ', st);
+		free(commands[i]);
 		if (first_check(st->cmd, st))
 		{
 			st->pipe = 0;
@@ -52,10 +53,10 @@ void        minishell(t_struct *st)
 			get_signals(st);
 			if (!ft_parsecmdline(&tmp, st))
 			{
-				commands = ft_split_cmdline(tmp, ';');
-				cmd_analysis(commands, st);
-				ft_free_tab(commands);
+				st->input = ft_split_cmdline(tmp, ';');
 				free(tmp);
+				cmd_analysis(st->input, st);
+				free(st->input);
 			}
 			shell_init();
 		}

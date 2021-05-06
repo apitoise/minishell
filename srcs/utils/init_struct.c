@@ -17,6 +17,7 @@ void	init_struct(t_struct *st, char **env)
 	st->exit = 0;
 	st->s = NULL;
 	st->cmd = NULL;
+	st->input = NULL;
 	st->lst = NULL;
 	st->result = NULL;
 	st->stdout_copy = dup(1);

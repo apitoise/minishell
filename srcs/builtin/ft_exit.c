@@ -45,6 +45,7 @@ void		ft_exit(char **cmd, t_struct *st)
 	}
 	ft_putstr_fd("exit\n", 1);
 	ft_free_tab(cmd);
+	free(st->input);
 	if (st->env)
 		ft_free_tab(st->env);
 	ft_varlstclear(&st->lst, &ft_del_elem);

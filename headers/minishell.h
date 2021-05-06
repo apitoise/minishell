@@ -37,6 +37,7 @@ typedef struct			s_struct
 	int					exit;
 	int					pipe;
 	char				*s;
+	char				**input;
 	char				**cmd;
 	char				**env;
 	pid_t				pid;

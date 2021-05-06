@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:24:21 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/06 17:33:27 by fcadet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,15 @@
 
 static void	ft_varlstclear(t_varlist **lst, void (*del)(void*))
 {
-	t_varlist *current;
-
+	if (lst && *lst)
+	{
+		if ((*lst)->next)
+			ft_varlstclear((t_varlist **)&(*lst)->next, del);
+		del((*lst)->content);
+		del((*lst)->name);
+		free(*lst);
+	}
+/*
 	if (lst && del)
 	{
 		current = *lst;
@@ -25,9 +32,10 @@ static void	ft_varlstclear(t_varlist **lst, void (*del)(void*))
 			del(current->content);
 			del(current->name);
 			free(current);
-			current = current->next;
+			current = current->next; <<< current deja free
 		}
 	}
+	*/
 }
 
 static void	ft_del_elem(void *content)

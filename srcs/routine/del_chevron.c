@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:17 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:26:18 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/06 17:34:53 by fcadet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ static char     **get_res(char **cmd, int len)
     char    **res;
 
     res = NULL;
-    if (!(res = (char **)malloc(sizeof(char *) * (len + 1))))
+    if (!(res = (char **)malloc(sizeof(char *) * (len + 1)))) {
         return (NULL);
+	}
     i = 0;
     j = 0;
     while(cmd[i])
@@ -58,7 +59,10 @@ static char     **get_res(char **cmd, int len)
         || !ft_strcmp(cmd[i], "<"))
         {
             if (!cmd[i + 2])
+			{
+				res[j] = NULL;
                 return (res);
+			}
             else
                 i += 2;
         }

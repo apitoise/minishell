@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 15:05:48 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/04 17:43:22 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/06 21:45:52 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include <curses.h>
 #include <term.h>
 
-int	init_termcap(void)
+int		init_termcap(t_struct *st)
 {
-	char	*termtype;
-	int		ret;
+	char			*termtype;
+	int				ret;
 
 	if	(!(termtype = getenv("TERM")))
 	{
@@ -34,6 +34,11 @@ int	init_termcap(void)
 	else if (!ret)
 	{
 		ft_putstr_fd("This terminal type is not defined\n", 2);
+		return (1);
+	}
+	if (ft_getwinsz(st))
+	{
+		ft_putstr_fd("Could not get window size\n", 2);
 		return (1);
 	}
 	return (0);

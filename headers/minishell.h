@@ -8,6 +8,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <sys/ioctl.h>
 # include <string.h>
 # include <limits.h>
 # include <termios.h>
@@ -51,8 +52,12 @@ typedef struct			s_struct
 	int					stdin_copy;
 	int					stdout_copy;
 	char				*result;
-	unsigned int		capacmdline;
-//	t_history			*history;
+	int					ttywidth;
+	int					ttyheight;
+	t_history			**hstab;
+	size_t				hslen;
+	size_t				hscapacity;
+	unsigned int		hsindex;
 }						t_struct;
 
 void					minishell(t_struct *st);
@@ -97,7 +102,8 @@ int						ft_tkorqt(char *str, int i);
 int						ft_freestr(char *str);
 int						ft_isspechar(char c);
 
-int						init_termcap(void);
+int						init_termcap(t_struct *st);
+int						ft_getwinsz(t_struct *st);
 char					*getcmdline(t_struct *st);
 int						ft_putc(int c);
 

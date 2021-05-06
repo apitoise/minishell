@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:46 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/04 16:05:26 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/06 20:00:55 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	init_struct(&st, env);
-	if (init_termcap())
+	if (init_termcap(&st))
 		return (1);
 	minishell(&st);
 	return (0);

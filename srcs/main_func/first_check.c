@@ -23,6 +23,8 @@ int			first_check(char **cmd, t_struct *st)
 		if ((cmd[i][0] == '<' || cmd[i][0] == '|')
 		&& (ft_strlen(cmd[i]) > 1))
 			return (ft_syntax_error(cmd[i], st));
+		else if (cmd[i][0] == '|')
+			return (ft_syntax_error("|", st));
 		else if ((!ft_strcmp(cmd[i], ">") || !ft_strcmp(cmd[i], ">>")
 		|| !ft_strcmp(cmd[i], "<") || !ft_strcmp(cmd[i], "|"))
 		&& !cmd[i + 1])

@@ -6,15 +6,15 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 13:58:37 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/27 13:58:39 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/07 17:07:44 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-int    ft_putchar(int c)
+int	ft_putchar(int c)
 {
-    write(1, &c, 1);
-    return (0);
+	write(1, &c, 1);
+	return (0);
 }

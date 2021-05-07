@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
+/*   Updated: 2021/05/07 17:06:50 by apitoise         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -61,7 +73,7 @@ void					print_list(t_varlist **lst);
 int						do_chevrons(char **cmd, t_struct *st);
 void					shell_init();
 char					**del_chevron(char **cmd);
-void    				ft_edit_cmd(t_struct *st);
+void					ft_edit_cmd(t_struct *st);
 void					init_struct(t_struct *st, char **env);
 void					init_sig_struct(void);
 void					ft_cd(char *path, t_struct *st);

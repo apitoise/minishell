@@ -50,7 +50,7 @@ typedef struct			s_struct
 	char				*result;
 }						t_struct;
 
-extern t_sig			sig;
+extern t_sig			g_sig;
 
 void					minishell(t_struct *st);
 void					print_tab(char **map);
@@ -86,7 +86,7 @@ void					init_lstenv(char **env, t_struct *st);
 void					get_signals(t_struct *st);
 void					ctrl_c(int useless);
 void					ctrl_backslash(int useless);
-
+void					ft_exec(char **cmd, char *filepath, t_struct *st);
 int						ft_parsecmdline(char **s, t_struct *st);
 int						ft_checkvalid(char *s, t_struct *st);
 int						ft_dollar(char **s1, t_struct *st);

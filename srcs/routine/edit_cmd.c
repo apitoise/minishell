@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 17:22:40 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/06 17:15:07 by fcadet           ###   ########.fr       */
+/*   Updated: 2021/05/07 14:04:16 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	rmquote(char **str)
 	int	i;
 	int	j;
 
-	
 	i = 0;
 	while ((*str)[i])
 	{

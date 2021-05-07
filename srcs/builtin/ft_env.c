@@ -6,14 +6,14 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:57 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:24:58 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/07 13:35:01 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-static void		create_list(char *name, char *content, t_varlist **lst)
+static void	create_list(char *name, char *content, t_varlist **lst)
 {
 	t_varlist	*current;
 	t_varlist	*new;
@@ -38,8 +38,8 @@ static void	create_elem(char *env, t_struct *st)
 {
 	char	*name;
 	char	*content;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (env[i] != '=')
@@ -58,16 +58,12 @@ static void	create_elem(char *env, t_struct *st)
 		return ;
 	j = 0;
 	while (env[i])
-	{
-		content[j] = env[i];
-		i++;
-		j++;
-	}
+		content[j++] = env[i++];
 	content[j] = '\0';
 	create_list(name, content, &st->lst);
 }
 
-void	init_lstenv(char **env, t_struct *st)
+void		init_lstenv(char **env, t_struct *st)
 {
 	int	i;
 
@@ -79,7 +75,7 @@ void	init_lstenv(char **env, t_struct *st)
 	}
 }
 
-char	**get_env(char **env)
+char		**get_env(char **env)
 {
 	int		nb_vars;
 	int		i;
@@ -100,7 +96,7 @@ char	**get_env(char **env)
 	return (our_env);
 }
 
-void	ft_env(t_struct *st)
+void		ft_env(t_struct *st)
 {
 	printlist_env(&st->lst);
 }

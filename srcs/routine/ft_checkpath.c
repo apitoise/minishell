@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/19 15:26:42 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/07 13:58:30 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ static void	ft_freepathtab(char **pathtab)
 	}
 	free(pathtab);
 	pathtab = NULL;
-}
-
-static void	ft_exec(char **cmd, char *filepath, t_struct *st)
-{
-	if (execve(filepath, cmd, st->env) == -1)
-		return(not_cmd(cmd[0], st));
 }
 
 static int	ft_checkfile(char *filepath)

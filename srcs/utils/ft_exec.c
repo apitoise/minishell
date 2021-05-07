@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_sig_struct.c                                  :+:      :+:    :+:   */
+/*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 15:38:17 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/07 13:40:07 by apitoise         ###   ########.fr       */
+/*   Created: 2021/05/07 13:58:41 by apitoise          #+#    #+#             */
+/*   Updated: 2021/05/07 14:45:10 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-void	init_sig_struct(void)
+void	ft_exec(char **cmd, char *filepath, t_struct *st)
 {
-	g_sig.pid = 0;
-	g_sig.sig_ret = 0;
+	if (execve(filepath, cmd, st->env) == -1)
+		return (not_cmd(cmd[0], st));
 }

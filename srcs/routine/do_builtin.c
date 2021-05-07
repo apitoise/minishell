@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:50 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/22 16:27:13 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/07 13:48:09 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static void	do_fork(char **cmd, t_struct *st)
 	}
 	else
 	{
-		sig.pid = forking;
+		g_sig.pid = forking;
 		waitpid(forking, &st->ret, 0);
-		sig.pid = 0;
+		g_sig.pid = 0;
 	}
 }
 

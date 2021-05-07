@@ -6,14 +6,14 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:56 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/06 16:46:16 by fcadet           ###   ########.fr       */
+/*   Updated: 2021/05/07 13:36:50 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-static void cmd_analysis(char **commands, t_struct *st)
+static void	cmd_analysis(char **commands, t_struct *st)
 {
 	int	i;
 
@@ -36,13 +36,13 @@ static void cmd_analysis(char **commands, t_struct *st)
 	}
 }
 
-void        minishell(t_struct *st)
+void		minishell(t_struct *st)
 {
-    char    *tmp;
+	char	*tmp;
 	int		ret;
 
-    tmp = NULL;
-    shell_init();
+	tmp = NULL;
+	shell_init();
 	get_signals(st);
 	while (!(st->exit))
 	{

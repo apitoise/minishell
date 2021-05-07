@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:10:52 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/06 17:35:58 by fcadet           ###   ########.fr       */
+/*   Updated: 2021/05/07 14:43:42 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ char		**ft_split_cmdline(char const *s, char c)
 			s++;
 		if (*s && *s != c)
 		{
-			tabl[i] = ft_malloc_w(s, c);
-			i++;
+			tabl[i++] = ft_malloc_w(s, c);
 			while (*s && *s != c)
 			{
 				if (*s == '\\')

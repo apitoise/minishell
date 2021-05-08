@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/05/04 15:20:49 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/05/08 23:42:17 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(LIB) $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
-		 $(CC) $(CFLAG) -o $(NAME) $(OBJS) $(LIB) -ltermcap
+		 $(CC) $(CFLAG) -o $(NAME) $(OBJS) $(LIB) -fsanitize=address -fno-omit-frame-pointer -ltermcap
 
 $(LIB):
 		@make -C libft/ fclean

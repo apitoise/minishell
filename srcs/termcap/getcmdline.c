@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/08 20:14:27 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/08 23:37:04 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <curses.h>
 #include <term.h>
 
-static int	ft_getposition_atoi(char *buff, int i, t_struct *st)
+static int	getposition_atoi(char *buff, int i, t_struct *st)
 {
 	int	pow;
 
@@ -44,7 +44,7 @@ static int	ft_getposition_atoi(char *buff, int i, t_struct *st)
 	return (0);
 }
 
-static int	getposition(t_struct *st)
+static int	ft_getposition(t_struct *st)
 {
 	char	buff[30];
 	char	c;
@@ -62,16 +62,16 @@ static int	getposition(t_struct *st)
 	}
 	if (i < 2)
 		return (1);
-	if (ft_getposition_atoi(buff, i, st))
+	if (getposition_atoi(buff, i, st))
 		return (1);
 	return (0);
 }
 
-static int	nextline(t_history *new, t_struct *st)
+static int	ft_nextline(t_history *new, t_struct *st)
 {
 	size_t	len;
 
-	if (getposition(st))
+	if (ft_getposition(st))
 		return (1);
 	len = 0;
 	if (new)
@@ -92,18 +92,16 @@ static int	nextline(t_history *new, t_struct *st)
 int			ft_tputsstr(char *str, t_history *new, t_struct *st)
 {
 	tputs(str, 1, &ft_putc);
-	if (nextline(new, st))
+	if (ft_nextline(new, st))
 		return (1);
 	return (0);
 }
 
-static int	replaceline(t_history *new, t_struct *st)
+static void	delcmdline(t_history *new, t_struct *st)
 {
 	int	nbrlines;
 	int	i;
 
-	if (getposition(st))
-		return (1);
 	nbrlines = (new->len + 12) / st->ttywidth;
 	if (new->cmdline)
 		free(new->cmdline);
@@ -115,13 +113,27 @@ static int	replaceline(t_history *new, t_struct *st)
 		tputs(tgoto(tgetstr("cm", NULL), 0, st->posy - i), 1, &ft_putc);
 	}
 	tputs(tgetstr("ce", NULL), 1, &ft_putc);
-	if (ft_tputsstr("@minishell> ", NULL, st) || (!(new->cmdline =
-		ft_strdup(st->hstab[st->hslen - st->hsindex]->cmdline))))
+}
+
+static int	replaceline(t_history *new, t_struct *st)
+{
+	if (ft_getposition(st))
 		return (1);
-	new->len = st->hstab[st->hslen - st->hsindex]->len;
-	new->capacity = st->hstab[st->hslen - st->hsindex]->capacity;
-	if (ft_tputsstr(new->cmdline, new, st))
+	delcmdline(new, st);
+	if (ft_tputsstr("@minishell> ", NULL, st))
 		return (1);
+	if (!st->hsindex)
+		ft_bzero(new, sizeof(t_history));
+	else if (st->hsindex > 0)
+	{
+		if (!(new->cmdline =
+					ft_strdup(st->hstab[st->hslen - st->hsindex]->cmdline)))
+			return (1);
+		new->len = st->hstab[st->hslen - st->hsindex]->len;
+		new->capacity = st->hstab[st->hslen - st->hsindex]->capacity;
+		if (ft_tputsstr(new->cmdline, new, st))
+			return (1);
+	}
 	return (0);
 }
 
@@ -129,7 +141,7 @@ static int	browsehistory(char c, t_history *new, t_struct *st)
 {
 	if (c == 'A' && st->hsindex < st->hslen)
 		st->hsindex++;
-	else if (c == 'B' && st->hsindex > 1)
+	else if (c == 'B' && st->hsindex > 0)
 		st->hsindex--;
 	else
 		return (0);
@@ -188,7 +200,7 @@ static int	delone(t_history *new, t_struct *st)
 			;
 		new->cmdline[--i] = '\0';
 		new->len--;
-		if (getposition(st))
+		if (ft_getposition(st))
 			return (1);
 		if (st->posx == 1 && st->posy != 1)
 		{
@@ -270,6 +282,28 @@ char		*closetermcap(t_history *new, struct termios *restore, t_struct *st)
 	return (NULL);
 }
 
+static int	editcmdline(char *buff, t_history *new, t_struct *st)
+{
+	if (buff[0] == 127)
+	{
+		if (delone(new, st))
+			return (1);
+	}
+	else if ((buff[0] != '\n' && vector(new, buff))
+			|| (ft_tputsstr(buff, new, st)))
+		return (1);
+	return (0);
+}
+
+static void	ctrld(t_history *new, struct termios *restore)
+{
+	if (new->cmdline)
+		free(new->cmdline);
+	free(new);
+	tcsetattr(STDIN_FILENO, TCSANOW, restore);
+	ft_exit(NULL);
+}
+
 static int	readloop(t_history *new, struct termios *restore, t_struct *st)
 {
 	char	buff[11];
@@ -278,34 +312,19 @@ static int	readloop(t_history *new, struct termios *restore, t_struct *st)
 	buff[0] = 0;
 	while (buff[0] != '\n')
 	{
-		if (winszdiff(new, st) == -1)
-			|| ((ret = read(STDIN_FILENO, buff, 10)) == -1)
+		if ((winszdiff(new, st) == -1)
+			|| ((ret = read(STDIN_FILENO, buff, 10)) == -1))
 			return (1);
 		buff[ret] = '\0';
 		if (buff[0] == 4)
-		{
-			if (new->cmdline)
-				free(new->cmdline);
-			free(new);
-			tcsetattr(STDIN_FILENO, TCSANOW, restore);
-			ft_exit(NULL);
-		}
+			ctrld(new, restore);
 		if (buff[0] == 27 && buff[1] == '[')
 		{
 			if (browsehistory(buff[2], new, st))
 				return (1);
 		}
-		else if (ret == 1)
-		{
-			if (buff[0] == 127)
-			{
-				if (delone(new, st))
-					return (1);
-			}
-			else if ((buff[0] != '\n' && vector(new, buff))
-				|| (ft_tputsstr(buff, new, st)))
-				return (1);
-		}
+		else if (ret == 1 && editcmdline(buff, new, st))
+			return (1);
 	}
 	return (0);
 }

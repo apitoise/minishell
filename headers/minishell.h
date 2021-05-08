@@ -34,7 +34,6 @@ typedef	struct			s_history
 {
 	char				*cmdline;
 	size_t				len;
-	size_t				reallen;
 	size_t				capacity;
 }						t_history;
 

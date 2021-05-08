@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 15:05:48 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/06 21:45:52 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/08 18:33:28 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		init_termcap(t_struct *st)
 	char			*termtype;
 	int				ret;
 
-	if	(!(termtype = getenv("TERM")))
+	if (!(termtype = getenv("TERM")))
 	{
 		ft_putstr_fd("TERM not defined\n", 2);
 		return (1);

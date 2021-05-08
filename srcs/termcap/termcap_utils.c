@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   termcap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/19 15:25:46 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/09 00:01:27 by lgimenez         ###   ########.fr       */
+/*   Created: 2021/05/04 13:35:02 by lgimenez          #+#    #+#             */
+/*   Updated: 2021/05/08 18:36:30 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-t_sig	g_sig;
-
-int			main(int ac, char **av, char **env)
+int	ft_getwinsz(t_struct *st)
 {
-	t_struct	st;
+	struct winsize	ws;
 
-	(void)ac;
-	(void)av;
-	init_sig_struct();
-	init_struct(&st, env);
-	if (init_termcap(&st))
+	if (ioctl(STDIN_FILENO, TIOCGWINSZ, &ws) == -1)
+	{
+		ft_putstr_fd("Could not get window size\n", 2);
 		return (1);
-	minishell(&st);
+	}
+	st->ttywidth = ws.ws_col;
+	st->ttyheight = ws.ws_row;
+	return (0);
+}
+
+int	ft_putc(int c)
+{
+	write(1, &c, 1);
 	return (0);
 }

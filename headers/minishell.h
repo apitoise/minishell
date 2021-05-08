@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/07 17:06:50 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/09 00:11:07 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <sys/ioctl.h>
 # include <string.h>
 # include <limits.h>
 # include <termios.h>
@@ -44,6 +45,13 @@ typedef struct			s_varlist
 	void				*next;
 }						t_varlist;
 
+typedef	struct			s_history
+{
+	char				*cmdline;
+	size_t				len;
+	size_t				capacity;
+}						t_history;
+
 typedef struct			s_struct
 {
 	int					exit;
@@ -60,6 +68,14 @@ typedef struct			s_struct
 	int					stdin_copy;
 	int					stdout_copy;
 	char				*result;
+	int					ttywidth;
+	int					ttyheight;
+	int					posx;
+	int					posy;
+	t_history			**hstab;
+	size_t				hslen;
+	size_t				hscapacity;
+	unsigned int		hsindex;
 }						t_struct;
 
 extern t_sig			g_sig;
@@ -109,5 +125,9 @@ int						ft_rmbslash(char **s, int i, int j);
 int						ft_tkorqt(char *str, int i);
 int						ft_freestr(char *str);
 int						ft_isspechar(char c);
+int						init_termcap(t_struct *st);
+int						ft_getwinsz(t_struct *st);
+char					*getcmdline(t_struct *st);
+int						ft_putc(int c);
 
 #endif

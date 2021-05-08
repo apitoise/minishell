@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/05/07 14:00:15 by apitoise         ###   ########.fr        #
+#    Updated: 2021/05/09 00:07:47 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,9 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/signals/get_signals.c \
 		srcs/signals/ctrl_c.c \
 		srcs/signals/ctrl_backslash.c \
+		srcs/termcap/init_termcap.c \
+		srcs/termcap/getcmdline.c \
+		srcs/termcap/termcap_utils.c
 
 
 OBJS = $(SRCS:.c=.o)
@@ -64,6 +67,7 @@ all: $(LIB) $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
 		 @$(CC) $(CFLAG) -lncurses $(OBJS) -o $(NAME) $(LIB) -ltermcap
+		 
 $(LIB):
 		@make -C libft/ fclean
 		@make -C ./libft

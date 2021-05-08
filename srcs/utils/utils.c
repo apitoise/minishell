@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:28:04 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/07 14:39:47 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/08 23:52:13 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 
 void		print_tab(char **map)
 {
-	int	i;
+	int i;
 
-	i = 0;
+	i = -1;
 	if (!map)
 		return ;
-	while (map && map[i])
-	{
-		ft_putendl_fd(map[i++], 1);
-	}
+	while (map && map[++i])
+		ft_putendl_fd(map[i], 1);
 }
 
 void		printlist_env(t_varlist **lst)

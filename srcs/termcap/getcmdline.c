@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/09 00:45:29 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/09 22:09:12 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 #include "../../libft/libft.h"
 #include <curses.h>
 #include <term.h>
+
+void		ft_freehs(t_history *new)
+{
+	if (new)
+	{
+		if (new->cmdline)
+			free(new->cmdline);
+		free(new);
+		new = NULL;
+	}
+}
 
 static int	getposition_atoi(char *buff, int i, t_struct *st)
 {
@@ -104,7 +115,10 @@ static void	delcmdline(t_history *new, t_struct *st)
 
 	nbrlines = (new->len + 12) / st->ttywidth;
 	if (new->cmdline)
+	{
 		free(new->cmdline);
+		new->cmdline = NULL;
+	}
 	tputs(tgoto(tgetstr("cm", NULL), 0, st->posy - 1), 1, &ft_putc);
 	i = 1;
 	while (nbrlines-- && ++i)
@@ -160,7 +174,7 @@ static void	ft_hstabcpy(t_history **tmp, t_struct *st)
 	}
 }
 
-static int	ediths(t_history *new, t_struct *st)
+static int	ediths(t_history **new, t_struct *st)
 {
 	t_history	**tmp;
 
@@ -168,11 +182,11 @@ static int	ediths(t_history *new, t_struct *st)
 	{
 		if (!(st->hstab = malloc(sizeof(t_history*))))
 			return (1);
-		st->hstab[0] = new;
+		st->hstab[0] = *new;
 		st->hslen = 1;
 		st->hscapacity = 1;
 	}
-	else if (ft_strcmp(st->hstab[st->hslen - 1]->cmdline, new->cmdline))
+	else if (ft_strcmp(st->hstab[st->hslen - 1]->cmdline, (*new)->cmdline))
 	{
 		if (st->hslen + 1 > st->hscapacity)
 		{
@@ -183,8 +197,13 @@ static int	ediths(t_history *new, t_struct *st)
 			st->hstab = tmp;
 			st->hscapacity *= 2;
 		}
-		st->hstab[st->hslen] = new;
+		st->hstab[st->hslen] = *new;
 		st->hslen++;
+	}
+	else
+	{
+		ft_freehs(*new);
+		*new = st->hstab[st->hslen - 1];
 	}
 	return (0);
 }
@@ -297,9 +316,7 @@ static int	editcmdline(char *buff, t_history *new, t_struct *st)
 
 static void	ctrld(t_history *new, struct termios *restore, t_struct *st)
 {
-	if (new->cmdline)
-		free(new->cmdline);
-	free(new);
+	ft_freehs(new);
 	tcsetattr(STDIN_FILENO, TCSANOW, restore);
 	ft_putstr_fd("exit\n", 1);
 	ft_exit(NULL, st);
@@ -352,8 +369,13 @@ char		*getcmdline(t_struct *st)
 		return (closetermcap(new, &restore, st));
 	else if (ret == 1)
 		ft_putchar_fd('\n', 1);
-	if (new->cmdline && new->cmdline[0] && ediths(new, st))
+	if (new->cmdline && new->cmdline[0] && ediths(&new, st))
 		return (closetermcap(new, &restore, st));
 	tcsetattr(STDIN_FILENO, TCSANOW, &restore);
+	if (!new->cmdline || !new->cmdline[0])
+	{
+		ft_freehs(new);
+		return (NULL);
+	}
 	return (ft_strdup(new->cmdline));
 }

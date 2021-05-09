@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/09 22:09:12 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/10 01:06:37 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	ft_nextline(t_history *new, t_struct *st)
 	len = 0;
 	if (new)
 		len = new->len;
-	if ((len + 12) % (unsigned int)st->ttywidth == 0)
+	if ((st->startposx - 1 + len) % (unsigned int)st->ttywidth == 0)
 	{
 		if (st->posy == st->ttyheight)
 		{
@@ -110,10 +110,12 @@ int			ft_tputsstr(char *str, t_history *new, t_struct *st)
 
 static void	delcmdline(t_history *new, t_struct *st)
 {
+	int	startposx;
 	int	nbrlines;
 	int	i;
 
-	nbrlines = (new->len + 12) / st->ttywidth;
+	startposx = st->startposx - 1;
+	nbrlines = (startposx + new->len) / st->ttywidth;
 	if (new->cmdline)
 	{
 		free(new->cmdline);
@@ -126,6 +128,8 @@ static void	delcmdline(t_history *new, t_struct *st)
 		tputs(tgetstr("ce", NULL), 1, &ft_putc);
 		tputs(tgoto(tgetstr("cm", NULL), 0, st->posy - i), 1, &ft_putc);
 	}
+	while (startposx--)
+		tputs(tgetstr("nd", NULL), 1, &ft_putc);
 	tputs(tgetstr("ce", NULL), 1, &ft_putc);
 }
 
@@ -134,8 +138,6 @@ static int	replaceline(t_history *new, t_struct *st)
 	if (ft_getposition(st))
 		return (1);
 	delcmdline(new, st);
-	if (ft_tputsstr("@minishell> ", NULL, st))
-		return (1);
 	if (!st->hsindex)
 		ft_bzero(new, sizeof(t_history));
 	else if (st->hsindex > 0)
@@ -279,8 +281,7 @@ int			winszdiff(t_history *new, t_struct *st)
 		tputs(tgetstr("cl", NULL), st->ttyheight, &ft_putc);
 		if (ft_tputsstr("@minishell> ", NULL, st))
 			return (-1);
-		if (new->cmdline)
-			if (ft_tputsstr(new->cmdline, new, st))
+		if (new->cmdline && ft_tputsstr(new->cmdline, new, st))
 				return (-1);
 		return (1);
 	}
@@ -365,6 +366,9 @@ char		*getcmdline(t_struct *st)
 		return (closetermcap(NULL, &restore, st));
 	ft_bzero(new, sizeof(t_history));
 	st->hsindex = 0;
+	if (ft_getposition(st))
+		return (closetermcap(new, &restore, st));
+	st->startposx = st->posx;
 	if (readloop(new, &restore, st) || (ret = winszdiff(new, st)) == -1)
 		return (closetermcap(new, &restore, st));
 	else if (ret == 1)

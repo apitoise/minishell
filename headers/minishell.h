@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/09 00:11:07 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/10 01:00:50 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct			s_struct
 	char				*result;
 	int					ttywidth;
 	int					ttyheight;
+	int					startposx;
 	int					posx;
 	int					posy;
 	t_history			**hstab;

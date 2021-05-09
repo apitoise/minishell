@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:37 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/05 17:57:42 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/10 01:47:38 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,15 @@ void	init_struct(t_struct *st, char **env)
 	st->pipe = 0;
 	st->env = get_env(env);
 	st->ret = 0;
+	st->startposx = 0;
+	st->ttywidth = 0;
+	st->ttyheight = 0;
+	st->posx = 0;
+	st->posy = 0;
 	st->hstab = NULL;
 	st->hslen = 0;
 	st->hscapacity = 0;
+	st->hsindex = 0;
 	init_lstenv(env, st);
 	return ;
 }

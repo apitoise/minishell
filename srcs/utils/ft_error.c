@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:29 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/11 17:40:32 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/11 18:22:55 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_error(char *s)
 	return (errno);
 }
 
-void		ft_clean_exit(char *cmd, t_struct *st)
+void	ft_clean_exit(char *cmd, t_struct *st)
 {
 	if (cmd == NULL)
 	{

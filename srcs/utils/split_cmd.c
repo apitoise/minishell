@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:56 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/07 16:16:55 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:26:21 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,12 @@ static char	*ft_malloc_w(char const *s, char c)
 	return (word);
 }
 
-char		**ft_split_cmd(char const *s, char c, t_struct *st)
+void		ft_split_cmd(char const *s, char c, t_struct *st, int i)
 {
-	char	**tabl;
-	int		i;
 	char	spec;
 
-	if (!s)
-		return (NULL);
-	i = 0;
-	if (!(tabl = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c, i) + 1))))
-		return (NULL);
+	if (!(st->cmd = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c, i) + 1))))
+		return ;
 	while (*s)
 	{
 		while (*s && *s == c)
@@ -118,21 +113,17 @@ char		**ft_split_cmd(char const *s, char c, t_struct *st)
 		{
 			st->pipe += *s == '|' ? 1 : 0;
 			spec = *s;
-			tabl[i] = ft_malloc_chevron(s, *s);
+			st->cmd[i] = ft_malloc_chevron(s, *s);
 			i++;
 			while (*s && *s == spec)
 				s++;
 		}
-		if (*s && (*s != c && *s != '>'
-					&& *s != '<' && *s != '|'))
+		if (*s && (*s != c && *s != '>' && *s != '<' && *s != '|'))
 		{
-			tabl[i] = ft_malloc_w(s, c);
-			i++;
-			while (*s && (*s != c && *s != '>'
-						&& *s != '<' && *s != '|'))
+			st->cmd[i++] = ft_malloc_w(s, c);
+			while (*s && (*s != c && *s != '>' && *s != '<' && *s != '|'))
 				s += *s == '\\' ? 2 : 1;
 		}
 	}
-	tabl[i] = NULL;
-	return (tabl);
+	st->cmd[i] = NULL;
 }

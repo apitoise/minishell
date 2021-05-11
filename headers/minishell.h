@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/10 01:00:50 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:39:16 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,18 @@ void					init_sig_struct(void);
 void					ft_cd(char *path, t_struct *st);
 int						ft_echo(char **cmd, t_struct *st);
 void					ft_exit(char **cmd, t_struct *st);
+void					ft_clean_exit(char *str, t_struct *st);
 int						ft_pwd(char **cmd);
 int						ft_unset(char **cmd, t_struct *st);
 void					ft_export(char **cmd, t_struct *st, int i);
+void					ft_varlstclear(t_varlist **lst);
 int						first_check(char **cmd, t_struct *st);
 void					ft_env(t_struct *st);
 void					do_builtin(char **cmd, t_struct *st);
 void					do_routine(t_struct *st);
 void					do_pipe(t_struct *st);
 char					**get_env(char **env);
-char					**ft_split_cmd(const char *s, char c, t_struct *st);
+void					ft_split_cmd(const char *s, char c, t_struct *st, int i);
 char					**ft_split_cmdline(char const *s, char c);
 int						ft_error(char *s);
 int						ft_syntax_error(char *token, t_struct *st);

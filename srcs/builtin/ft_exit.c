@@ -6,14 +6,14 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/09 00:39:26 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:38:18 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-static void	ft_varlstclear(t_varlist **lst)
+void	ft_varlstclear(t_varlist **lst)
 {
 	if (lst && *lst)
 	{
@@ -25,7 +25,7 @@ static void	ft_varlstclear(t_varlist **lst)
 	}
 }
 
-void		ft_exit(char **cmd, t_struct *st)
+void	ft_exit(char **cmd, t_struct *st)
 {
 	if (cmd == NULL)
 	{

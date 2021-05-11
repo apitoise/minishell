@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:28:04 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/08 23:52:13 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:25:04 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ static char	*print_it(t_varlist ***lst, t_varlist **cur, t_varlist *tmp)
 {
 	ft_putstr_fd("declare -x ", 1);
 	ft_putstr_fd(tmp->name, 1);
-	ft_putstr_fd("=\"", 1);
-	ft_putstr_fd(tmp->content, 1);
-	ft_putstr_fd("\"\n", 1);
+	if (tmp->content)
+	{
+		ft_putstr_fd("=\"", 1);
+		ft_putstr_fd(tmp->content, 1);
+		ft_putstr_fd("\"", 1);
+	}
+	ft_putstr_fd("\n", 1);
 	*cur = **lst;
 	return (tmp->name);
 }

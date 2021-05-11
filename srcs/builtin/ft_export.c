@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:07 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/05 15:02:55 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/12 01:15:29 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,67 +101,61 @@ static void	modif_list(char *name, char *content, int visible, t_varlist **lst)
 		current->visible = 1;
 }
 
+static int	elem_contentyes(char *cmd, int visible, t_struct *st)
+{
+	int		i;
+	char	*name;
+	char	*content;
+
+	i = -1;
+	while (cmd[++i] != '=')
+		;
+	if (!(name = malloc(sizeof(char) * i + 1)))
+		return (1);
+	i = -1;
+	while (cmd[++i] != '=')
+		name[i] = cmd[i];
+	name[i] = '\0';
+	i += 1;
+	if (!(content = malloc(sizeof(char) * ft_strlen(cmd + i) + 1)))
+	{
+		free(name);
+		return (1);
+	}
+	ft_strcpy(content, cmd + i);
+	if (!varexist(name, &st->lst))
+		create_list(name, content, visible, &st->lst);
+	else
+		modif_list(name, content, visible, &st->lst);
+	return (0);
+}
+
 static void	create_elem(char **cmd, int f, int visible, t_struct *st)
 {
-	int			i;
-	int			j;
-	char		*name;
-	char		*content;
 	t_varlist	*current;
 
-	while (cmd[f])
+	while (cmd[++f])
 	{
 		if (!check_error(cmd[f]))
 		{
 			if (ft_strchr(cmd[f], '='))
-			{
-				i = 0;
-				while (cmd[f][i] != '=')
-					i++;
-				if (!(name = malloc(sizeof(char) * i + 1)))
-					return ;
-				i = 0;
-				while (cmd[f][i] != '=')
-				{
-					name[i] = cmd[f][i];
-					i++;
-				}
-				name[i] = '\0';
-				i += 1;
-				if (!(content = malloc(sizeof(char) * ft_strlen(cmd[f] + i) + 1)))
-					return ;
-				j = 0;
-				while (cmd[f][i])
-				{
-					content[j] = cmd[f][i];
-					i++;
-					j++;
-				}
-				content[j] = '\0';
-				if (!varexist(name, &st->lst))
-					create_list(name, content, visible, &st->lst);
-				else
-					modif_list(name, content, visible, &st->lst);
-			}
+				elem_contentyes(cmd[f], visible, st);
 			else
 			{
 				if (varexist(cmd[f], &st->lst))
 				{
 					current = st->lst;
-					while (current->next)
+					while (current)
 					{
 						if (!ft_strcmp(current->name, cmd[f]))
 							current->visible = 1;
 						current = current->next;
 					}
-					if (!ft_strcmp(current->name, cmd[f]))
-						current->visible = 1;
 				}
 				else
-					create_list(cmd[f], NULL, 1, &st->lst);
+					create_list(ft_strdup(cmd[f]), NULL, 1, &st->lst);
 			}
 		}
-		f++;
 	}
 }
 
@@ -172,8 +166,8 @@ void		ft_export(char **cmd, t_struct *st, int f)
 		if (!cmd[1])
 			printlist_export(&st->lst);
 		else
-			return (create_elem(cmd, 1, 1, st));
+			return (create_elem(cmd, 0, 1, st));
 	}
 	else
-		return (create_elem(cmd, 0, 0, st));
+		return (create_elem(cmd, -1, 0, st));
 }

@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:07 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/12 01:15:29 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/13 00:30:40 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	create_list(char *name, char *content, int visible, t_varlist **lst)
 	t_varlist	*current;
 	t_varlist	*new;
 
-	new = malloc(sizeof(t_varlist));
+	if	(!(new = malloc(sizeof(t_varlist))))
+		return ;
 	new->name = name;
 	new->content = content;
 	new->visible = visible;

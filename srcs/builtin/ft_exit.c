@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/13 01:07:19 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/13 18:08:12 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,6 @@ void	ft_varlstclear(t_varlist **lst)
 
 void	ft_exit(char **cmd, t_struct *st)
 {
-/*	if (cmd == NULL)
-	{
-		exit(EXIT_SUCCESS);
-		return ;
-	}*/
 	ft_putstr_fd("exit\n", 1);
 	ft_free_tab(cmd);
 	free(st->input);

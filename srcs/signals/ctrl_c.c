@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 11:46:18 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/07 14:05:06 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/13 17:38:09 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ctrl_c(int useless)
 	}
 	else
 	{
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("^C\n", 1);
 		shell_init();
 	}
 }

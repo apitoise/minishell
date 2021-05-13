@@ -22,11 +22,6 @@ int		ft_error(char *s)
 
 void	ft_clean_exit(char *cmd, t_struct *st)
 {
-	if (cmd == NULL)
-	{
-		exit(EXIT_SUCCESS);
-		return ;
-	}
 	free(cmd);
 	free(st->input);
 	if (st->env)

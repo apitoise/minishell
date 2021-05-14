@@ -83,5 +83,6 @@ int			do_chevrons(char **cmd, t_struct *st)
 			err = left_chevron(cmd, st, i);
 		i++;
 	}
+	st->chevrons = 0;
 	return (err);
 }

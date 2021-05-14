@@ -25,6 +25,7 @@ void	init_struct(t_struct *st, char **env)
 	st->stdout_fd = dup(1);
 	st->stdin_fd = dup(0);
 	st->pipe = 0;
+	st->chevrons = 0;
 	st->env = get_env(env);
 	st->ret = 0;
 	st->startposx = 0;
@@ -37,5 +38,4 @@ void	init_struct(t_struct *st, char **env)
 	st->hscapacity = 0;
 	st->hsindex = 0;
 	init_lstenv(env, st);
-	return ;
 }

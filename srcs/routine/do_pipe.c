@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:02 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/07 14:03:34 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:32:26 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ void		do_pipe(t_struct *st)
 		if (!do_chevrons(cmd, st))
 		{
 			cmd = del_chevron(cmd);
-			do_builtin(cmd, st);
+			if (ft_strcmp(cmd[0], ""))
+			{
+				ft_edit_cmd(cmd);
+				do_builtin(cmd, st);
+			}
 			dup2(new_pipe[0], st->stdin_fd);
 			dup2(st->stdout_copy, st->stdout_fd);
 		}

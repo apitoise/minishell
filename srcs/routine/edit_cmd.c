@@ -57,15 +57,15 @@ static void	rmquote(char **str)
 	}
 }
 
-void		ft_edit_cmd(t_struct *st)
+void		ft_edit_cmd(char **cmd)
 {
 	int	i;
 
 	i = 0;
-	while (st->cmd[i])
+	while (cmd[i])
 	{
-		rmquote(&(st->cmd[i]));
-		rmbslash(&(st->cmd[i]));
+		rmquote(&(cmd[i]));
+		rmbslash(&(cmd[i]));
 		i++;
 	}
 }

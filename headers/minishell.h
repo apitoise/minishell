@@ -56,6 +56,7 @@ typedef struct			s_struct
 {
 	int					exit;
 	int					pipe;
+	int					chevrons;
 	char				*s;
 	char				**input;
 	char				**cmd;
@@ -90,7 +91,7 @@ void					print_list(t_varlist **lst);
 int						do_chevrons(char **cmd, t_struct *st);
 void					shell_init();
 char					**del_chevron(char **cmd);
-void					ft_edit_cmd(t_struct *st);
+void					ft_edit_cmd(char **cmd);
 void					init_struct(t_struct *st, char **env);
 void					init_sig_struct(void);
 void					ft_cd(char *path, t_struct *st);
@@ -105,6 +106,7 @@ int						first_check(char **cmd, t_struct *st);
 void					ft_env(t_struct *st);
 void					do_builtin(char **cmd, t_struct *st);
 void					do_routine(t_struct *st);
+void					chevrons_routine(char **cmd, t_struct *st);
 void					do_pipe(t_struct *st);
 char					**get_env(char **env);
 void					ft_split_cmd(const char *s, char c,

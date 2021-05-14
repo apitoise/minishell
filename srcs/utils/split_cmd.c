@@ -111,7 +111,7 @@ void		ft_split_cmd(char const *s, char c, t_struct *st, int i)
 			s++;
 		if (*s && (*s == '>' || *s == '<' || *s == '|'))
 		{
-			st->pipe += *s == '|' ? 1 : 0;
+			*s == '|' ? st->pipe++ : st->chevrons++;
 			spec = *s;
 			st->cmd[i] = ft_malloc_chevron(s, *s);
 			i++;

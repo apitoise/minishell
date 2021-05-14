@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:29 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/11 18:22:55 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/14 17:02:02 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_clean_exit(char *cmd, t_struct *st)
 	if (st->env)
 		ft_free_tab(st->env);
 	ft_varlstclear(&st->lst);
+	ft_free_hstab(st->hstab, st->hslen);
 	exit(EXIT_SUCCESS);
 }
 

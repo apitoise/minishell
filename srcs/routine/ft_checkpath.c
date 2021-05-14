@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/07 13:58:30 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:57:44 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static void	ft_checkpath2(char **cmd, char *path, t_struct *st)
 			i++;
 		}
 	}
-	not_cmd(cmd[0], st);
 	ft_freepathtab(pathtab);
+	not_cmd(cmd[0], st);
 }
 
 void		ft_checkpath(char **cmd, t_struct *st)
@@ -80,7 +80,7 @@ void		ft_checkpath(char **cmd, t_struct *st)
 	t_varlist	*tmp;
 
 	tmp = st->lst;
-	while (ft_strcmp(tmp->name, "PATH") && tmp)
+	while (tmp && ft_strcmp(tmp->name, "PATH"))
 		tmp = tmp->next;
 	if (!tmp)
 		not_cmd(cmd[0], st);

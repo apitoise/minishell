@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/11 18:22:10 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/14 17:13:13 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int						ft_pwd(char **cmd);
 int						ft_unset(char **cmd, t_struct *st);
 void					ft_export(char **cmd, t_struct *st, int i);
 void					ft_varlstclear(t_varlist **lst);
+void					ft_free_hstab(t_history **hstab, int len);
 int						first_check(char **cmd, t_struct *st);
 void					ft_env(t_struct *st);
 void					do_builtin(char **cmd, t_struct *st);

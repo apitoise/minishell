@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/14 16:57:44 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/17 15:57:49 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ static char	*ft_finalpath(char *s1, char *s2)
 	return (tmp2);
 }
 
-static void	ft_checkpath2(char **cmd, char *path, t_struct *st)
+static char	*ft_checkpath2(char **cmd, char *path, t_struct *st)
 {
 	char	**pathtab;
 	char	*filepath;
 	int		i;
 
+	(void)st;
 	pathtab = ft_split(path, ':');
 	filepath = NULL;
 	i = 0;
@@ -60,9 +61,8 @@ static void	ft_checkpath2(char **cmd, char *path, t_struct *st)
 		filepath = ft_finalpath(pathtab[i], cmd[0]);
 		if (ft_checkfile(filepath))
 		{
-			ft_exec(cmd, filepath, st);
-			free(filepath);
-			return ;
+			ft_freepathtab(pathtab);
+			return (filepath);
 		}
 		else
 		{
@@ -72,18 +72,19 @@ static void	ft_checkpath2(char **cmd, char *path, t_struct *st)
 		}
 	}
 	ft_freepathtab(pathtab);
-	not_cmd(cmd[0], st);
+	return (NULL);
 }
 
 void		ft_checkpath(char **cmd, t_struct *st)
 {
 	t_varlist	*tmp;
+	char		*filepath;
 
 	tmp = st->lst;
 	while (tmp && ft_strcmp(tmp->name, "PATH"))
 		tmp = tmp->next;
-	if (!tmp)
+	if (!tmp || !(filepath = ft_checkpath2(cmd, tmp->content, st)))
 		not_cmd(cmd[0], st);
 	else
-		ft_checkpath2(cmd, tmp->content, st);
+		ft_fork(cmd, filepath, st);
 }

@@ -6,34 +6,12 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:50 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/14 16:24:19 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/17 16:02:18 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
-
-static void	do_fork(char **cmd, t_struct *st)
-{
-	pid_t	forking;
-
-	forking = fork();
-	if (forking == 0)
-	{
-		dup2(st->stdin_fd, STDIN_FILENO);
-		dup2(st->stdout_fd, STDOUT_FILENO);
-		ft_checkpath(cmd, st);
-		close(STDOUT_FILENO);
-		close(STDIN_FILENO);
-		exit(st->ret);
-	}
-	else
-	{
-		g_sig.pid = forking;
-		waitpid(forking, &st->ret, 0);
-		g_sig.pid = 0;
-	}
-}
 
 static void	if_builtin(char **cmd, t_struct *st)
 {
@@ -56,7 +34,7 @@ static void	if_builtin(char **cmd, t_struct *st)
 	else if (!ft_strcmp(cmd[0], "export"))
 		ft_export(cmd, st, 2);
 	else
-		do_fork(cmd, st);
+		ft_checkpath(cmd, st);
 }
 
 void		do_builtin(char **cmd, t_struct *st)

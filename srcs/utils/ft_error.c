@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:29 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/17 13:51:10 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/17 15:53:14 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,9 @@ int		ft_error(char *s)
 	return (errno);
 }
 
-void	ft_clean_exit(char *cmd, t_struct *st)
-{
-	free(cmd);
-	free(st->input);
-	if (st->env)
-		ft_free_tab(st->env);
-	ft_varlstclear(&st->lst);
-	ft_free_hstab(st->hstab, st->hslen);
-	exit(EXIT_SUCCESS);
-}
-
 void	not_cmd(char *str, t_struct *st)
 {
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(" : command not found\n", 2);
 	st->ret = 127;
-	ft_clean_exit(str, st);
 }

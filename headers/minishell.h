@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/14 17:13:13 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/17 15:57:32 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void					init_lstenv(char **env, t_struct *st);
 void					get_signals(t_struct *st);
 void					ctrl_c(int useless);
 void					ctrl_backslash(int useless);
+void					ft_fork(char **cmd, char *filepath, t_struct *st);
 void					ft_exec(char **cmd, char *filepath, t_struct *st);
 int						ft_parsecmdline(char **s, t_struct *st);
 int						ft_checkvalid(char *s, t_struct *st);

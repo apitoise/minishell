@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:58:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/07 14:45:10 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/17 16:03:10 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,31 @@
 void	ft_exec(char **cmd, char *filepath, t_struct *st)
 {
 	if (execve(filepath, cmd, st->env) == -1)
-		return (not_cmd(cmd[0], st));
+	{
+		free(filepath);
+		not_cmd(cmd[0], st);
+	}
+}
+
+void 	ft_fork(char **cmd, char *filepath, t_struct *st)
+{
+	pid_t   forking;
+
+	forking = fork();
+	if (forking == 0)
+	{
+		dup2(st->stdin_fd, STDIN_FILENO);
+		dup2(st->stdout_fd, STDOUT_FILENO);
+		ft_exec(cmd, filepath, st);
+		close(STDOUT_FILENO);
+		close(STDIN_FILENO);
+		exit(st->ret);
+	}
+	else
+	{
+		g_sig.pid = forking;
+		waitpid(forking, &st->ret, 0);
+		g_sig.pid = 0;
+		free(filepath);
+	}
 }

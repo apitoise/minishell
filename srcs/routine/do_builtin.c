@@ -17,8 +17,6 @@ static void	if_builtin(char **cmd, t_struct *st)
 {
 	if (!ft_strcmp(cmd[0], "pwd"))
 		ft_pwd(cmd);
-	else if (!ft_strcmp(cmd[0], ""))
-		not_cmd(cmd[0], st);
 	else if (!ft_strcmp(cmd[0], "exit"))
 		ft_exit(cmd, st);
 	else if (!ft_strcmp(cmd[0], "echo"))
@@ -39,9 +37,8 @@ static void	if_builtin(char **cmd, t_struct *st)
 
 void		do_builtin(char **cmd, t_struct *st)
 {
-	if (cmd[0] == NULL)
-		cmd[0] = ft_strdup("");
-	if_builtin(cmd, st);
+	if (cmd[0])
+		if_builtin(cmd, st);
 	if (st->ret > 0)
 		st->ret = st->ret / 256;
 }

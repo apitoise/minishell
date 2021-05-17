@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/17 15:57:49 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/17 16:13:11 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		ft_checkpath(char **cmd, t_struct *st)
 	while (tmp && ft_strcmp(tmp->name, "PATH"))
 		tmp = tmp->next;
 	if (!tmp || !(filepath = ft_checkpath2(cmd, tmp->content, st)))
-		not_cmd(cmd[0], st);
+		not_cmd(cmd, st);
 	else
 		ft_fork(cmd, filepath, st);
 }

@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:58:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/17 16:03:10 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/17 16:13:26 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_exec(char **cmd, char *filepath, t_struct *st)
 	if (execve(filepath, cmd, st->env) == -1)
 	{
 		free(filepath);
-		not_cmd(cmd[0], st);
+		not_cmd(cmd, st);
 	}
 }
 

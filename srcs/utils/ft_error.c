@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:29 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/17 11:48:50 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/17 13:51:10 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		ft_error(char *s)
 void	ft_clean_exit(char *cmd, t_struct *st)
 {
 	free(cmd);
-	ft_free_tab(st->cmd);
 	free(st->input);
 	if (st->env)
 		ft_free_tab(st->env);

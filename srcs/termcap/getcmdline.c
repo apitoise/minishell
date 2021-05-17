@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/12 01:14:22 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/17 17:25:16 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,17 @@ static int	ediths(t_history **new, t_struct *st)
 	return (0);
 }
 
+static int	isempty(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] != ' ')
+			return (0);
+	return (1);
+}
+
 static int	delone(t_history *new, t_struct *st)
 {
 	int	i;
@@ -373,6 +384,8 @@ char		*getcmdline(t_struct *st)
 		return (closetermcap(new, &restore, st));
 	else if (ret == 1)
 		ft_putchar_fd('\n', 1);
+	if (new->cmdline && isempty(new->cmdline))
+		new->cmdline[0] = '\0';
 	if (new->cmdline && new->cmdline[0] && ediths(&new, st))
 		return (closetermcap(new, &restore, st));
 	tcsetattr(STDIN_FILENO, TCSANOW, &restore);

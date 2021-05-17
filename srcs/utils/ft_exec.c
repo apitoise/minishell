@@ -16,5 +16,5 @@
 void	ft_exec(char **cmd, char *filepath, t_struct *st)
 {
 	if (execve(filepath, cmd, st->env) == -1)
-		return (not_cmd(cmd[0], st));
+		return (not_cmd(cmd, st));
 }

@@ -72,7 +72,7 @@ static void	ft_checkpath2(char **cmd, char *path, t_struct *st)
 		}
 	}
 	ft_freepathtab(pathtab);
-	not_cmd(cmd[0], st);
+	not_cmd(cmd, st);
 }
 
 void		ft_checkpath(char **cmd, t_struct *st)
@@ -83,7 +83,7 @@ void		ft_checkpath(char **cmd, t_struct *st)
 	while (tmp && ft_strcmp(tmp->name, "PATH"))
 		tmp = tmp->next;
 	if (!tmp)
-		not_cmd(cmd[0], st);
+		not_cmd(cmd, st);
 	else
 		ft_checkpath2(cmd, tmp->content, st);
 }

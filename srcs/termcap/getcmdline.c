@@ -6,14 +6,12 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/20 16:06:48 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/20 23:56:30 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
-#include <curses.h>
-#include <term.h>
 
 void		ft_freehs(t_history *new)
 {
@@ -362,7 +360,7 @@ static int	readloop(t_history *new, struct termios *restore, t_struct *st)
 	return (0);
 }
 
-char		*getcmdline(t_struct *st)
+char		*tc_getcmdline(t_struct *st)
 {
 	struct termios	restore;
 	struct termios	term;

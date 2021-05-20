@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/20 16:29:35 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/20 22:05:13 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int						ft_freestr(char *str);
 int						ft_isspechar(char c);
 int						init_termcap(t_struct *st);
 int						ft_getwinsz(t_struct *st);
-char					*getcmdline(t_struct *st);
+char					*tc_getcmdline(t_struct *st);
 int						ft_putc(int c);
 
 #endif

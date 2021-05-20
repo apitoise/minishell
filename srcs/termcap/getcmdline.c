@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/17 17:25:16 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:06:48 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,10 +328,13 @@ static int	editcmdline(char *buff, t_history *new, t_struct *st)
 
 static void	ctrld(t_history *new, struct termios *restore, t_struct *st)
 {
-	ft_freehs(new);
-	tcsetattr(STDIN_FILENO, TCSANOW, restore);
-	ft_putstr_fd("exit\n", 1);
-	ft_exit(NULL, st);
+	if (!new->cmdline || new->cmdline[0] == '\0')
+	{
+		ft_freehs(new);
+		tcsetattr(STDIN_FILENO, TCSANOW, restore);
+		ft_putstr_fd("exit\n", 1);
+		ft_exit(NULL, st);
+	}
 }
 
 static int	readloop(t_history *new, struct termios *restore, t_struct *st)
@@ -348,7 +351,7 @@ static int	readloop(t_history *new, struct termios *restore, t_struct *st)
 		buff[ret] = '\0';
 		if (buff[0] == 4)
 			ctrld(new, restore, st);
-		if (buff[0] == 27 && buff[1] == '[')
+		else if (buff[0] == 27 && buff[1] == '[')
 		{
 			if (browsehistory(buff[2], new, st))
 				return (1);

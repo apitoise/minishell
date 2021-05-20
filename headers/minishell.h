@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/17 15:57:32 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:29:35 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void					ft_split_cmd(const char *s, char c,
 t_struct *st, int i);
 char					**ft_split_cmdline(char const *s, char c);
 int						ft_error(char *s);
+void					ft_freeptr(void **ptr);
 int						ft_syntax_error(char *token, t_struct *st);
 void					ft_checkpath(char **cmd, t_struct *st);
 void					not_cmd(char **str, t_struct *st);

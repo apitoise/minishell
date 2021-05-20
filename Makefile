@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/05/09 00:07:47 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/05/20 16:31:45 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/utils/split_cmdline.c \
 		srcs/utils/shell_init.c \
 		srcs/utils/ft_error.c \
+		srcs/utils/ft_freeptr.c \
 		srcs/utils/ft_syntax_error.c \
 		srcs/utils/utils.c \
 		srcs/utils/init_sig_struct.c \

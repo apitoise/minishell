@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:56 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/17 14:12:14 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:44:19 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void		minishell(t_struct *st)
 		if (!ft_parsecmdline(&cmdline, st))
 		{
 			st->input = ft_split_cmdline(cmdline, ';');
-			free(cmdline);
+			ft_freeptr((void**)&cmdline);
 			cmd_analysis(st->input, st);
-			free(st->input);
+			ft_freeptr((void**)&st->input);
 		}
 		shell_init();
 	}

@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/20 23:56:30 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/25 22:21:02 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -377,6 +377,7 @@ char		*tc_getcmdline(t_struct *st)
 	if (!(new = malloc(sizeof(t_history))))
 		return (closetermcap(NULL, &restore, st));
 	ft_bzero(new, sizeof(t_history));
+	g_sig.cmdl = &new;
 	st->hsindex = 0;
 	if (ft_getposition(st))
 		return (closetermcap(new, &restore, st));
@@ -395,5 +396,6 @@ char		*tc_getcmdline(t_struct *st)
 		ft_freehs(new);
 		return (NULL);
 	}
+	g_sig.cmdl = NULL;
 	return (ft_strdup(new->cmdline));
 }

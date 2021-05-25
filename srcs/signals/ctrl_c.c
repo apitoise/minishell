@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 11:46:18 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/13 17:38:09 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/25 22:35:42 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ctrl_c(int useless)
 	}
 	else
 	{
+		if ((*g_sig.cmdl)->cmdline)
+			(*g_sig.cmdl)->cmdline[0] = '\0';
 		ft_putstr_fd("^C\n", 1);
 		shell_init();
 	}

@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/20 22:05:13 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/25 22:19:49 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@
 # include <errno.h>
 # define MAX_FD 3000
 
-typedef struct			s_sig
-{
-	pid_t	pid;
-	int		sig_ret;
-}						t_sig;
-
 typedef struct			s_varlist
 {
 	char				*name;
@@ -51,6 +45,13 @@ typedef	struct			s_history
 	size_t				len;
 	size_t				capacity;
 }						t_history;
+
+typedef struct			s_sig
+{
+	pid_t				pid;
+	int					sig_ret;
+	t_history			**cmdl;
+}						t_sig;
 
 typedef struct			s_struct
 {

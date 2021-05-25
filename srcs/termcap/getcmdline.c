@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/25 22:21:02 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/25 22:48:58 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,6 +347,8 @@ static int	readloop(t_history *new, struct termios *restore, t_struct *st)
 			|| ((ret = read(STDIN_FILENO, buff, 10)) == -1))
 			return (1);
 		buff[ret] = '\0';
+		if (!ft_strcmp(buff, "\t"))
+			buff[0] = ' ';
 		if (buff[0] == 4)
 			ctrld(new, restore, st);
 		else if (buff[0] == 27 && buff[1] == '[')

@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:56 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/20 23:55:56 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/27 22:59:42 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void		minishell(t_struct *st)
 	get_signals(st);
 	while (!(st->exit))
 	{
-		cmdline = tc_getcmdline(st);
-//		get_signals(st);
+		cmdline = ft_termcap(st);
+		get_signals(st);
 		if (!ft_parsecmdline(&cmdline, st))
 		{
 			st->input = ft_split_cmdline(cmdline, ';');

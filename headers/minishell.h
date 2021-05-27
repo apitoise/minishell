@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/25 22:19:49 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/28 00:23:05 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,17 @@ int						ft_tkorqt(char *str, int i);
 int						ft_freestr(char *str);
 int						ft_isspechar(char c);
 int						init_termcap(t_struct *st);
+char					*ft_termcap(t_struct *st);
+int						tc_editcmdl(char *buff, t_history *new, t_struct *st);
+int						tc_ediths(t_history **new, t_struct *st);
+int						tc_browsehs(char c, t_history *new, t_struct *st);
+int						ft_getposition(t_struct *st);
 int						ft_getwinsz(t_struct *st);
-char					*tc_getcmdline(t_struct *st);
+int						ft_winszdiff(t_history *new, t_struct *st);
 int						ft_putc(int c);
+int						ft_isblank(char *str);
+int						ft_tputsstr(char *str, t_history *new, t_struct *st);
+int						ft_nextline(t_history *new, t_struct *st);
+void					ft_freehs(t_history *new);
 
 #endif

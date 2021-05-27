@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/05/20 16:31:45 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/05/28 00:17:54 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,12 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/signals/ctrl_c.c \
 		srcs/signals/ctrl_backslash.c \
 		srcs/termcap/init_termcap.c \
-		srcs/termcap/getcmdline.c \
+		srcs/termcap/termcap.c \
+		srcs/termcap/termcap_editcmdl.c \
+		srcs/termcap/termcap_ediths.c \
+		srcs/termcap/termcap_browsehs.c \
+		srcs/termcap/termcap_getposition.c \
+		srcs/termcap/termcap_winsz.c \
 		srcs/termcap/termcap_utils.c
 
 

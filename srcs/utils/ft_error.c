@@ -6,14 +6,14 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:29 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/17 16:12:57 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/28 00:28:42 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-int			ft_error(char *s)
+int		ft_error(char *s)
 {
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd("\n", 2);

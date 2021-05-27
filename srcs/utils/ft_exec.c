@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:58:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/17 16:13:26 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/28 00:29:24 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_exec(char **cmd, char *filepath, t_struct *st)
 	}
 }
 
-void 	ft_fork(char **cmd, char *filepath, t_struct *st)
+void	ft_fork(char **cmd, char *filepath, t_struct *st)
 {
-	pid_t   forking;
+	pid_t	forking;
 
 	forking = fork();
 	if (forking == 0)

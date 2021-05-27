@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/28 00:23:05 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/28 01:06:44 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,16 @@ void					ft_exit(char **cmd, t_struct *st);
 int						ft_pwd(char **cmd);
 int						ft_unset(char **cmd, t_struct *st);
 void					ft_export(char **cmd, t_struct *st, int i);
+char					*xp_getname(char *cmd, char c);
+int						xp_catlist(char *name, char *content, t_varlist **lst);
+void					xp_modiflist(char *name, char *content, int visible,
+t_varlist **lst);
+int						xp_checkerror(char *arg);
+int						xp_newlst(char *name, char *content, int visible,
+t_varlist **lst);
+int						xp_idnotvalid(char *arg);
+int						xp_varexist(char *str, t_varlist **lst);
+int						xp_isalpha(char c);
 void					ft_varlstclear(t_varlist **lst);
 void					ft_free_hstab(t_history **hstab, int len);
 int						first_check(char **cmd, t_struct *st);

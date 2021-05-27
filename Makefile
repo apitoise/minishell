@@ -6,7 +6,7 @@
 #    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/05/28 00:17:54 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/05/28 01:08:54 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRCS =  srcs/builtin/ft_cd.c \
 		srcs/builtin/ft_env.c \
 		srcs/builtin/ft_exit.c \
 		srcs/builtin/ft_export.c \
+		srcs/builtin/exportutils.c \
+		srcs/builtin/exportutilsbis.c \
 		srcs/builtin/ft_pwd.c \
 		srcs/builtin/ft_unset.c \
 		srcs/utils/init_struct.c \

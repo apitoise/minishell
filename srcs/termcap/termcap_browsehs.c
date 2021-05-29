@@ -6,12 +6,28 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/28 00:22:16 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/29 18:30:28 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
+
+static char	*dupcmdl(char *s1, size_t capacity)
+{
+	char	*s2;
+	int		i;
+
+	if (!s1 || ft_strlen(s1) > capacity)
+		return (NULL);
+	if (!(s2 = (char *)malloc(sizeof(char) * (capacity + 1))))
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		s2[i] = s1[i];
+	s2[i] = '\0';
+	return (s2);
+}
 
 static void	delcmdline(t_history *new, t_struct *st)
 {
@@ -47,8 +63,8 @@ static int	replaceline(t_history *new, t_struct *st)
 		ft_bzero(new, sizeof(t_history));
 	else if (st->hsindex > 0)
 	{
-		if (!(new->cmdline =
-					ft_strdup(st->hstab[st->hslen - st->hsindex]->cmdline)))
+		if ((new->cmdline = dupcmdl(st->hstab[st->hslen - st->hsindex]->cmdline,
+		st->hstab[st->hslen - st->hsindex]->capacity)) == NULL)
 			return (1);
 		new->len = st->hstab[st->hslen - st->hsindex]->len;
 		new->capacity = st->hstab[st->hslen - st->hsindex]->capacity;

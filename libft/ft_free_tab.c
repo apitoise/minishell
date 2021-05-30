@@ -6,7 +6,7 @@
 /*   By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 12:44:52 by cnotin            #+#    #+#             */
-/*   Updated: 2020/05/28 15:44:18 by cnotin           ###   ########.fr       */
+/*   Updated: 2021/05/31 00:55:06 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	if (!tab || !tab[i])
+	if (!tab)
 		return ;
 	while (tab && tab[i])
 	{

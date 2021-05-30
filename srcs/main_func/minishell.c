@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:56 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/27 22:59:42 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/31 00:56:47 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	cmd_analysis(char **commands, t_struct *st)
 	i = 0;
 	if (!commands[i])
 		st->ret = 0;
+	g_sig.cmdt = commands;
 	while (commands[i])
 	{
 		if (commands[i])
 			ft_split_cmd(commands[i], ' ', st, 0);
-		free(commands[i]);
 		if (first_check(st->cmd, st))
 		{
 			st->pipe = 0;
@@ -36,6 +36,8 @@ static void	cmd_analysis(char **commands, t_struct *st)
 		ft_free_tab(st->cmd);
 		i++;
 	}
+	ft_free_tab(commands);
+	g_sig.cmdt = NULL;
 }
 
 void		minishell(t_struct *st)
@@ -54,7 +56,7 @@ void		minishell(t_struct *st)
 			st->input = ft_split_cmdline(cmdline, ';');
 			ft_freeptr((void**)&cmdline);
 			cmd_analysis(st->input, st);
-			ft_freeptr((void**)&st->input);
+			st->input = NULL;
 		}
 		shell_init();
 	}

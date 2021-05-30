@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/28 01:06:44 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/30 16:28:34 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct			s_sig
 	pid_t				pid;
 	int					sig_ret;
 	t_history			**cmdl;
+	char				**cmdt;
 }						t_sig;
 
 typedef struct			s_struct

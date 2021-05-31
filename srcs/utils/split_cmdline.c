@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:10:52 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/07 14:43:42 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/05/31 16:04:40 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ static char	*ft_malloc_w(char const *s, char c)
 
 	i = 0;
 	while (s[i] && s[i] != c)
+	{
+		if (s[i] == '\\')
+			i++;
 		i++;
+	}
 	if (!(word = (char *)malloc(sizeof(char) * i + 1)))
 		return (NULL);
 	i = 0;

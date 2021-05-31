@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:23:55 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/20 15:45:53 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/31 22:54:27 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static int	gethomevalue(char **path, t_struct *st)
 		current = current->next;
 	if (current)
 		home = current->content;
-	else
-		home = getenv("HOME");
+	else if (!(home = getenv("HOME")))
+		return (1);
 	deltilde(*path);
 	if (!(tmp = ft_strjoin(home, *path)))
 		return (1);
@@ -88,9 +88,6 @@ void		ft_cd(char *cmd, t_struct *st)
 	char	*oldpwd;
 	char	*path;
 
-	getcwd(buff, PATH_MAX);
-	oldpwd = ft_strdup(buff);
-	modif_pwd("OLDPWD", oldpwd, &st->lst);
 	if (!cmd)
 	{
 		if (!(path = malloc(sizeof(char) * 2)))
@@ -98,15 +95,17 @@ void		ft_cd(char *cmd, t_struct *st)
 		path[0] = '~';
 		path[1] = '\0';
 	}
+	else if (!ft_strcmp(cmd, "-"))
+	{
+		if (cd_getoldpwd(&path, st))
+			return ;
+	}
 	else if (!(path = ft_strdup(cmd)))
 		return ;
-	if (path[0] == '~')
-	{
-		if (gethomevalue(&path, st))
-		{
-			free(path);
-			return ;
-		}
-	}
+	if (path[0] == '~' && gethomevalue(&path, st))
+		return (ft_freeptr((void**)&path));
+	getcwd(buff, PATH_MAX);
+	oldpwd = ft_strdup(buff);
+	modif_pwd("OLDPWD", oldpwd, &st->lst);
 	gotopath(path, st);
 }

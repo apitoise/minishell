@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+         #
+#    By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/08/25 14:09:35 by cnotin            #+#    #+#              #
-#    Updated: 2021/05/28 01:08:54 by lgimenez         ###   ########.fr        #
+#    Created: 2021/05/31 22:20:20 by lgimenez          #+#    #+#              #
+#    Updated: 2021/05/31 22:20:26 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,14 @@ INC = -I headers/minishell.h
 
 LIB = libft/libft.a
 
-SRCS =  srcs/builtin/ft_cd.c \
-		srcs/routine/do_builtin.c \
+SRCS =  srcs/routine/do_builtin.c \
 		srcs/routine/do_chevron.c \
 		srcs/routine/del_chevron.c \
 		srcs/routine/edit_cmd.c \
 		srcs/routine/do_pipe.c \
 		srcs/routine/routine.c \
+		srcs/builtin/ft_cd.c \
+		srcs/builtin/cdutils.c \
 		srcs/builtin/ft_echo.c \
 		srcs/builtin/ft_env.c \
 		srcs/builtin/ft_exit.c \

@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/30 16:28:34 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/31 22:17:57 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void					ft_edit_cmd(char **cmd);
 void					init_struct(t_struct *st, char **env);
 void					init_sig_struct(void);
 void					ft_cd(char *path, t_struct *st);
+int						cd_getoldpwd(char **path, t_struct *st);
 int						ft_echo(char **cmd, t_struct *st);
 void					ft_exit(char **cmd, t_struct *st);
 int						ft_pwd(char **cmd);

@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:50 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/17 16:02:18 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/31 19:18:14 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ static void	if_builtin(char **cmd, t_struct *st)
 	else if (!ft_strcmp(cmd[0], "unset"))
 		ft_unset(cmd, st);
 	else if (!ft_strcmp(cmd[0], "cd"))
-		ft_cd(cmd[1], st);
+	{
+		if (cmd[2])
+			ft_putstr_fd("minishell: cd: too many arguments\n", 1);
+		else
+			ft_cd(cmd[1], st);
+	}
 	else if (ft_strchr(cmd[0], '='))
 		ft_export(cmd, st, 1);
 	else if (!ft_strcmp(cmd[0], "export"))

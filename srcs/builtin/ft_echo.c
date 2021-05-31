@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:06 by apitoise          #+#    #+#             */
-/*   Updated: 2021/04/22 00:53:41 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/05/31 10:28:00 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ int	ft_echo(char **cmd, t_struct *st)
 
 	i = 1;
 	n = 0;
-	if (cmd[1] && !ft_strcmp(cmd[1], "-n"))
-		n = 1;
-	i += n;
+	while (cmd[i] && !ft_strcmp(cmd[i], "-n"))
+	{
+		i++;
+		n++;
+	}
 	while (cmd[i])
 	{
 		ft_putstr_fd(cmd[i], 1);

@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 11:46:18 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/31 15:19:53 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/01 15:44:46 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ctrl_c(int useless)
 	g_sig.sig_ret = 130;
 	if (g_sig.pid != 0)
 	{
-		ft_putstr_fd("^C\n", 1);
+		ft_putstr_fd("\n", 1);
 		kill(g_sig.pid, SIGINT);
 		if (g_sig.cmdt)
 		{

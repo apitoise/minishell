@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/28 00:20:25 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/01 15:43:51 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ char		*ft_termcap(t_struct *st)
 		return (NULL);
 	}
 	g_sig.cmdl = NULL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &restore);
 	return (ft_strdup(new->cmdline));
 }

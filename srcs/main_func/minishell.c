@@ -28,12 +28,12 @@ static void	cmd_analysis(char **commands, t_struct *st)
 		if (first_check(st->cmd, st))
 		{
 			st->pipe = 0;
-			ft_free_tab(st->cmd);
+//			ft_free_tab(st->cmd);
 			return ;
 		}
 		if (st->cmd[0])
-			do_routine(st);
-		ft_free_tab(st->cmd);
+			do_pipe(st->cmd, st);
+		//ft_free_tab(st->cmd);
 		i++;
 	}
 	ft_free_tab(commands);

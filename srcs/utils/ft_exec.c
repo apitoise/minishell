@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:58:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/01 00:34:49 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/02 12:14:39 by apitoise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ void	ft_fork(char **cmd, char *filepath, t_struct *st)
 	forking = fork();
 	if (forking == 0)
 	{
-		dup2(st->stdin_fd, STDIN_FILENO);
-		dup2(st->stdout_fd, STDOUT_FILENO);
 		ft_exec(cmd, filepath, st);
-		close(STDOUT_FILENO);
-		close(STDIN_FILENO);
 		exit(st->ret);
 	}
 	else

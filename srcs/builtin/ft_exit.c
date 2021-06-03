@@ -74,7 +74,7 @@ void		ft_exit(char **cmd, t_struct *st)
 
 	ft_putstr_fd("exit\n", 1);
 	ret = get_ret(cmd[1]);
-	ft_free_tab(cmd);
+	//ft_free_tab(cmd);
 	if (st->input)
 		ft_free_tab(st->input);
 	if (st->env)

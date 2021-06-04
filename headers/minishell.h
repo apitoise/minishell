@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/04 16:47:07 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/05 01:33:34 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,9 @@ char					**del_chevron(char **cmd);
 void					ft_edit_cmd(char **cmd);
 void					init_struct(t_struct *st, char **env);
 void					init_sig_struct(void);
-void					ft_cd(char *path, t_struct *st);
+void					ft_cd(char **path, t_struct *st);
 int						cd_getoldpwd(char **path, t_struct *st);
+void					cd_deltilde(char *path);
 int						ft_echo(char **cmd, t_struct *st);
 void					ft_exit(char **cmd, t_struct *st);
 int						ft_pwd(char **cmd);
@@ -108,14 +109,15 @@ char					*xp_getname(char *cmd, char c);
 int						xp_catlist(char *name, char *content, t_varlist **lst);
 void					xp_modiflist(char *name, char *content, int visible,
 t_varlist **lst);
-int						xp_checkerror(char *arg);
+int						xp_checkerror(char *arg, t_struct *st);
 int						xp_newlst(char *name, char *content, int visible,
 t_varlist **lst);
-int						xp_idnotvalid(char *arg);
+int						xp_idnotvalid(char *arg, t_struct *st);
 int						xp_varexist(char *str, t_varlist **lst);
 int						xp_isalpha(char c);
 void					ft_varlstclear(t_varlist **lst);
 void					ft_free_hstab(t_history **hstab, int len);
+void					ft_free_st(t_struct *st);
 int						first_check(char **cmd, t_struct *st);
 void					ft_env(t_struct *st);
 void					do_builtin(char **cmd, t_struct *st);

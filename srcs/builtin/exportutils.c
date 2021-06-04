@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:07 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/28 01:05:40 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/05 01:35:45 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ int		xp_newlst(char *name, char *content, int visible, t_varlist **lst)
 	return (0);
 }
 
-int		xp_checkerror(char *arg)
+int		xp_checkerror(char *arg, t_struct *st)
 {
 	int	i;
 
 	if (arg[0] == '=')
-		return (xp_idnotvalid(arg));
+		return (xp_idnotvalid(arg, st));
 	i = 0;
 	while (arg[i] && arg[i] != '=')
 	{
 		if (!xp_isalpha(arg[i]) && !(arg[i] == '+'
 		&& arg[i + 1] == '=' && i > 0))
-			return (xp_idnotvalid(arg));
+			return (xp_idnotvalid(arg, st));
 		i++;
 	}
 	return (0);

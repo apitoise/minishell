@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:23:55 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/31 22:54:27 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/04 19:56:27 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ static void	modif_pwd(char *name, char *content, t_varlist **lst)
 	}
 }
 
-static void	deltilde(char *path)
-{
-	int	i;
-
-	if (path[0] == '~')
-	{
-		i = -1;
-		while (path[++i])
-			path[i] = path[i + 1];
-	}
-}
-
 static int	gethomevalue(char **path, t_struct *st)
 {
 	t_varlist	*current;
@@ -52,7 +40,7 @@ static int	gethomevalue(char **path, t_struct *st)
 		home = current->content;
 	else if (!(home = getenv("HOME")))
 		return (1);
-	deltilde(*path);
+	cd_deltilde(*path);
 	if (!(tmp = ft_strjoin(home, *path)))
 		return (1);
 	free(*path);
@@ -82,7 +70,7 @@ static void	gotopath(char *path, t_struct *st)
 	modif_pwd("PWD", newpwd, &st->lst);
 }
 
-void		ft_cd(char *cmd, t_struct *st)
+static void	editpath(char *cmd, t_struct *st)
 {
 	char	buff[PATH_MAX];
 	char	*oldpwd;
@@ -108,4 +96,15 @@ void		ft_cd(char *cmd, t_struct *st)
 	oldpwd = ft_strdup(buff);
 	modif_pwd("OLDPWD", oldpwd, &st->lst);
 	gotopath(path, st);
+}
+
+void		ft_cd(char **cmd, t_struct *st)
+{
+	if (cmd[2])
+	{
+	  	ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+		st->ret = 1;
+	}
+	else
+		editpath(cmd[1], st);
 }

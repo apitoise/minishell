@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:07 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/28 00:54:41 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/05 01:31:40 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ int	xp_varexist(char *str, t_varlist **lst)
 	}
 }
 
-int	xp_idnotvalid(char *arg)
+int	xp_idnotvalid(char *arg, t_struct *st)
 {
 	ft_putstr_fd("minishell: export: `", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd("': not a valid identifier\n", 2);
+	st->ret = 1;
 	return (1);
 }

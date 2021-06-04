@@ -6,7 +6,7 @@
 #    By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/31 22:20:20 by lgimenez          #+#    #+#              #
-#    Updated: 2021/05/31 22:20:26 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/06/04 23:38:34 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS =  srcs/routine/do_builtin.c \
 		srcs/utils/shell_init.c \
 		srcs/utils/ft_error.c \
 		srcs/utils/ft_freeptr.c \
+		srcs/utils/ft_varlstclear.c \
 		srcs/utils/ft_syntax_error.c \
 		srcs/utils/utils.c \
 		srcs/utils/init_sig_struct.c \

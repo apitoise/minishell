@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:07 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/28 01:06:01 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/05 01:35:26 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	create_elem(char **cmd, int f, int visible, t_struct *st)
 
 	while (cmd[++f])
 	{
-		if (!xp_checkerror(cmd[f]))
+		if (!xp_checkerror(cmd[f], st))
 		{
 			if (ft_strchr(cmd[f], '='))
 				elem_getstrs(cmd[f], visible, st);

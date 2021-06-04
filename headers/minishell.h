@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/31 22:17:57 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/04 16:47:07 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef	struct			s_history
 typedef struct			s_sig
 {
 	pid_t				pid;
-	int					sig_ret;
 	t_history			**cmdl;
 	char				**cmdt;
 }						t_sig;
@@ -66,6 +65,8 @@ typedef struct			s_struct
 	pid_t				pid;
 	t_varlist			*lst;
 	int					ret;
+	int					childps;
+	int					childret;
 	int					stdout_fd;
 	int					stdin_fd;
 	int					stdin_copy;
@@ -131,7 +132,7 @@ int						ft_syntax_error(char *token, t_struct *st);
 void					ft_checkpath(char **cmd, t_struct *st);
 void					not_cmd(char **str, t_struct *st);
 void					init_lstenv(char **env, t_struct *st);
-void					get_signals(t_struct *st);
+void					get_signals(void);
 void					ctrl_c(int useless);
 void					ctrl_backslash(int useless);
 void					ft_fork(char **cmd, char *filepath, t_struct *st);

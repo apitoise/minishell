@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/31 10:35:01 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/06/02 21:36:43 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ void		ft_exit(char **cmd, t_struct *st)
 	int	ret;
 
 	ft_putstr_fd("exit\n", 1);
-	ret = get_ret(cmd[1]);
+	ret = 0;
+	if (cmd)
+		ret = get_ret(cmd[1]);
 	ft_free_tab(cmd);
 	if (st->input)
 		ft_free_tab(st->input);

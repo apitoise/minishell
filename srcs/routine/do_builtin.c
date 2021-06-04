@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:50 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/31 19:18:14 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/04 17:02:10 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,21 @@ static void	if_builtin(char **cmd, t_struct *st)
 void		do_builtin(char **cmd, t_struct *st)
 {
 	if (cmd[0])
+	{
+		st->ret = 0;
 		if_builtin(cmd, st);
-	if (st->ret > 0)
-		st->ret = st->ret / 256;
+		if (st->childps)
+		{
+			if (WIFEXITED(st->childret))
+				st->ret = WEXITSTATUS(st->childret);
+			else if (WIFSIGNALED(st->childret))
+				st->ret = WTERMSIG(st->childret) + 128;
+			if (st->ret == 137)
+				ft_putstr_fd("Killed\n", 1);
+		}
+		st->childps = 0;
+		st->childret = 0;
+	}
+	else
+		st->ret = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:58:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/01 00:34:49 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/04 16:34:31 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	ft_fork(char **cmd, char *filepath, t_struct *st)
 	else
 	{
 		g_sig.pid = forking;
-		waitpid(forking, &st->ret, 0);
+		st->childps = 1;
+		waitpid(forking, &st->childret, 0);
 		g_sig.pid = 0;
 		free(filepath);
 	}

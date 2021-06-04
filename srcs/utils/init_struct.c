@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:37 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/10 01:47:38 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/04 16:38:23 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	init_struct(t_struct *st, char **env)
 	st->chevrons = 0;
 	st->env = get_env(env);
 	st->ret = 0;
+	st->childps = 0;
+	st->childret = 0;
 	st->startposx = 0;
 	st->ttywidth = 0;
 	st->ttyheight = 0;

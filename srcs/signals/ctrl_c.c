@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 11:46:18 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/01 15:44:46 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/04 13:56:22 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	delcmdt(void)
 void	ctrl_c(int useless)
 {
 	(void)useless;
-	g_sig.sig_ret = 130;
 	if (g_sig.pid != 0)
 	{
 		ft_putstr_fd("\n", 1);

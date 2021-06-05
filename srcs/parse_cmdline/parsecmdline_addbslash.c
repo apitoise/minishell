@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:24:51 by lgimenez          #+#    #+#             */
-/*   Updated: 2019/12/06 12:03:31 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/05 19:21:22 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static void	ft_addbslash_loop(char **s, char **tmp)
 			ft_addbslash_looptk(s, &i, tmp, &j);
 		else if ((*s)[i] == '"')
 			ft_addbslash_loopqt(s, &i, tmp, &j);
+		else if ((*s)[i] == '$' && ft_tkorqt(*s, i) == 2)
+			(*tmp)[j++] = (*s)[i];
 		else if (ft_isspechar((*s)[i]) && ft_tkorqt(*s, i))
 		{
 			(*tmp)[j] = '\\';

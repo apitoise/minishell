@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:28:04 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/12 00:25:04 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/05 16:43:22 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,23 @@ void		printlist_env(t_varlist **lst)
 
 static char	*print_it(t_varlist ***lst, t_varlist **cur, t_varlist *tmp)
 {
+	int	i;
+
+	if (!ft_strcmp(tmp->name, "_"))
+		return (tmp->name);
 	ft_putstr_fd("declare -x ", 1);
 	ft_putstr_fd(tmp->name, 1);
 	if (tmp->content)
 	{
 		ft_putstr_fd("=\"", 1);
-		ft_putstr_fd(tmp->content, 1);
+		i = -1;
+		while (tmp->content[++i])
+		{
+			if (tmp->content[i] == '\\' || tmp->content[i] == '"'
+			|| tmp->content[i] == '$')
+				write(1, "\\", 1);
+			write(1, &(tmp->content[i]), 1);
+		}
 		ft_putstr_fd("\"", 1);
 	}
 	ft_putstr_fd("\n", 1);

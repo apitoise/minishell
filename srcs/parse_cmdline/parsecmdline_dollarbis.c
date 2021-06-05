@@ -6,17 +6,42 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:24:51 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/04/21 23:45:37 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/05 16:21:49 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
+static int	ft_dollar_alias_cpybis(char **tmp2, char *str)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (str[++i])
+		;
+	if (!(*tmp2 = malloc(sizeof(char) * (i * 2 + 1))))
+		return (1);
+	i = -1;
+	j = 0;
+	while (str[++i])
+	{
+		if (ft_isspechar(str[i]))
+		{
+			(*tmp2)[j] = '\\';
+			j++;
+		}
+		(*tmp2)[j] = str[i];
+		j++;
+	}
+	(*tmp2)[j] = '\0';
+	return (0);
+}
+
 static int	ft_dollar_alias_cpy(char **tmp, char **tmp2, t_struct *st)
 {
 	t_varlist	*tmplst;
-	int			i;
 
 	tmplst = st->lst;
 	while (tmplst && ft_strcmp(*tmp, tmplst->name))
@@ -27,18 +52,8 @@ static int	ft_dollar_alias_cpy(char **tmp, char **tmp2, t_struct *st)
 			return (1);
 		(*tmp2)[0] = '\0';
 	}
-	else
-	{
-		i = -1;
-		while (tmplst->content[++i])
-			;
-		if (!(*tmp2 = malloc(sizeof(char) * (i + 1))))
-			return (1);
-		i = -1;
-		while (tmplst->content[++i])
-			(*tmp2)[i] = tmplst->content[i];
-		(*tmp2)[i] = '\0';
-	}
+	else if (ft_dollar_alias_cpybis(tmp2, tmplst->content))
+		return(1);
 	return (0);
 }
 

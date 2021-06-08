@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:24:51 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/06/08 02:21:06 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/08 15:57:26 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_dollar_alias_cpybis(char **tmp2, char *str)
 	j = 0;
 	while (str[++i])
 	{
-		if (str[i] != ' ' && ft_isspechar(str[i]))
+		if (str[i] == '\\' || str[i] == '"' || str[i] == '$')
 		{
 			(*tmp2)[j] = '\\';
 			j++;

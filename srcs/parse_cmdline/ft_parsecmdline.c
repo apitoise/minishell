@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:24:51 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/06/05 15:16:29 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/07 21:11:58 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 int	ft_parsecmdline(char **s, t_struct *st)
 {
-	if (!*s || ft_checkvalid(*s, st) || ft_addbslash(s)
-	|| ft_rmbslash(s, -1, 0))
+	if (!*s || ft_checkvalid(*s, st))
 		return (ft_freestr(*s));
 	return (0);
 }

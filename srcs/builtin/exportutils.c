@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:07 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/05 01:35:45 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/08 02:08:21 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ int		xp_checkerror(char *arg, t_struct *st)
 {
 	int	i;
 
-	if (arg[0] == '=')
+	if (!ft_isalpha(arg[0]))
 		return (xp_idnotvalid(arg, st));
 	i = 0;
-	while (arg[i] && arg[i] != '=')
+	while (arg[i] && arg[i] != '+' && arg[i] != '=')
 	{
-		if (!xp_isalpha(arg[i]) && !(arg[i] == '+'
-		&& arg[i + 1] == '=' && i > 0))
+		if (!ft_isalnum(arg[i]))
 			return (xp_idnotvalid(arg, st));
 		i++;
 	}
+	if (arg[i] == '+' && arg[i + 1] != '=')
+		return (xp_idnotvalid(arg, st));
 	return (0);
 }
 

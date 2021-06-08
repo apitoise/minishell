@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:24:51 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/06/05 16:21:49 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/08 02:21:06 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_dollar_alias_cpybis(char **tmp2, char *str)
 	j = 0;
 	while (str[++i])
 	{
-		if (ft_isspechar(str[i]))
+		if (str[i] != ' ' && ft_isspechar(str[i]))
 		{
 			(*tmp2)[j] = '\\';
 			j++;
@@ -88,7 +88,7 @@ static void	ft_dollar_d_cpy(char **s1, int *i, char **tmp)
 	else
 	{
 		j = 0;
-		while ((*s1)[*i] && !ft_isspechar((*s1)[*i]))
+		while ((*s1)[*i] && ft_isalnum((*s1)[*i]))
 		{
 			(*tmp)[j] = ((*s1)[*i]);
 			j++;
@@ -114,7 +114,7 @@ int			ft_dollar_d(char **s1, int *i, char **s2, t_struct *st)
 	{
 		j = *i;
 		len = 0;
-		while ((*s1)[j] && !ft_isspechar((*s1)[j++]))
+		while ((*s1)[j] && ft_isalnum((*s1)[j++]))
 			len++;
 		if (!(tmp = malloc(sizeof(char) * (len + 2))))
 			return (1);

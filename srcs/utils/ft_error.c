@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:29 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/28 00:28:42 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/08 00:48:43 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int		ft_error(char *s)
 void	not_cmd(char **str, t_struct *st)
 {
 	ft_putstr_fd(str[0], 2);
-	ft_putstr_fd(" : command not found\n", 2);
+	ft_putstr_fd(": command not found\n", 2);
 	st->ret = 127;
 }

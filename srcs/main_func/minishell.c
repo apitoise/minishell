@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:56 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/05 19:22:20 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/08 02:04:46 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,27 @@ static void	cmd_analysis(char **commands, t_struct *st)
 {
 	int	i;
 
-	i = 0;
-	if (!commands[i])
+	if (!commands[0])
 		st->ret = 0;
 	g_sig.cmdt = commands;
-	while (commands[i])
+	i = -1;
+	while (commands[++i])
 	{
-		ft_dollar(&commands[i], st);
-		if (commands[i])
-			ft_split_cmd(commands[i], ' ', st, 0);
-		if (first_check(st->cmd, st))
+		if (!ft_dollar(&commands[i], st) && !ft_addbslash(&commands[i])
+		&& !ft_rmbslash(&commands[i], -1, 0))
 		{
-			st->pipe = 0;
+			if (commands[i])
+				ft_split_cmd(commands[i], ' ', st, 0);
+			if (first_check(st->cmd, st))
+			{
+				st->pipe = 0;
+				ft_free_tab(st->cmd);
+				return ;
+			}
+			if (st->cmd[0])
+				do_routine(st);
 			ft_free_tab(st->cmd);
-			return ;
 		}
-		if (st->cmd[0])
-			do_routine(st);
-		ft_free_tab(st->cmd);
-		i++;
 	}
 	ft_free_tab(commands);
 	g_sig.cmdt = NULL;

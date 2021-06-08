@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/05 01:33:34 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/07 17:12:01 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void					do_pipe(t_struct *st);
 char					**get_env(char **env);
 void					ft_split_cmd(const char *s, char c,
 t_struct *st, int i);
-char					**ft_split_cmdline(char const *s, char c);
+char					**ft_split_cmdline(char *s, char c);
 int						ft_error(char *s);
 void					ft_freeptr(void **ptr);
 int						ft_syntax_error(char *token, t_struct *st);

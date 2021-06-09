@@ -15,7 +15,7 @@
 
 static void	exec_cmd(char ***cmd, int end, t_struct *st)
 {
-	char	*par[MAX_PARAM];
+	char	**par;
 	int		new_pipe[2];
 	int		i;
 
@@ -23,51 +23,64 @@ static void	exec_cmd(char ***cmd, int end, t_struct *st)
 		return ;
 	else
 	{
+		par = (char **)malloc(sizeof(char *) * end);
+		i = 0;
+		while (i < end)
+		{
+			par[i] = (*cmd)[i];
+			i++;
+		}
+		par[end] = NULL;
 		if ((*cmd)[end] && !ft_strcmp((*cmd)[end], "|"))
 		{
 			if (pipe(new_pipe) == -1)
 				return ;
 			st->stdout_fd = new_pipe[1];
-			if (!do_chevrons(*cmd, st))
+			if (!do_chevrons(par, st))
 			{
-				*cmd = del_chevron(*cmd);
-				i = 0;
-				while (i < end)
+				par = del_chevron(par);
+				dup2(st->stdin_fd, 0);
+				dup2(st->stdout_fd, 1);
+				if (ft_strcmp((par)[0], ""))
 				{
-					par[i] = (*cmd)[i];
-					i++;
-				}
-				par[end] = NULL;
-				if (ft_strcmp((*cmd)[0], ""))
-				{
-					dup2(st->stdin_fd, STDIN_FILENO);
-					dup2(st->stdout_fd, STDOUT_FILENO);
 					ft_edit_cmd(par);
 					do_builtin(par, st);
-					if (st->stdin_fd != 0)
-						close(st->stdin_fd);
-					st->stdin_fd = new_pipe[0];
-					if (st->stdout_fd != 1)
-						close(st->stdout_fd);
-					st->stdout_fd = st->stdout_copy;
-					*cmd += end;
-					return ;
 				}
+				close(0);
+				close(1);
+				if (st->stdin_fd != 0)
+					close(st->stdin_fd);
+				st->stdin_fd = new_pipe[0];
+				if (st->stdout_fd != 1)
+					close(st->stdout_fd);
+				st->stdout_fd = st->stdout_copy;
+				*cmd += end;
+				return ;
 			}
 		}
 		else
 		{
-			ft_edit_cmd(*cmd);
-			do_builtin(*cmd, st);
+			if (!do_chevrons(par, st))
+			{
+				par = del_chevron(par);
+				dup2(st->stdin_fd, 0);
+				dup2(st->stdout_fd, 1);
+				if (ft_strcmp((par)[0], ""))
+				{
+					ft_edit_cmd(par);
+					do_builtin(par, st);
+					// close(0);
+					// close(1);
+				}
+			}
 		}
-		if (STDOUT_FILENO != 1)
-			close(STDOUT_FILENO);
-		if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
-			return ;
-		if (STDIN_FILENO != 0)
-			close(STDIN_FILENO);
-		if (dup2(st->stdin_copy, STDIN_FILENO) < 0)
-			return ;
+		//ft_free_tab(par);
+		if (st->stdout_fd != 1)
+			close(st->stdout_fd);
+		st->stdout_fd = 1;
+		if (st->stdin_fd != 0)
+			close(st->stdin_fd);
+		st->stdin_fd = 0;
 		*cmd += end;
 	}
 }
@@ -79,20 +92,27 @@ void		do_pipe(char **cmd, t_struct *st)
 	while (*(cmd))
 	{
 		i = 0;
-		while (cmd[i] && strcmp(cmd[i], ";") && strcmp(cmd[i], "|"))
+		while (cmd[i] && ft_strcmp(cmd[i], ";") && ft_strcmp(cmd[i], "|"))
 			i++;
 		exec_cmd(&cmd, i, st);
 		if (*(cmd))
 			cmd++;
 	}
-	if (STDOUT_FILENO != 1)
-		close(STDOUT_FILENO);
-	if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
-		return ;
-	if (STDIN_FILENO != 0)
-		close(STDIN_FILENO);
-	if (dup2(st->stdin_copy, STDIN_FILENO) < 0)
-		return ;
+	if (st->stdout_fd != 1)
+		close(st->stdout_fd);
+	st->stdout_fd = 1;
+	if (st->stdin_fd != 0)
+		close(st->stdin_fd);
+	st->stdin_fd = 0;
+//	if (STDOUT_FILENO != 1)
+//		close(STDOUT_FILENO);
+	// if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
+	// 	return ;
+	// if (STDIN_FILENO != 0)
+	// 	close(STDIN_FILENO);
+	// if (dup2(st->stdin_copy, STDIN_FILENO) < 0)
+	// 	return ;
+	return ;
 }
 
 
@@ -131,28 +151,49 @@ void		do_pipe(char **cmd, t_struct *st)
 // 	if (pipe(new_pipe) != 0)
 // 		return ;
 // 	pipe_nb = 0;
-// 	while (pipe_nb <= st->pipe)
+// 	while (pipe_nb < st->pipe)
 // 	{
 // 		st->stdout_fd = new_pipe[1];
 // 		cmd = cmd_before_pipe(st->cmd, pipe_nb);
-		// if (!do_chevrons(cmd, st))
-		// {
-		// 	cmd = del_chevron(cmd);
-		// 	if (ft_strcmp(cmd[0], ""))
-		// 	{
-		// 		dup2(st->stdin_fd, STDIN_FILENO);
-		// 		dup2(st->stdout_fd, STDOUT_FILENO);
-		// 		ft_edit_cmd(cmd);
-		// 		do_builtin(cmd, st);
-		// 	}
-// 			dup2(new_pipe[0], st->stdin_fd);
-// 			dup2(st->stdout_copy, st->stdout_fd);
+// 		if (!do_chevrons(cmd, st))
+// 		{
+// 			cmd = del_chevron(cmd);
+// 			if (ft_strcmp(cmd[0], ""))
+// 			{
+// 				dup2(st->stdin_fd, STDIN_FILENO);
+// 				dup2(st->stdout_fd, STDOUT_FILENO);
+// 				ft_edit_cmd(cmd);
+// 				do_builtin(cmd, st);
+// 				close(0);
+// 				close(1);
+// 				if (st->stdin_fd != 0)
+// 					close(st->stdin_fd);
+// 				st->stdin_fd = new_pipe[0];
+// 				if (st->stdout_fd != 1)
+// 					close(st->stdout_fd);
+// 				st->stdout_fd = st->stdout_copy;
+// 			}
 // 		}
-// 		ft_free_tab(cmd);
+// 		// ft_free_tab(cmd);
 // 		pipe_nb++;
 // 	}
-//	close(STDIN_FILENO);
-//	close(STDOUT_FILENO);
-//	dup2(st->stdin_copy, STDIN_FILENO);
-//	dup2(st->stdout_copy, STDOUT_FILENO);
-//}
+// 	dup2(st->stdin_fd, 0);
+// 	dup2(st->stdout_fd, 1);
+// 	ft_edit_cmd(cmd);
+// 	do_builtin(cmd, st);
+// 	ft_free_tab(cmd);
+// 	if (st->stdout_fd != 1)
+// 		close(st->stdout_fd);
+// 	st->stdout_fd = 1;
+// 	if (st->stdin_fd != 0)
+// 		close(st->stdin_fd);
+// 	st->stdin_fd = 0;
+// 	if (STDOUT_FILENO != 1)
+// 		close(STDOUT_FILENO);
+// 	if (dup2(st->stdout_fd, STDOUT_FILENO) < 0)
+// 		return ;
+// 	if (STDIN_FILENO != 0)
+// 		close(STDIN_FILENO);
+// 	if (dup2(st->stdin_fd, STDIN_FILENO) < 0)
+// 		return ;
+// }

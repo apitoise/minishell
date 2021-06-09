@@ -19,7 +19,7 @@ int	ft_getwinsz(t_struct *st)
 
 	if (ioctl(STDIN_FILENO, TIOCGWINSZ, &ws) == -1)
 	{
-		ft_putstr_fd("Could not get window size\n", 2);
+	//	ft_putstr_fd("Could not get window size\n", 2);
 		return (1);
 	}
 	st->ttywidth = ws.ws_col;

@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:25:56 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/08 02:04:46 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/10 17:10:40 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	cmd_analysis(char **commands, t_struct *st)
 	i = -1;
 	while (commands[++i])
 	{
-		if (!ft_dollar(&commands[i], st) && !ft_addbslash(&commands[i])
+		if (!ft_addbslash(&commands[i]) && !ft_dollar(&commands[i], st)
 		&& !ft_rmbslash(&commands[i], -1, 0))
 		{
 			if (commands[i])

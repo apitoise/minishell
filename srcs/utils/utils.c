@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:28:04 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/05 16:43:22 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/11 23:34:49 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static char	*print_it(t_varlist ***lst, t_varlist **cur, t_varlist *tmp)
 {
 	int	i;
 
+	*cur = **lst;
 	if (!ft_strcmp(tmp->name, "_"))
 		return (tmp->name);
 	ft_putstr_fd("declare -x ", 1);
@@ -69,7 +70,6 @@ static char	*print_it(t_varlist ***lst, t_varlist **cur, t_varlist *tmp)
 		ft_putstr_fd("\"", 1);
 	}
 	ft_putstr_fd("\n", 1);
-	*cur = **lst;
 	return (tmp->name);
 }
 

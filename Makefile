@@ -75,7 +75,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(LIB) $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
-		 @$(CC) $(CFLAG) -lncurses $(OBJS) -o $(NAME) $(LIB) -ltermcap
+		 @$(CC) $(CFLAG) -fsanitize=address -lncurses $(OBJS) -o $(NAME) $(LIB) -ltermcap
 		 
 $(LIB):
 		@make -C libft/ fclean

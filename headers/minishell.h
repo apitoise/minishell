@@ -119,9 +119,9 @@ void					ft_free_hstab(t_history **hstab, int len);
 int						first_check(char **cmd, t_struct *st);
 void					ft_env(t_struct *st);
 void					do_builtin(char **cmd, t_struct *st);
-void					do_routine(t_struct *st);
+void					routine(t_struct *st);
 void					chevrons_routine(char **cmd, t_struct *st);
-void					do_pipe(char **cmd, t_struct *st);
+void					do_pipe(t_struct *st);
 char					**get_env(char **env);
 void					ft_split_cmd(const char *s, char c,
 t_struct *st, int i);

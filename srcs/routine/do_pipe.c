@@ -13,107 +13,107 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-static void	exec_cmd(char ***cmd, int end, t_struct *st)
-{
-	char	**par;
-	int		new_pipe[2];
-	int		i;
+// static void	exec_cmd(char ***cmd, int end, t_struct *st)
+// {
+// 	char	**par;
+// 	int		new_pipe[2];
+// 	int		i;
 
-	if (end == 0)
-		return ;
-	else
-	{
-		par = (char **)malloc(sizeof(char *) * end);
-		i = 0;
-		while (i < end)
-		{
-			par[i] = (*cmd)[i];
-			i++;
-		}
-		par[end] = NULL;
-		if ((*cmd)[end] && !ft_strcmp((*cmd)[end], "|"))
-		{
-			if (pipe(new_pipe) == -1)
-				return ;
-			st->stdout_fd = new_pipe[1];
-			if (!do_chevrons(par, st))
-			{
-				par = del_chevron(par);
-				dup2(st->stdin_fd, 0);
-				dup2(st->stdout_fd, 1);
-				if (ft_strcmp((par)[0], ""))
-				{
-					ft_edit_cmd(par);
-					do_builtin(par, st);
-				}
-				close(0);
-				close(1);
-				if (st->stdin_fd != 0)
-					close(st->stdin_fd);
-				st->stdin_fd = new_pipe[0];
-				if (st->stdout_fd != 1)
-					close(st->stdout_fd);
-				st->stdout_fd = st->stdout_copy;
-				*cmd += end;
-				return ;
-			}
-		}
-		else
-		{
-			if (!do_chevrons(par, st))
-			{
-				par = del_chevron(par);
-				dup2(st->stdin_fd, 0);
-				dup2(st->stdout_fd, 1);
-				if (ft_strcmp((par)[0], ""))
-				{
-					ft_edit_cmd(par);
-					do_builtin(par, st);
-					// close(0);
-					// close(1);
-				}
-			}
-		}
-		//ft_free_tab(par);
-		if (st->stdout_fd != 1)
-			close(st->stdout_fd);
-		st->stdout_fd = 1;
-		if (st->stdin_fd != 0)
-			close(st->stdin_fd);
-		st->stdin_fd = 0;
-		*cmd += end;
-	}
-}
+// 	if (end == 0)
+// 		return ;
+// 	else
+// 	{
+// 		par = (char **)malloc(sizeof(char *) * end);
+// 		i = 0;
+// 		while (i < end)
+// 		{
+// 			par[i] = (*cmd)[i];
+// 			i++;
+// 		}
+// 		par[end] = NULL;
+// 		if ((*cmd)[end] && !ft_strcmp((*cmd)[end], "|"))
+// 		{
+// 			if (pipe(new_pipe) == -1)
+// 				return ;
+// 			st->stdout_fd = new_pipe[1];
+// 			if (!do_chevrons(par, st))
+// 			{
+// 				par = del_chevron(par);
+// 				dup2(st->stdin_fd, 0);
+// 				dup2(st->stdout_fd, 1);
+// 				if (ft_strcmp((par)[0], ""))
+// 				{
+// 					ft_edit_cmd(par);
+// 					do_builtin(par, st);
+// 				}
+// 				close(0);
+// 				close(1);
+// 				if (st->stdin_fd != 0)
+// 					close(st->stdin_fd);
+// 				st->stdin_fd = new_pipe[0];
+// 				if (st->stdout_fd != 1)
+// 					close(st->stdout_fd);
+// 				st->stdout_fd = st->stdout_copy;
+// 				*cmd += end;
+// 				return ;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			if (!do_chevrons(par, st))
+// 			{
+// 				par = del_chevron(par);
+// 				dup2(st->stdin_fd, 0);
+// 				dup2(st->stdout_fd, 1);
+// 				if (ft_strcmp((par)[0], ""))
+// 				{
+// 					ft_edit_cmd(par);
+// 					do_builtin(par, st);
+// 					// close(0);
+// 					// close(1);
+// 				}
+// 			}
+// 		}
+// 		//ft_free_tab(par);
+// 		if (st->stdout_fd != 1)
+// 			close(st->stdout_fd);
+// 		st->stdout_fd = 1;
+// 		if (st->stdin_fd != 0)
+// 			close(st->stdin_fd);
+// 		st->stdin_fd = 0;
+// 		*cmd += end;
+// 	}
+// }
 
-void		do_pipe(char **cmd, t_struct *st)
-{
-	int	i;
+// void		do_pipe(char **cmd, t_struct *st)
+// {
+// 	int	i;
 	
-	while (*(cmd))
-	{
-		i = 0;
-		while (cmd[i] && ft_strcmp(cmd[i], ";") && ft_strcmp(cmd[i], "|"))
-			i++;
-		exec_cmd(&cmd, i, st);
-		if (*(cmd))
-			cmd++;
-	}
-	if (st->stdout_fd != 1)
-		close(st->stdout_fd);
-	st->stdout_fd = 1;
-	if (st->stdin_fd != 0)
-		close(st->stdin_fd);
-	st->stdin_fd = 0;
-//	if (STDOUT_FILENO != 1)
-//		close(STDOUT_FILENO);
-	// if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
-	// 	return ;
-	// if (STDIN_FILENO != 0)
-	// 	close(STDIN_FILENO);
-	// if (dup2(st->stdin_copy, STDIN_FILENO) < 0)
-	// 	return ;
-	return ;
-}
+// 	while (*(cmd))
+// 	{
+// 		i = 0;
+// 		while (cmd[i] && ft_strcmp(cmd[i], ";") && ft_strcmp(cmd[i], "|"))
+// 			i++;
+// 		exec_cmd(&cmd, i, st);
+// 		if (*(cmd))
+// 			cmd++;
+// 	}
+// 	if (st->stdout_fd != 1)
+// 		close(st->stdout_fd);
+// 	st->stdout_fd = 1;
+// 	if (st->stdin_fd != 0)
+// 		close(st->stdin_fd);
+// 	st->stdin_fd = 0;
+// 	if (STDOUT_FILENO != 1)
+// 		close(STDOUT_FILENO);
+// 	if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
+// 	 	return ;
+// 	if (STDIN_FILENO != 0)
+// 		close(STDIN_FILENO);
+// 	if (dup2(st->stdin_copy, STDIN_FILENO) < 0)
+// 		return ;
+// 	return ;
+// }
 
 
 // static char	**cmd_before_pipe(char **cmd, int pipe_nb)

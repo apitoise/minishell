@@ -32,7 +32,7 @@ static void	cmd_analysis(char **commands, t_struct *st)
 			return ;
 		}
 		if (st->cmd[0])
-			do_pipe(st->cmd, st);
+			routine(st);
 		//ft_free_tab(st->cmd);
 		i++;
 	}
@@ -58,6 +58,8 @@ void		minishell(t_struct *st)
 			cmd_analysis(st->input, st);
 			st->input = NULL;
 		}
+//		dup2(st->stdin_copy, 0);
+//		dup2(st->stdout_copy, 0);
 		shell_init();
 	}
 }

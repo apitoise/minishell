@@ -99,6 +99,5 @@ void	routine(t_struct *st)
 		if (st->cmd[i])
 			i++;
 	}
-	printf("OK\n");
-//	reset_in_out(st->stdin_copy, st->stdout_copy, st);
+	reset_in_out(st->stdin_copy, st->stdout_copy, st);
 }

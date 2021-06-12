@@ -22,8 +22,8 @@ void	init_struct(t_struct *st, char **env)
 	st->result = NULL;
 	st->stdout_copy = dup(1);
 	st->stdin_copy = dup(0);
-	st->stdout_fd = dup(1);
-	st->stdin_fd = dup(0);
+	st->stdout_fd = 1;
+	st->stdin_fd = 0;
 	st->pipe = 0;
 	st->chevrons = 0;
 	st->env = get_env(env);

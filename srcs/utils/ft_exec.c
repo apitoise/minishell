@@ -30,6 +30,8 @@ void	ft_fork(char **cmd, char *filepath, t_struct *st)
 	if (forking == 0)
 	{
 		ft_exec(cmd, filepath, st);
+		close(0);
+		close(1);
 		exit(st->ret);
 	}
 	else

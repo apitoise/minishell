@@ -27,13 +27,13 @@ int	ft_echo(char **cmd, t_struct *st)
 	}
 	while (cmd[i])
 	{
-		ft_putstr_fd(cmd[i], 1);
+		ft_putstr_fd(cmd[i], st->stdout_fd);
 		if (cmd[i + 1])
-			ft_putstr_fd(" ", 1);
+			ft_putstr_fd(" ", st->stdout_fd);
 		i++;
 	}
 	if (!n)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", st->stdout_fd);
 	st->ret = 0;
 	return (0);
 }

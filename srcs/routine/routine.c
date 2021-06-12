@@ -26,8 +26,6 @@ void	reset_in_out(int in, int out, t_struct *st)
 
 void	launch_exec(char **args, t_struct *st)
 {
-	dup2(st->stdin_fd, 0);
-	dup2(st->stdout_fd, 1);
 	if (ft_strcmp(args[0], ""))
 	{
 		ft_edit_cmd(args);
@@ -60,7 +58,7 @@ void	exec_cmd(char **cmd, int start, int end, t_struct *st)
 				return ;
 			st->stdout_fd = new_pipe[1];
 			launch_exec(args, st);
-			reset_in_out(new_pipe[0], st->stdout_copy, st);
+			reset_in_out(new_pipe[0], 1, st);
 			free(args);
 			return ;
 		}
@@ -74,8 +72,6 @@ void	exec_cmd(char **cmd, int start, int end, t_struct *st)
 //		st->stdout_fd = 1;
 		free(args);
 		reset_in_out(0, 1, st);
-		dup2(st->stdin_copy, 0);
-		dup2(st->stdout_copy, 1);
 	}
 }
 

@@ -29,6 +29,8 @@ void	ft_fork(char **cmd, char *filepath, t_struct *st)
 	forking = fork();
 	if (forking == 0)
 	{
+		dup2(st->stdin_fd, 0);
+		dup2(st->stdout_fd, 1);
 		ft_exec(cmd, filepath, st);
 		close(0);
 		close(1);

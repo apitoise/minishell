@@ -78,6 +78,8 @@ void	do_pipe(t_struct *st)
 		}
 		if (ft_strcmp(cmd[0], ""))
 			ft_free_tab(cmd);
+		else
+			free(cmd);
 		pipe_nb++;
 	}
 	reset_in_out(0, 1, st);

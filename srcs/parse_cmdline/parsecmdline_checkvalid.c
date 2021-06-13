@@ -16,7 +16,7 @@
 static int	semicolon(char *s, t_struct *st)
 {
 	int	i;
-	int j;
+	int	j;
 
 	if (s[0] == ';')
 		return (ft_syntax_error(";", st));
@@ -50,7 +50,7 @@ static int	new_line(char *s, t_struct *st)
 	return (0);
 }
 
-int			ft_checkvalid(char *s, t_struct *st)
+int	ft_checkvalid(char *s, t_struct *st)
 {
 	if (semicolon(s, st) || new_line(s, st))
 		return (1);

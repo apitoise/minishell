@@ -19,8 +19,7 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t			i;
 
 	i = 0;
-	if (!(p = (unsigned char *)malloc(sizeof(unsigned char) * (size * count))))
-		return (NULL);
+	p = (unsigned char *)malloc(sizeof(unsigned char) * (size * count));
 	while (i < size * count)
 	{
 		p[i] = 0;

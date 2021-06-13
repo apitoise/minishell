@@ -15,16 +15,16 @@
 
 static int	get_len(char **cmd)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	len = 0;
 	i = 0;
 	while (cmd[i])
 	{
 		if (!ft_strcmp(cmd[i], ">")
-				|| !ft_strcmp(cmd[i], ">>")
-				|| !ft_strcmp(cmd[i], "<"))
+			|| !ft_strcmp(cmd[i], ">>")
+			|| !ft_strcmp(cmd[i], "<"))
 		{
 			if (!cmd[i + 2])
 				return (len);
@@ -46,14 +46,13 @@ static char	**get_res(char **cmd, int len)
 	int		j;
 	char	**res;
 
-	if (!(res = (char **)malloc(sizeof(char *) * (len + 1))))
-		return (NULL);
+	res = (char **)malloc(sizeof(char *) * (len + 1));
 	i = 0;
 	j = 0;
 	while (cmd[i])
 	{
 		if (!ft_strcmp(cmd[i], ">") || !ft_strcmp(cmd[i], ">>")
-				|| !ft_strcmp(cmd[i], "<"))
+			|| !ft_strcmp(cmd[i], "<"))
 		{
 			if (!cmd[i + 2])
 			{
@@ -69,7 +68,7 @@ static char	**get_res(char **cmd, int len)
 	return (res);
 }
 
-char		**del_chevron(char **cmd)
+char	**del_chevron(char **cmd)
 {
 	int		len;
 	char	**res;
@@ -78,8 +77,7 @@ char		**del_chevron(char **cmd)
 	res = NULL;
 	if (len == 0)
 	{
-		if (!(res = (char **)malloc(sizeof(char *) * 1)))
-			return (NULL);
+		res = (char **)malloc(sizeof(char *) * 1);
 		res[0] = ft_strdup("");
 		ft_free_tab(cmd);
 		return (res);

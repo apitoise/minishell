@@ -15,7 +15,7 @@
 
 t_sig	g_sig;
 
-int			main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	t_struct	st;
 

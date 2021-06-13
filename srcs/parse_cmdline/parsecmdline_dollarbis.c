@@ -22,8 +22,7 @@ static int	ft_dollar_alias_cpybis(char **tmp2, char *str, int toq)
 	i = -1;
 	while (str[++i])
 		;
-	if (!(*tmp2 = malloc(sizeof(char) * (i * 2 + 1))))
-		return (1);
+	*tmp2 = malloc(sizeof(char) * (i * 2 + 1));
 	i = -1;
 	j = 0;
 	while (str[++i])
@@ -65,12 +64,11 @@ static int	ft_dollar_alias_cpy(char **tmp, char **tmp2, t_struct *st, int toq)
 		tmplst = tmplst->next;
 	if (!tmplst)
 	{
-		if (!(*tmp2 = malloc(sizeof(char))))
-			return (1);
+		*tmp2 = malloc(sizeof(char));
 		(*tmp2)[0] = '\0';
 	}
 	else if (ft_dollar_alias_cpybis(tmp2, tmplst->content, toq))
-		return(1);
+		return (1);
 	return (0);
 }
 
@@ -82,8 +80,7 @@ static int	ft_dollar_alias(char **tmp, t_struct *st, int toq, int par)
 		toq = -1;
 	if ((*tmp)[0] == '\0')
 	{
-		if (!(tmp2 = malloc(sizeof(char) * 3)))
-			return (1);
+		tmp2 = malloc(sizeof(char) * 3);
 		tmp2[0] = '\\';
 		tmp2[1] = '$';
 		tmp2[2] = '\0';
@@ -117,7 +114,7 @@ static void	ft_dollar_d_cpy(char **s1, int *i, char **tmp)
 	}
 }
 
-int			ft_dollar_d(char **s1, int *i, char **s2, t_struct *st)
+int	ft_dollar_d(char **s1, int *i, char **s2, t_struct *st)
 {
 	char	*tmp;
 	int		j;
@@ -136,8 +133,7 @@ int			ft_dollar_d(char **s1, int *i, char **s2, t_struct *st)
 		len = 0;
 		while ((*s1)[j] && ft_isalnum((*s1)[j++]))
 			len++;
-		if (!(tmp = malloc(sizeof(char) * (len + 2))))
-			return (1);
+		tmp = malloc(sizeof(char) * (len + 2));
 		ft_dollar_d_cpy(s1, i, &tmp);
 		par = 0;
 		if (*i > 2 && (*s1)[*i - 3] != ' ')

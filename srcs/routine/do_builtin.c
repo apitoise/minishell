@@ -35,7 +35,7 @@ static void	if_builtin(char **cmd, t_struct *st)
 		ft_checkpath(cmd, st);
 }
 
-void		do_builtin(char **cmd, t_struct *st)
+void	do_builtin(char **cmd, t_struct *st)
 {
 	if (cmd[0])
 	{

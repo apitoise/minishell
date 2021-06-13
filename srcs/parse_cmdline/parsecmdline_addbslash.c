@@ -46,7 +46,7 @@ static void	ft_addbslash_looptk(char **s, int *i, char **tmp, int *j)
 static void	ft_addbslash_loopbs(char **s, int *i, char **tmp, int *j)
 {
 	if (!ft_tkorqt(*s, *i) || (ft_tkorqt(*s, *i) == 2
-		&& ((*s)[*i + 1] == '\\' || (*s)[*i + 1] == '$'
+			&& ((*s)[*i + 1] == '\\' || (*s)[*i + 1] == '$'
 		|| (*s)[*i + 1] == '"')))
 	{
 		(*tmp)[*j] = (*s)[*i];
@@ -91,7 +91,7 @@ static void	ft_addbslash_loop(char **s, char **tmp)
 	(*tmp)[j] = '\0';
 }
 
-int			ft_addbslash(char **s)
+int	ft_addbslash(char **s)
 {
 	char	*tmp;
 	int		i;
@@ -104,8 +104,7 @@ int			ft_addbslash(char **s)
 		if (ft_isspechar((*s)[i]))
 			nbrbackslash++;
 	}
-	if (!(tmp = malloc(sizeof(char) * (ft_strlen(*s) + nbrbackslash + 1))))
-		return (1);
+	tmp = malloc(sizeof(char) * (ft_strlen(*s) + nbrbackslash + 1));
 	ft_addbslash_loop(s, &tmp);
 	free(*s);
 	*s = tmp;

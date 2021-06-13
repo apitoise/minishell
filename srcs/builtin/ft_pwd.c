@@ -15,7 +15,7 @@
 
 int	ft_pwd(char **cmd)
 {
-	char path[PATH_MAX];
+	char	path[PATH_MAX];
 
 	(void)cmd;
 	if (!(getcwd(path, PATH_MAX)))

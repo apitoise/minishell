@@ -13,9 +13,9 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-void cd_deltilde(char *path)
-{   
-	int i;
+void	cd_deltilde(char *path)
+{
+	int	i;
 
 	if (path[0] == '~')
 	{
@@ -37,7 +37,6 @@ int	cd_getoldpwd(char **path, t_struct *st)
 		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 1);
 		return (1);
 	}
-	if (!(*path = ft_strdup(current->content)))
-		return (1);
+	*path = ft_strdup(current->content);
 	return (0);
 }

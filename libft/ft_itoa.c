@@ -31,14 +31,13 @@ static int	ft_nb_len(long n)
 	return (count);
 }
 
-char		*ft_itoa(long n)
+char	*ft_itoa(long n)
 {
 	char	*res;
 	long	i;
 
 	i = ft_nb_len(n);
-	if (!(res = (char *)malloc(sizeof(char) * i + 1)))
-		return (NULL);
+	res = (char *)malloc(sizeof(char) * i + 1);
 	if (n == -2147483648)
 		return ("-2147483648");
 	res[i] = '\0';

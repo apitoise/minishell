@@ -15,7 +15,7 @@
 #include <curses.h>
 #include <term.h>
 
-int		init_termcap(t_struct *st)
+int	init_termcap(t_struct *st)
 {
 	char			*termtype;
 	int				ret;

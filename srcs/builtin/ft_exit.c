@@ -13,7 +13,7 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-void		ft_free_hstab(t_history **hstab, int len)
+void	ft_free_hstab(t_history **hstab, int len)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ void		ft_free_hstab(t_history **hstab, int len)
 	}
 }
 
-void		ft_free_st(t_struct *st)
+void	ft_free_st(t_struct *st)
 {
 	if (st->input)
 		ft_free_tab(st->input);
@@ -50,7 +50,7 @@ static int	isargvalid(char *arg)
 	while (arg[++i])
 	{
 		if (!ft_isdigit(arg[i]))
-			return (0);;
+			return (0);
 	}
 	return (1);
 }
@@ -80,7 +80,7 @@ static void	exitwitharg(char **cmd, t_struct *st)
 	}
 }
 
-void		ft_exit(char **cmd, t_struct *st)
+void	ft_exit(char **cmd, t_struct *st)
 {
 	ft_putstr_fd("exit\n", 1);
 	if (cmd && cmd[1])

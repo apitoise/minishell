@@ -20,7 +20,8 @@ char	*ft_strnjoinf(char *s1, char *s2, size_t rm, size_t len)
 		return (NULL);
 	if (!s1 || !s2)
 		return (NULL);
-	if ((new_s = ft_strnew(ft_strlen(s1) + ft_strlen(s2))) == NULL)
+	new_s = ft_strnew(ft_strlen(s1) + ft_strlen(s2));
+	if (new_s == NULL)
 		return (NULL);
 	ft_strcpy(new_s, s1);
 	ft_strncat(new_s, s2, len);

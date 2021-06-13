@@ -17,8 +17,7 @@ int	ft_rmbslash(char **s, int i, int j)
 {
 	char	*tmp;
 
-	if (!(tmp = malloc(sizeof(char) * (ft_strlen(*s) + 1))))
-		return (1);
+	tmp = malloc(sizeof(char) * (ft_strlen(*s) + 1));
 	while ((*s)[++i])
 	{
 		if ((*s)[i] == '\\' && ft_isspechar((*s)[i + 1]))

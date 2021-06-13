@@ -13,6 +13,12 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
+static void	exec_cmd(char **cmd, t_struct *st)
+{
+	ft_edit_cmd(cmd);
+	do_builtin(cmd, st);
+}
+
 static void	reset_in_out(int in, int out, t_struct *st)
 {
 	if (st->stdin_fd != 0)
@@ -40,8 +46,7 @@ static char	**cmd_before_pipe(char **cmd, int pipe_nb)
 	save = i;
 	while (cmd[i] && ft_strcmp(cmd[i], "|"))
 		i++;
-	if (!(res = (char **)malloc(sizeof(char *) * (i - save + 1))))
-		return (NULL);
+	res = (char **)malloc(sizeof(char *) * (i - save + 1));
 	j = 0;
 	while (cmd[save] && ft_strcmp(cmd[save], "|"))
 		res[j++] = ft_strdup(cmd[save++]);
@@ -49,13 +54,13 @@ static char	**cmd_before_pipe(char **cmd, int pipe_nb)
 	return (res);
 }
 
-void		do_pipe(t_struct *st)
+void	do_pipe(t_struct *st)
 {
 	int		new_pipe[2];
 	int		pipe_nb;
 	char	**cmd;
 
-		pipe_nb = 0;
+	pipe_nb = 0;
 	while (pipe_nb <= st->pipe)
 	{
 		if (pipe_nb == st->pipe)
@@ -68,10 +73,7 @@ void		do_pipe(t_struct *st)
 		{
 			cmd = del_chevron(cmd);
 			if (ft_strcmp(cmd[0], ""))
-			{
-				ft_edit_cmd(cmd);
-				do_builtin(cmd, st);
-			}
+				exec_cmd(cmd, st);
 			reset_in_out(new_pipe[0], 1, st);
 		}
 		ft_free_tab(cmd);

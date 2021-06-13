@@ -15,11 +15,12 @@
 
 static void	single_chevron(char **cmd, t_struct *st, int i)
 {
-	int new_fd;
+	int	new_fd;
 
 	if (st->stdout_fd >= 0)
 		close(st->stdout_fd);
-	if ((new_fd = open(cmd[i + 1], O_WRONLY | O_TRUNC | O_CREAT, 0666)) < 0)
+	new_fd = open(cmd[i + 1], O_WRONLY | O_TRUNC | O_CREAT, 0666);
+	if (new_fd < 0)
 		return ;
 	close(STDOUT_FILENO);
 	if (dup(new_fd) < 0)
@@ -30,11 +31,12 @@ static void	single_chevron(char **cmd, t_struct *st, int i)
 
 static void	double_chevron(char **cmd, t_struct *st, int i)
 {
-	int new_fd;
+	int	new_fd;
 
 	if (st->stdout_fd >= 0)
 		close(st->stdout_fd);
-	if ((new_fd = open(cmd[i + 1], O_WRONLY | O_APPEND | O_CREAT, 0666)) < 0)
+	new_fd = open(cmd[i + 1], O_WRONLY | O_APPEND | O_CREAT, 0666);
+	if (new_fd < 0)
 		return ;
 	close(STDOUT_FILENO);
 	if (dup(new_fd) < 0)
@@ -45,11 +47,12 @@ static void	double_chevron(char **cmd, t_struct *st, int i)
 
 static int	left_chevron(char **cmd, t_struct *st, int i)
 {
-	int new_fd;
+	int	new_fd;
 
 	if (st->stdin_fd >= 0)
 		close(st->stdin_fd);
-	if ((new_fd = open(cmd[i + 1], O_RDONLY, 0666)) < 0)
+	new_fd = open(cmd[i + 1], O_RDONLY, 0666);
+	if (new_fd < 0)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd[i + 1], 2);
@@ -64,10 +67,10 @@ static int	left_chevron(char **cmd, t_struct *st, int i)
 	return (0);
 }
 
-int			do_chevrons(char **cmd, t_struct *st)
+int	do_chevrons(char **cmd, t_struct *st)
 {
-	int i;
-	int err;
+	int	i;
+	int	err;
 
 	if (cmd[0] == NULL)
 		return (0);
@@ -76,7 +79,7 @@ int			do_chevrons(char **cmd, t_struct *st)
 	st->chevrons = 0;
 	while (cmd[i] && err == 0)
 	{
-		if (!ft_strcmp(cmd[i] , ">") || !ft_strcmp(cmd[i], ">>")
+		if (!ft_strcmp(cmd[i], ">") || !ft_strcmp(cmd[i], ">>")
 			|| !ft_strcmp(cmd[i], "<"))
 			st->chevrons++;
 		if (!ft_strcmp(cmd[i], ">"))

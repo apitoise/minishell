@@ -47,8 +47,7 @@ static int	vector(t_history *new, char *buff)
 
 	if (new->cmdline == NULL)
 	{
-		if (!(new->cmdline = malloc(sizeof(char) + 1)))
-			return (1);
+		new->cmdline = malloc(sizeof(char) + 1);
 		new->capacity = 1;
 		ft_strcpy(new->cmdline, buff);
 		new->len = 1;
@@ -57,8 +56,7 @@ static int	vector(t_history *new, char *buff)
 	{
 		if (new->len + 1 > new->capacity)
 		{
-			if (!(tmp = malloc(sizeof(char) * (new->capacity * 2 + 1))))
-				return (1);
+			tmp = malloc(sizeof(char) * (new->capacity * 2 + 1));
 			ft_strcpy(tmp, new->cmdline);
 			free(new->cmdline);
 			new->cmdline = tmp;
@@ -70,7 +68,7 @@ static int	vector(t_history *new, char *buff)
 	return (0);
 }
 
-int			tc_editcmdl(char *buff, t_history *new, t_struct *st)
+int	tc_editcmdl(char *buff, t_history *new, t_struct *st)
 {
 	if (buff[0] == 127)
 	{
@@ -78,7 +76,7 @@ int			tc_editcmdl(char *buff, t_history *new, t_struct *st)
 			return (1);
 	}
 	else if ((buff[0] != '\n' && vector(new, buff))
-			|| (ft_tputsstr(buff, new, st)))
+		|| (ft_tputsstr(buff, new, st)))
 		return (1);
 	return (0);
 }

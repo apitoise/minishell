@@ -35,7 +35,7 @@ static int	option_n(char *str, int *n, int *option)
 	return (0);
 }
 
-int			ft_echo(char **cmd, t_struct *st)
+int	ft_echo(char **cmd, t_struct *st)
 {
 	int	i;
 	int	n;

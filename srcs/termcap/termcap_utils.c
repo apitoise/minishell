@@ -24,7 +24,7 @@ void	ft_freehs(t_history *new)
 	}
 }
 
-int		ft_nextline(t_history *new, t_struct *st)
+int	ft_nextline(t_history *new, t_struct *st)
 {
 	size_t	len;
 
@@ -46,7 +46,7 @@ int		ft_nextline(t_history *new, t_struct *st)
 	return (0);
 }
 
-int		ft_tputsstr(char *str, t_history *new, t_struct *st)
+int	ft_tputsstr(char *str, t_history *new, t_struct *st)
 {
 	tputs(str, 1, &ft_putc);
 	if (ft_nextline(new, st))
@@ -54,7 +54,7 @@ int		ft_tputsstr(char *str, t_history *new, t_struct *st)
 	return (0);
 }
 
-int		ft_isblank(char *str)
+int	ft_isblank(char *str)
 {
 	int	i;
 
@@ -65,7 +65,7 @@ int		ft_isblank(char *str)
 	return (1);
 }
 
-int		ft_putc(int c)
+int	ft_putc(int c)
 {
 	write(1, &c, 1);
 	return (0);

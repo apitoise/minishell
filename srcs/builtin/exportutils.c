@@ -13,13 +13,12 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-int		xp_newlst(char *name, char *content, int visible, t_varlist **lst)
+int	xp_newlst(char *name, char *content, int visible, t_varlist **lst)
 {
 	t_varlist	*current;
 	t_varlist	*new;
 
-	if (!(new = malloc(sizeof(t_varlist))))
-		return (1);
+	new = malloc(sizeof(t_varlist));
 	new->name = name;
 	new->content = content;
 	new->visible = visible;
@@ -36,7 +35,7 @@ int		xp_newlst(char *name, char *content, int visible, t_varlist **lst)
 	return (0);
 }
 
-int		xp_checkerror(char *arg, t_struct *st)
+int	xp_checkerror(char *arg, t_struct *st)
 {
 	int	i;
 
@@ -68,7 +67,7 @@ void	xp_modiflist(char *name, char *content, int visible, t_varlist **lst)
 		current->visible = 1;
 }
 
-int		xp_catlist(char *name, char *content, t_varlist **lst)
+int	xp_catlist(char *name, char *content, t_varlist **lst)
 {
 	t_varlist	*current;
 	char		*tmp;
@@ -76,7 +75,8 @@ int		xp_catlist(char *name, char *content, t_varlist **lst)
 	current = *lst;
 	while (current && ft_strcmp(current->name, name))
 		current = current->next;
-	if (!current || !(tmp = ft_strjoin(current->content, content)))
+	tmp = ft_strjoin(current->content, content);
+	if (!current)
 		return (1);
 	free(current->content);
 	current->content = tmp;
@@ -93,7 +93,8 @@ char	*xp_getname(char *cmd, char c)
 	i = -1;
 	while (cmd[++i] != c && cmd[i])
 		;
-	if (!cmd[i] || !(name = malloc(sizeof(char) * i + 1)))
+	name = malloc(sizeof(char) * i + 1);
+	if (!cmd[i])
 		return (NULL);
 	i = -1;
 	while (cmd[++i] != c && cmd[i])

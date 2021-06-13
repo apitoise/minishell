@@ -75,14 +75,15 @@ static char	*ft_checkpath2(char **cmd, char *path, t_struct *st)
 	return (NULL);
 }
 
-void		ft_checkpath(char **cmd, t_struct *st)
+void	ft_checkpath(char **cmd, t_struct *st)
 {
 	t_varlist	*tmp;
 	char		*filepath;
 
 	if (ft_checkfile(cmd[0]))
 	{
-		if (!(filepath = ft_strdup(cmd[0])))
+		filepath = ft_strdup(cmd[0]);
+		if (!filepath)
 			return ;
 		ft_fork(cmd, filepath, st);
 	}
@@ -91,7 +92,8 @@ void		ft_checkpath(char **cmd, t_struct *st)
 		tmp = st->lst;
 		while (tmp && ft_strcmp(tmp->name, "PATH"))
 			tmp = tmp->next;
-		if (!tmp || !(filepath = ft_checkpath2(cmd, tmp->content, st)))
+		filepath = ft_checkpath2(cmd, tmp->content, st);
+		if (!tmp || !filepath)
 			not_cmd(cmd, st);
 		else
 			ft_fork(cmd, filepath, st);

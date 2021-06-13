@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cnotin <cnotin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 11:16:12 by cnotin            #+#    #+#             */
-/*   Updated: 2019/12/06 12:17:06 by cnotin           ###   ########.fr       */
+/*   Created: 2021/05/07 13:58:41 by apitoise          #+#    #+#             */
+/*   Updated: 2021/06/12 15:07:48 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
-#include <string.h>
+#include "../../headers/minishell.h"
+#include "../../libft/libft.h"
 
-void	*ft_memalloc(size_t size)
+int	get_i(char c)
 {
-	void *mem;
+	if (c == '\\')
+		return (2);
+	else
+		return (1);
+}
 
-	if (!(mem = malloc(size)))
-		return (NULL);
-	ft_bzero(mem, size);
-	return (mem);
+void	pipe_or_chevron(char c, t_struct *st)
+{
+	if (c == '|')
+		st->pipe++;
+	else
+		st->chevrons++;
 }

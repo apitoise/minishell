@@ -84,7 +84,7 @@ static int	getcmdline(t_history **new, struct termios *restore, t_struct *st)
 	return (0);
 }
 
-char		*ft_termcap(t_struct *st)
+char	*ft_termcap(t_struct *st)
 {
 	struct termios	restore;
 	struct termios	term;

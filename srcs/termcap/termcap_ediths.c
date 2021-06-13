@@ -31,8 +31,7 @@ static int	ediths_resize(t_history **new, t_struct *st)
 
 	if (st->hslen + 1 > st->hscapacity)
 	{
-		if (!(tmp = malloc(sizeof(t_history*) * (st->hscapacity * 2))))
-			return (1);
+		tmp = malloc(sizeof(t_history *) * (st->hscapacity * 2));
 		ft_hstabcpy(tmp, st);
 		free(st->hstab);
 		st->hstab = tmp;
@@ -43,12 +42,11 @@ static int	ediths_resize(t_history **new, t_struct *st)
 	return (0);
 }
 
-int			tc_ediths(t_history **new, t_struct *st)
+int	tc_ediths(t_history **new, t_struct *st)
 {
 	if (!st->hstab)
 	{
-		if (!(st->hstab = malloc(sizeof(t_history*))))
-			return (1);
+		st->hstab = malloc(sizeof(t_history *));
 		st->hstab[0] = *new;
 		st->hslen = 1;
 		st->hscapacity = 1;

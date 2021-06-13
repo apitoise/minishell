@@ -20,8 +20,7 @@ static char	*dupcmdl(char *s1, size_t capacity)
 
 	if (!s1 || ft_strlen(s1) > capacity)
 		return (NULL);
-	if (!(s2 = (char *)malloc(sizeof(char) * (capacity + 1))))
-		return (NULL);
+	s2 = (char *)malloc(sizeof(char) * (capacity + 1));
 	i = -1;
 	while (s1[++i])
 		s2[i] = s1[i];
@@ -64,7 +63,7 @@ static int	replaceline(t_history *new, t_struct *st)
 	else if (st->hsindex > 0)
 	{
 		if ((new->cmdline = dupcmdl(st->hstab[st->hslen - st->hsindex]->cmdline,
-		st->hstab[st->hslen - st->hsindex]->capacity)) == NULL)
+					st->hstab[st->hslen - st->hsindex]->capacity)) == NULL)
 			return (1);
 		new->len = st->hstab[st->hslen - st->hsindex]->len;
 		new->capacity = st->hstab[st->hslen - st->hsindex]->capacity;
@@ -74,7 +73,7 @@ static int	replaceline(t_history *new, t_struct *st)
 	return (0);
 }
 
-int			tc_browsehs(char c, t_history *new, t_struct *st)
+int	tc_browsehs(char c, t_history *new, t_struct *st)
 {
 	if (c == 'A' && st->hsindex < st->hslen)
 		st->hsindex++;

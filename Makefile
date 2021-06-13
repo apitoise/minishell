@@ -40,6 +40,7 @@ SRCS =  srcs/routine/do_builtin.c \
 		srcs/main_func/first_check.c \
 		srcs/main_func/main.c \
 		srcs/main_func/minishell.c \
+		srcs/utils/split_utils.c \
 		srcs/utils/ft_exec.c \
 		srcs/utils/split_cmd.c \
 		srcs/utils/split_cmdline.c \

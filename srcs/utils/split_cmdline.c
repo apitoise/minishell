@@ -50,8 +50,7 @@ static char	*ft_malloc_w(char *s, char c)
 			i++;
 		i++;
 	}
-	if (!(word = (char *)malloc(sizeof(char) * (i * 2 + 1))))
-		return (NULL);
+	word = (char *)malloc(sizeof(char) * (i * 2 + 1));
 	i = 0;
 	while (s[i] && !(s[i] == c && !ft_tkorqt(s, i)))
 	{
@@ -67,7 +66,7 @@ static char	*ft_malloc_w(char *s, char c)
 	return (word);
 }
 
-char		**ft_split_cmdline(char *s, char c)
+char	**ft_split_cmdline(char *s, char c)
 {
 	char	**tabl;
 	int		i;
@@ -75,8 +74,7 @@ char		**ft_split_cmdline(char *s, char c)
 
 	if (!s)
 		return (NULL);
-	if (!(tabl = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c) + 1))))
-		return (NULL);
+	tabl = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c) + 1));
 	i = 0;
 	j = 0;
 	while (s[j])
@@ -87,11 +85,7 @@ char		**ft_split_cmdline(char *s, char c)
 		{
 			tabl[i++] = ft_malloc_w(s + j, c);
 			while (s[j] && !(s[j] == c && !ft_tkorqt(s, j)))
-			{
-				if (s[j] == '\\')
-					j++;
-				j++;
-			}
+				j += get_i(s[j]);
 		}
 	}
 	tabl[i] = NULL;

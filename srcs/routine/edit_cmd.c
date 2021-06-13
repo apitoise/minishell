@@ -15,7 +15,7 @@
 
 static void	rmbslash(char **str)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = -1;
@@ -57,7 +57,7 @@ static void	rmquote(char **str)
 	}
 }
 
-void		ft_edit_cmd(char **cmd)
+void	ft_edit_cmd(char **cmd)
 {
 	int	i;
 

@@ -29,8 +29,8 @@ int	ft_getwinsz(t_struct *st)
 
 int	ft_winszdiff(t_history *new, t_struct *st)
 {
-	int oldwidth;
-	int oldheight;
+	int	oldwidth;
+	int	oldheight;
 
 	oldwidth = st->ttywidth;
 	oldheight = st->ttyheight;

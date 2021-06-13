@@ -42,7 +42,7 @@ static int	getposition_atoi(char *buff, int i, t_struct *st)
 	return (0);
 }
 
-int			ft_getposition(t_struct *st)
+int	ft_getposition(t_struct *st)
 {
 	char	buff[30];
 	char	c;

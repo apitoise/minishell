@@ -13,7 +13,7 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-int			ft_dollar_cat(char **s2, char **tmp)
+int	ft_dollar_cat(char **s2, char **tmp)
 {
 	char	*s3;
 	int		i;
@@ -25,8 +25,7 @@ int			ft_dollar_cat(char **s2, char **tmp)
 	j = -1;
 	while ((*tmp)[++j])
 		;
-	if (!(s3 = malloc(sizeof(char) * (i + j + 1))))
-		return (1);
+	s3 = malloc(sizeof(char) * (i + j + 1));
 	i = -1;
 	j = 0;
 	while ((*s2)[++i])
@@ -85,21 +84,19 @@ static int	ft_dollar_notd(char **s1, int *i, char **s2)
 		len++;
 		j++;
 	}
-	if (!(tmp = malloc(sizeof(char) * (len + 1))))
-		return (1);
+	tmp = malloc(sizeof(char) * (len + 1));
 	ft_dollar_notd_cpy(s1, i, &tmp);
 	if (ft_dollar_cat(s2, &tmp))
 		return (ft_freestr(tmp));
 	return (0);
 }
 
-int			ft_dollar(char **s1, t_struct *st)
+int	ft_dollar(char **s1, t_struct *st)
 {
 	char	*s2;
 	int		i;
 
-	if (!(s2 = malloc(sizeof(char))))
-		return (1);
+	s2 = malloc(sizeof(char));
 	s2[0] = '\0';
 	i = 0;
 	while ((*s1)[i])

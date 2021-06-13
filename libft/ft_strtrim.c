@@ -28,7 +28,7 @@ static size_t	ft_trim(char const *set, char c)
 	return (0);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t		start;
 	size_t		end;

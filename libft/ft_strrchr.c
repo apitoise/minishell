@@ -22,5 +22,8 @@ char	*ft_strrchr(const char *s, int c)
 		str++;
 	while ((*str) != c && (*str) != s[0])
 		str--;
-	return ((*str == c) ? str : NULL);
+	if (*str == c)
+		return (str);
+	else
+		return (NULL);
 }

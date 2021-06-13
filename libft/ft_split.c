@@ -42,8 +42,7 @@ static char	*ft_malloc_w(char const *s, char c)
 	i = 0;
 	while (s[i] && s[i] != c)
 		i++;
-	if (!(word = (char *)malloc(sizeof(char) * i + 1)))
-		return (NULL);
+	word = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
 	while (s[i] && s[i] != c)
 	{
@@ -54,14 +53,15 @@ static char	*ft_malloc_w(char const *s, char c)
 	return (word);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 	int		i;
 
 	if (!s)
 		return (NULL);
-	if (!(tab = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c) + 1))))
+	tab = (char **)malloc(sizeof(char *) * (ft_nb_w(s, c) + 1));
+	if (tab == NULL)
 		return (NULL);
 	i = 0;
 	while (*s)

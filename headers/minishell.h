@@ -31,7 +31,7 @@
 # include <errno.h>
 # define MAX_FD 3000
 
-typedef struct			s_varlist
+typedef struct s_varlist
 {
 	char				*name;
 	char				*content;
@@ -39,21 +39,21 @@ typedef struct			s_varlist
 	void				*next;
 }						t_varlist;
 
-typedef	struct			s_history
+typedef struct s_history
 {
 	char				*cmdline;
 	size_t				len;
 	size_t				capacity;
 }						t_history;
 
-typedef struct			s_sig
+typedef struct s_sig
 {
 	pid_t				pid;
 	t_history			**cmdl;
 	char				**cmdt;
 }						t_sig;
 
-typedef struct			s_struct
+typedef struct s_struct
 {
 	int					exit;
 	int					pipe;
@@ -92,7 +92,6 @@ void					printlist_export(t_varlist **lst);
 void					shell_init(void);
 void					print_list(t_varlist **lst);
 int						do_chevrons(char **cmd, t_struct *st);
-void					shell_init();
 char					**del_chevron(char **cmd);
 void					ft_edit_cmd(char **cmd);
 void					init_struct(t_struct *st, char **env);
@@ -108,10 +107,10 @@ void					ft_export(char **cmd, t_struct *st, int i);
 char					*xp_getname(char *cmd, char c);
 int						xp_catlist(char *name, char *content, t_varlist **lst);
 void					xp_modiflist(char *name, char *content, int visible,
-t_varlist **lst);
+							t_varlist **lst);
 int						xp_checkerror(char *arg, t_struct *st);
 int						xp_newlst(char *name, char *content, int visible,
-t_varlist **lst);
+							t_varlist **lst);
 int						xp_idnotvalid(char *arg, t_struct *st);
 int						xp_varexist(char *str, t_varlist **lst);
 int						xp_isalpha(char c);
@@ -126,7 +125,7 @@ void					chevrons_routine(char **cmd, t_struct *st);
 void					do_pipe(t_struct *st);
 char					**get_env(char **env);
 void					ft_split_cmd(const char *s, char c,
-t_struct *st, int i);
+							t_struct *st, int i);
 char					**ft_split_cmdline(char *s, char c);
 int						ft_error(char *s);
 void					ft_freeptr(void **ptr);
@@ -162,5 +161,7 @@ int						ft_isblank(char *str);
 int						ft_tputsstr(char *str, t_history *new, t_struct *st);
 int						ft_nextline(t_history *new, t_struct *st);
 void					ft_freehs(t_history *new);
+int						get_i(char c);
+void					pipe_or_chevron(char c, t_struct *st);
 
 #endif

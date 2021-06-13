@@ -53,11 +53,13 @@ static int	gethomevalue(char **path, t_struct *st, int par)
 	{
 		if (par)
 			return (homenotset());
-		else if (!(home = getenv("HOME")))
+		home = getenv("HOME");
+		if (!home)
 			return (1);
 	}
 	cd_deltilde(*path);
-	if (!(tmp = ft_strjoin(home, *path)))
+	tmp = ft_strjoin(home, *path);
+	if (!tmp)
 		return (1);
 	free(*path);
 	*path = tmp;
@@ -100,8 +102,7 @@ static void	editpath(char *cmd, t_struct *st, int par)
 
 	if (!cmd)
 	{
-		if (!(path = malloc(sizeof(char) * 2)))
-			return ;
+		path = malloc(sizeof(char) * 2);
 		path[0] = '~';
 		path[1] = '\0';
 		par = 1;

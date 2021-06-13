@@ -21,7 +21,7 @@ static void	reset_fd(t_struct *st)
 		return ;
 }
 
-void		do_routine(t_struct *st)
+void	do_routine(t_struct *st)
 {
 	if (st->pipe > 0)
 	{

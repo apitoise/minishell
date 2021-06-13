@@ -17,14 +17,12 @@ static void	cmd_analysis(char **commands, t_struct *st)
 {
 	int	i;
 
-	if (!commands[0])
-		st->ret = 0;
 	g_sig.cmdt = commands;
 	i = -1;
 	while (commands[++i])
 	{
 		if (!ft_addbslash(&commands[i]) && !ft_dollar(&commands[i], st)
-		&& !ft_rmbslash(&commands[i], -1, 0))
+			&& !ft_rmbslash(&commands[i], -1, 0))
 		{
 			if (commands[i])
 				ft_split_cmd(commands[i], ' ', st, 0);
@@ -43,7 +41,7 @@ static void	cmd_analysis(char **commands, t_struct *st)
 	g_sig.cmdt = NULL;
 }
 
-void		minishell(t_struct *st)
+void	minishell(t_struct *st)
 {
 	char	*cmdline;
 
@@ -56,7 +54,9 @@ void		minishell(t_struct *st)
 		if (!ft_parsecmdline(&cmdline, st))
 		{
 			st->input = ft_split_cmdline(cmdline, ';');
-			ft_freeptr((void**)&cmdline);
+			ft_freeptr((void **)&cmdline);
+			if (!st->input[0])
+				st->ret = 0;
 			cmd_analysis(st->input, st);
 			st->input = NULL;
 		}

@@ -12,6 +12,22 @@
 
 #include "../../headers/minishell.h"
 
+static void	bis(t_struct *st)
+{
+	st->ret = 0;
+	st->childps = 0;
+	st->childret = 0;
+	st->startposx = 0;
+	st->ttywidth = 0;
+	st->ttyheight = 0;
+	st->posx = 0;
+	st->posy = 0;
+	st->hstab = NULL;
+	st->hslen = 0;
+	st->hscapacity = 0;
+	st->hsindex = 0;
+}
+
 void	init_struct(t_struct *st, char **env)
 {
 	st->exit = 0;
@@ -27,17 +43,5 @@ void	init_struct(t_struct *st, char **env)
 	st->pipe = 0;
 	st->chevrons = 0;
 	st->env = get_env(env);
-	st->ret = 0;
-	st->childps = 0;
-	st->childret = 0;
-	st->startposx = 0;
-	st->ttywidth = 0;
-	st->ttyheight = 0;
-	st->posx = 0;
-	st->posy = 0;
-	st->hstab = NULL;
-	st->hslen = 0;
-	st->hscapacity = 0;
-	st->hsindex = 0;
 	init_lstenv(env, st);
 }

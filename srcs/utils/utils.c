@@ -13,9 +13,9 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-void		print_tab(char **map)
+void	print_tab(char **map)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (!map)
@@ -24,7 +24,7 @@ void		print_tab(char **map)
 		ft_putendl_fd(map[i], 1);
 }
 
-void		printlist_env(t_varlist **lst)
+void	printlist_env(t_varlist **lst)
 {
 	t_varlist	*current;
 
@@ -63,7 +63,7 @@ static char	*print_it(t_varlist ***lst, t_varlist **cur, t_varlist *tmp)
 		while (tmp->content[++i])
 		{
 			if (tmp->content[i] == '\\' || tmp->content[i] == '"'
-			|| tmp->content[i] == '$')
+				|| tmp->content[i] == '$')
 				write(1, "\\", 1);
 			write(1, &(tmp->content[i]), 1);
 		}
@@ -81,7 +81,7 @@ static int	print_bis(t_varlist *tmp, t_varlist *current, char *lw, int i)
 	{
 		i = 0;
 		while (tmp->name[i] == current->name[i] && tmp->name[i]
-				&& current->name[i])
+			&& current->name[i])
 			i++;
 		if (current->name[i] < tmp->name[i])
 			*tmp = *current;
@@ -89,7 +89,7 @@ static int	print_bis(t_varlist *tmp, t_varlist *current, char *lw, int i)
 	return (i);
 }
 
-void		printlist_export(t_varlist **lst)
+void	printlist_export(t_varlist **lst)
 {
 	t_varlist	*current;
 	t_varlist	tmp;
@@ -105,7 +105,7 @@ void		printlist_export(t_varlist **lst)
 	{
 		i = 0;
 		while (lastwrit[i] == current->name[i] && lastwrit[i]
-				&& current->name[i])
+			&& current->name[i])
 			i++;
 		if (current->name[i] > lastwrit[i])
 			print_bis(&tmp, current, lastwrit, i);

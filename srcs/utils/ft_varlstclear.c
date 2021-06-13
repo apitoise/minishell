@@ -13,10 +13,10 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-void        ft_varlstclear(t_varlist **lst)
+void	ft_varlstclear(t_varlist **lst)
 {
 	if (lst && *lst)
-	{   
+	{
 		if ((*lst)->next)
 			ft_varlstclear((t_varlist **)&(*lst)->next);
 		free((*lst)->name);

@@ -13,7 +13,7 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-int		ft_error(char *s)
+int	ft_error(char *s)
 {
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd("\n", 2);

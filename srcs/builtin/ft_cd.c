@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:23:55 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/11 03:28:13 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/13 14:42:46 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,17 @@ static int	gethomevalue(char **path, t_struct *st, int par)
 	return (0);
 }
 
-static void	gotopath(char *path, t_struct *st)
+static int	gotopath(char *path, t_struct *st)
 {
 	int		ret;
 	char	buff[PATH_MAX];
 	char	*newpwd;
 
 	if (!ft_strcmp(path, ""))
-		return ;
+	{
+		free(path);
+		return (0);
+	}
 	ret = chdir(path);
 	if (ret == -1 && path)
 	{
@@ -86,6 +89,7 @@ static void	gotopath(char *path, t_struct *st)
 	getcwd(buff, PATH_MAX);
 	newpwd = ft_strdup(buff);
 	modif_pwd("PWD", newpwd, &st->lst);
+	return (ret);
 }
 
 static void	editpath(char *cmd, t_struct *st, int par)
@@ -114,9 +118,11 @@ static void	editpath(char *cmd, t_struct *st, int par)
 	if (path[0] == '~' && gethomevalue(&path, st, par))
 		return (ft_freeptr((void**)&path));
 	getcwd(buff, PATH_MAX);
-	oldpwd = ft_strdup(buff);
-	modif_pwd("OLDPWD", oldpwd, &st->lst);
-	gotopath(path, st);
+	if (gotopath(path, st) != -1)
+	{
+		oldpwd = ft_strdup(buff);
+		modif_pwd("OLDPWD", oldpwd, &st->lst);
+	}
 }
 
 void		ft_cd(char **cmd, t_struct *st)

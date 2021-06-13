@@ -44,4 +44,5 @@ void	init_struct(t_struct *st, char **env)
 	st->chevrons = 0;
 	st->env = get_env(env);
 	init_lstenv(env, st);
+	bis(st);
 }

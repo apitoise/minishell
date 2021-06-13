@@ -76,7 +76,8 @@ void	do_pipe(t_struct *st)
 				exec_cmd(cmd, st);
 			reset_in_out(new_pipe[0], 1, st);
 		}
-		ft_free_tab(cmd);
+		if (ft_strcmp(cmd[0], ""))
+			ft_free_tab(cmd);
 		pipe_nb++;
 	}
 	reset_in_out(0, 1, st);

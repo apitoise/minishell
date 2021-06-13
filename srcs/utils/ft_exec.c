@@ -29,11 +29,14 @@ void	ft_fork(char **cmd, char *filepath, t_struct *st)
 	forking = fork();
 	if (forking == 0)
 	{
-		dup2(st->stdin_fd, STDIN_FILENO);
-		dup2(st->stdout_fd, STDOUT_FILENO);
+		if (st->pipe == 0 && st->chevrons == 0)
+			dup2(st->stdout_copy, 1);
+		else
+			dup2(st->stdout_fd, 1);
+		dup2(st->stdin_fd, 0);
 		ft_exec(cmd, filepath, st);
-		close(STDOUT_FILENO);
-		close(STDIN_FILENO);
+		close(0);
+		close(1);
 		ft_exit(cmd, st);
 	}
 	else

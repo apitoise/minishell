@@ -13,6 +13,16 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
+static void	reset_in_out(int in, int out, t_struct *st)
+{
+	if (st->stdin_fd != 0)
+		close(st->stdin_fd);
+	st->stdin_fd = in;
+	if (st->stdout_fd != 1)
+		close(st->stdout_fd);
+	st->stdout_fd = out;
+}
+
 static char	**cmd_before_pipe(char **cmd, int pipe_nb)
 {
 	char	**res;
@@ -45,11 +55,13 @@ void		do_pipe(t_struct *st)
 	int		pipe_nb;
 	char	**cmd;
 
-	if (pipe(new_pipe) != 0)
-		return ;
-	pipe_nb = 0;
+		pipe_nb = 0;
 	while (pipe_nb <= st->pipe)
 	{
+		if (pipe_nb == st->pipe)
+			st->pipe = 0;
+		if (pipe(new_pipe) != 0)
+			return ;
 		st->stdout_fd = new_pipe[1];
 		cmd = cmd_before_pipe(st->cmd, pipe_nb);
 		if (!do_chevrons(cmd, st))
@@ -60,10 +72,10 @@ void		do_pipe(t_struct *st)
 				ft_edit_cmd(cmd);
 				do_builtin(cmd, st);
 			}
-			dup2(new_pipe[0], st->stdin_fd);
-			dup2(st->stdout_copy, st->stdout_fd);
+			reset_in_out(new_pipe[0], 1, st);
 		}
 		ft_free_tab(cmd);
 		pipe_nb++;
 	}
+	reset_in_out(0, 1, st);
 }

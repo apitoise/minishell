@@ -73,8 +73,12 @@ int			do_chevrons(char **cmd, t_struct *st)
 		return (0);
 	i = 0;
 	err = 0;
+	st->chevrons = 0;
 	while (cmd[i] && err == 0)
 	{
+		if (!ft_strcmp(cmd[i] , ">") || !ft_strcmp(cmd[i], ">>")
+			|| !ft_strcmp(cmd[i], "<"))
+			st->chevrons++;
 		if (!ft_strcmp(cmd[i], ">"))
 			single_chevron(cmd, st, i);
 		else if (!ft_strcmp(cmd[i], ">>"))
@@ -83,6 +87,5 @@ int			do_chevrons(char **cmd, t_struct *st)
 			err = left_chevron(cmd, st, i);
 		i++;
 	}
-	st->chevrons = 0;
 	return (err);
 }

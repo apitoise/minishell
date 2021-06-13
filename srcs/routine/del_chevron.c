@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:17 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/07 13:56:15 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:10:16 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ char	**del_chevron(char **cmd)
 	res = NULL;
 	if (len == 0)
 	{
-		res = (char **)malloc(sizeof(char *) * 1);
+		res = (char **)malloc(sizeof(char *) * 2);
 		res[0] = ft_strdup("");
+		res[1] = NULL;
 		ft_free_tab(cmd);
 		return (res);
 	}

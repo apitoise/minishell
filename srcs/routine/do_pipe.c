@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:27:02 by apitoise          #+#    #+#             */
-/*   Updated: 2021/05/14 16:32:26 by apitoise         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:09:34 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,7 @@ void	do_pipe(t_struct *st)
 				exec_cmd(cmd, st);
 			reset_in_out(new_pipe[0], 1, st);
 		}
-		if (ft_strcmp(cmd[0], ""))
-			ft_free_tab(cmd);
-		else
-			free(cmd);
+		ft_free_tab(cmd);
 		pipe_nb++;
 	}
 	reset_in_out(0, 1, st);

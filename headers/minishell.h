@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/14 15:54:54 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 17:09:51 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ void					ft_env(t_struct *st);
 void					init_shlvl(t_struct *st);
 int						elem_error(char *name, char *content);
 int						gethomevaluebis(t_varlist *current, char **home,
-							int par);
-int						homenotset(void);
+							int par, t_struct *st);
+int						homenotset(t_struct *st);
 void					modif_pwd(char *name, char *content, t_varlist **lst);
 void					do_builtin(char **cmd, t_struct *st);
 void					do_routine(t_struct *st);

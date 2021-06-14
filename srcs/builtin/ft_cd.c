@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:23:55 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/14 15:53:34 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 17:13:41 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	gethomevalue(char **path, t_struct *st, int par)
 	current = st->lst;
 	while (current && ft_strcmp(current->name, "HOME"))
 		current = current->next;
-	if (gethomevaluebis(current, &home, par))
+	if (gethomevaluebis(current, &home, par, st))
 		return (1);
 	cd_deltilde(*path);
 	tmp = ft_strjoin(home, *path);

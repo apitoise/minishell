@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:36:54 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/06/14 15:54:10 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 18:04:33 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ int	elem_error(char *name, char *content)
 	return (1);
 }
 
-int	homenotset(void)
+int	homenotset(t_struct *st)
 {
 	ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+	st->ret = 1;
 	return (1);
 }
 
@@ -60,28 +61,30 @@ void	modif_pwd(char *name, char *content, t_varlist **lst)
 	t_varlist	*current;
 
 	current = *lst;
-	while (ft_strcmp(current->name, name) && current)
+	while (current && ft_strcmp(current->name, name))
 		current = current->next;
 	if (current && current->content)
 	{
 		free(current->content);
 		current->content = content;
 	}
+	else
+		free(content);
 }
 
-int	gethomevaluebis(t_varlist *current, char **home, int par)
+int	gethomevaluebis(t_varlist *current, char **home, int par, t_struct *st)
 {
 	if (current)
 	{
 		if (current->content)
 			*home = current->content;
 		else
-			return (homenotset());
+			return (homenotset(st));
 	}
 	else
 	{
 		if (par)
-			return (homenotset());
+			return (homenotset(st));
 		*home = getenv("HOME");
 		if (!*home)
 			return (1);

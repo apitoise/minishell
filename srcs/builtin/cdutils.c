@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 21:52:11 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/06/04 19:56:10 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 18:02:03 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ int	cd_getoldpwd(char **path, t_struct *st)
 	current = st->lst;
 	while (current && ft_strcmp(current->name, "OLDPWD"))
 		current = current->next;
-	if (!current)
+	if (!current || !current->content)
 	{
 		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 1);
+		st->ret = 1;
 		return (1);
 	}
 	*path = ft_strdup(current->content);

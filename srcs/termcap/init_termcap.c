@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 15:05:48 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/08 18:33:28 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 13:58:58 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,10 @@
 #include <curses.h>
 #include <term.h>
 
-int	init_termcap(t_struct *st)
+static int	init_termcap_tgetent(char *termtype, t_struct *st)
 {
-	char			*termtype;
-	int				ret;
+	int	ret;
 
-	if (!(termtype = getenv("TERM")))
-	{
-		ft_putstr_fd("TERM not defined\n", 2);
-		return (1);
-	}
 	ret = tgetent(NULL, termtype);
 	if (ret < 0)
 	{
@@ -41,5 +35,20 @@ int	init_termcap(t_struct *st)
 		ft_putstr_fd("Could not get window size\n", 2);
 		return (1);
 	}
+	return (0);
+}
+
+int	init_termcap(t_struct *st)
+{
+	char			*termtype;
+
+	termtype = getenv("TERM");
+	if (!termtype)
+	{
+		ft_putstr_fd("TERM not defined\n", 2);
+		return (1);
+	}
+	if (init_termcap_tgetent(termtype, st))
+		return (1);
 	return (0);
 }

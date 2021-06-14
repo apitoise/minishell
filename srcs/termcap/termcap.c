@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/06/01 16:10:50 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 13:53:48 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ static int	readloop(t_history *new, struct termios *restore, t_struct *st)
 	ft_bzero(buff, 11);
 	while (buff[0] != '\n')
 	{
-		if ((ft_winszdiff(new, st) == -1)
-			|| ((ret = read(STDIN_FILENO, buff, 10)) == -1))
+		if (ft_winszdiff(new, st) == -1)
+			return (1);
+		ret = read(STDIN_FILENO, buff, 10);
+		if (ret == -1)
 			return (1);
 		buff[ret] = '\0';
 		if (!ft_strcmp(buff, "\t"))
@@ -73,7 +75,10 @@ static int	getcmdline(t_history **new, struct termios *restore, t_struct *st)
 	if (ft_getposition(st))
 		return (1);
 	st->startposx = st->posx;
-	if (readloop(*new, restore, st) || (ret = ft_winszdiff(*new, st)) == -1)
+	if (readloop(*new, restore, st))
+		return (1);
+	ret = ft_winszdiff(*new, st);
+	if (ret == -1)
 		return (1);
 	else if (ret == 1)
 		ft_putchar_fd('\n', 1);
@@ -96,9 +101,7 @@ char	*ft_termcap(t_struct *st)
 	term = restore;
 	term.c_lflag &= ~(ECHO | ICANON);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
-	new = NULL;
-	if (!(new = malloc(sizeof(t_history))))
-		return (closetermcap(NULL, &restore, st));
+	new = malloc(sizeof(t_history));
 	ft_bzero(new, sizeof(t_history));
 	g_sig.cmdl = &new;
 	if (getcmdline(&new, &restore, st))

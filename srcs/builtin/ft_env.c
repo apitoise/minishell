@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:57 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/12 01:25:46 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 15:41:27 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ static void	create_elem(char *env, t_struct *st)
 	i = 0;
 	while (env[i] != '=')
 		i++;
-	if (!(name = malloc(sizeof(char) * (i + 1))))
-		return ;
+	name = malloc(sizeof(char) * (i + 1));
 	i = 0;
 	while (env[i] != '=')
 	{
@@ -54,8 +53,7 @@ static void	create_elem(char *env, t_struct *st)
 	}
 	name[i] = '\0';
 	i += 1;
-	if (!(content = malloc(sizeof(char) * (ft_strlen(env + i) + 1))))
-		return ;
+	content = malloc(sizeof(char) * (ft_strlen(env + i) + 1));
 	j = 0;
 	while (env[i])
 		content[j++] = env[i++];
@@ -63,35 +61,7 @@ static void	create_elem(char *env, t_struct *st)
 	create_list(name, content, &st->lst);
 }
 
-static void	init_shlvl(t_struct *st)
-{
-	t_varlist	*current;
-	int			tmp1;
-	char		*tmp2;
-	int			i;
-
-	current = st->lst;
-	while(current && ft_strcmp(current->name, "SHLVL"))
-		current = current->next;
-	if (current && current->content && current->content[0])
-	{
-		tmp1 = 0;
-		i = -1;
-		while (current->content[++i])
-		{
-			if (!ft_isdigit(current->content[i]))
-				return ;
-			tmp1 = tmp1 * 10 + (current->content[i] - '0');
-		}
-		tmp1++;
-		if (!(tmp2 = ft_itoa(tmp1)))
-			return ;
-		free(current->content);
-		current->content = tmp2;
-	}
-}
-
-void		init_lstenv(char **env, t_struct *st)
+void	init_lstenv(char **env, t_struct *st)
 {
 	int			i;
 
@@ -101,7 +71,7 @@ void		init_lstenv(char **env, t_struct *st)
 	init_shlvl(st);
 }
 
-char		**get_env(char **env)
+char	**get_env(char **env)
 {
 	int		nb_vars;
 	int		i;
@@ -110,8 +80,7 @@ char		**get_env(char **env)
 	nb_vars = 0;
 	while (env[nb_vars])
 		nb_vars++;
-	if (!(our_env = (char **)malloc(sizeof(char *) * (nb_vars + 1))))
-		return (NULL);
+	our_env = (char **)malloc(sizeof(char *) * (nb_vars + 1));
 	i = 0;
 	while (i < nb_vars)
 	{
@@ -122,7 +91,7 @@ char		**get_env(char **env)
 	return (our_env);
 }
 
-void		ft_env(t_struct *st)
+void	ft_env(t_struct *st)
 {
 	printlist_env(&st->lst);
 }

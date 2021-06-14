@@ -6,7 +6,7 @@
 #    By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/31 22:20:20 by lgimenez          #+#    #+#              #
-#    Updated: 2021/06/04 23:38:34 by lgimenez         ###   ########.fr        #
+#    Updated: 2021/06/14 15:39:44 by lgimenez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS =  srcs/routine/do_builtin.c \
 		srcs/builtin/exportutilsbis.c \
 		srcs/builtin/ft_pwd.c \
 		srcs/builtin/ft_unset.c \
+		srcs/builtin/builtin_utils.c \
 		srcs/utils/init_struct.c \
 		srcs/main_func/first_check.c \
 		srcs/main_func/main.c \

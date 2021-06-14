@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/05/29 18:30:28 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 13:34:14 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ static int	replaceline(t_history *new, t_struct *st)
 		ft_bzero(new, sizeof(t_history));
 	else if (st->hsindex > 0)
 	{
-		if ((new->cmdline = dupcmdl(st->hstab[st->hslen - st->hsindex]->cmdline,
-					st->hstab[st->hslen - st->hsindex]->capacity)) == NULL)
+		new->cmdline = dupcmdl(st->hstab[st->hslen - st->hsindex]->cmdline,
+				st->hstab[st->hslen - st->hsindex]->capacity);
+		if (!new->cmdline)
 			return (1);
 		new->len = st->hstab[st->hslen - st->hsindex]->len;
 		new->capacity = st->hstab[st->hslen - st->hsindex]->capacity;

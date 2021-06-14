@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:06:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/07 17:12:01 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 15:54:54 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,12 @@ void					ft_free_hstab(t_history **hstab, int len);
 void					ft_free_st(t_struct *st);
 int						first_check(char **cmd, t_struct *st);
 void					ft_env(t_struct *st);
+void					init_shlvl(t_struct *st);
+int						elem_error(char *name, char *content);
+int						gethomevaluebis(t_varlist *current, char **home,
+							int par);
+int						homenotset(void);
+void					modif_pwd(char *name, char *content, t_varlist **lst);
 void					do_builtin(char **cmd, t_struct *st);
 void					do_routine(t_struct *st);
 void					chevrons_routine(char **cmd, t_struct *st);
@@ -142,7 +148,11 @@ int						ft_parsecmdline(char **s, t_struct *st);
 int						ft_checkvalid(char *s, t_struct *st);
 int						ft_dollar(char **s1, t_struct *st);
 int						ft_dollar_d(char **s1, int *i, char **s2, t_struct *st);
-int						ft_dollar_cat(char **s2, char **tmp);
+void					ft_dollar_cat(char **s2, char **tmp);
+void					ft_dollar_alias_cpybis_loop(char **tmp2, char *str,
+							int toq);
+void					ft_dollar_alias_cpybis_loop2(char **tmp2, char *str,
+							int i, int *j);
 int						ft_addbslash(char **s);
 int						ft_rmbslash(char **s, int i, int j);
 int						ft_tkorqt(char *str, int i);

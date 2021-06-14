@@ -6,32 +6,12 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:23:55 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/13 14:42:46 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 15:53:34 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
-
-static int	homenotset(void)
-{
-	ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-	return (1);
-}
-
-static void	modif_pwd(char *name, char *content, t_varlist **lst)
-{
-	t_varlist	*current;
-
-	current = *lst;
-	while (ft_strcmp(current->name, name) && current)
-		current = current->next;
-	if (current && current->content)
-	{
-		free(current->content);
-		current->content = content;
-	}
-}
 
 static int	gethomevalue(char **path, t_struct *st, int par)
 {
@@ -42,21 +22,8 @@ static int	gethomevalue(char **path, t_struct *st, int par)
 	current = st->lst;
 	while (current && ft_strcmp(current->name, "HOME"))
 		current = current->next;
-	if (current)
-	{
-		if (current->content)
-			home = current->content;
-		else
-			return (homenotset());
-	}
-	else
-	{
-		if (par)
-			return (homenotset());
-		home = getenv("HOME");
-		if (!home)
-			return (1);
-	}
+	if (gethomevaluebis(current, &home, par))
+		return (1);
 	cd_deltilde(*path);
 	tmp = ft_strjoin(home, *path);
 	if (!tmp)
@@ -94,6 +61,14 @@ static int	gotopath(char *path, t_struct *st)
 	return (ret);
 }
 
+static void	editpath_pathinit(char **path, int *par)
+{
+	*path = malloc(sizeof(char) * 2);
+	(*path)[0] = '~';
+	(*path)[1] = '\0';
+	*par = 1;
+}
+
 static void	editpath(char *cmd, t_struct *st, int par)
 {
 	char	buff[PATH_MAX];
@@ -101,12 +76,7 @@ static void	editpath(char *cmd, t_struct *st, int par)
 	char	*path;
 
 	if (!cmd)
-	{
-		path = malloc(sizeof(char) * 2);
-		path[0] = '~';
-		path[1] = '\0';
-		par = 1;
-	}
+		editpath_pathinit(&path, &par);
 	else if (!ft_strcmp(cmd, "-"))
 	{
 		if (cd_getoldpwd(&path, st))
@@ -114,10 +84,10 @@ static void	editpath(char *cmd, t_struct *st, int par)
 		ft_putstr_fd(path, 1);
 		ft_putstr_fd("\n", 1);
 	}
-	else if (!(path = ft_strdup(cmd)))
-		return ;
+	else
+		path = ft_strdup(cmd);
 	if (path[0] == '~' && gethomevalue(&path, st, par))
-		return (ft_freeptr((void**)&path));
+		return (ft_freeptr((void **)&path));
 	getcwd(buff, PATH_MAX);
 	if (gotopath(path, st) != -1)
 	{
@@ -126,14 +96,14 @@ static void	editpath(char *cmd, t_struct *st, int par)
 	}
 }
 
-void		ft_cd(char **cmd, t_struct *st)
+void	ft_cd(char **cmd, t_struct *st)
 {
 	int	par;
 
 	par = 0;
 	if (cmd[1] && cmd[2])
 	{
-	  	ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		st->ret = 1;
 	}
 	else

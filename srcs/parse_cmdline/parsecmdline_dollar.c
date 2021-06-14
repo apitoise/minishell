@@ -6,14 +6,14 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:24:51 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/04/19 17:36:21 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 14:22:03 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-int	ft_dollar_cat(char **s2, char **tmp)
+void	ft_dollar_cat(char **s2, char **tmp)
 {
 	char	*s3;
 	int		i;
@@ -37,7 +37,6 @@ int	ft_dollar_cat(char **s2, char **tmp)
 	free(*s2);
 	free(*tmp);
 	*s2 = s3;
-	return (0);
 }
 
 static void	ft_dollar_notd_cpy(char **s1, int *i, char **tmp)
@@ -86,8 +85,7 @@ static int	ft_dollar_notd(char **s1, int *i, char **s2)
 	}
 	tmp = malloc(sizeof(char) * (len + 1));
 	ft_dollar_notd_cpy(s1, i, &tmp);
-	if (ft_dollar_cat(s2, &tmp))
-		return (ft_freestr(tmp));
+	ft_dollar_cat(s2, &tmp);
 	return (0);
 }
 

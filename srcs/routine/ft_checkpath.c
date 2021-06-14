@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:26:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/12 19:41:53 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/14 03:43:25 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	ft_checkpath(char **cmd, t_struct *st)
 	t_varlist	*tmp;
 	char		*filepath;
 
-	if (ft_checkfile(cmd[0]))
+	if (!cmd[0])
+		return ;
+	if (ft_strchr(cmd[0], '/') && ft_checkfile(cmd[0]))
 	{
 		filepath = ft_strdup(cmd[0]);
 		if (!filepath)

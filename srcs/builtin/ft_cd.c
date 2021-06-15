@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:23:55 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/14 17:13:41 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:31:24 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static void	editpath_pathinit(char **path, int *par)
 static void	editpath(char *cmd, t_struct *st, int par)
 {
 	char	buff[PATH_MAX];
-	char	*oldpwd;
 	char	*path;
 	int		out;
 
@@ -94,10 +93,7 @@ static void	editpath(char *cmd, t_struct *st, int par)
 		return (ft_freeptr((void **)&path));
 	getcwd(buff, PATH_MAX);
 	if (gotopath(path, st) != -1)
-	{
-		oldpwd = ft_strdup(buff);
-		modif_pwd("OLDPWD", oldpwd, &st->lst);
-	}
+		modif_pwd("OLDPWD", ft_strdup(buff), &st->lst);
 }
 
 void	ft_cd(char **cmd, t_struct *st)

@@ -64,7 +64,7 @@ void	do_pipe(t_struct *st)
 	while (pipe_nb <= st->pipe)
 	{
 		if (pipe_nb == st->pipe)
-			st->pipe = 0;
+			st->pipe = -1;
 		if (pipe(new_pipe) != 0)
 			return ;
 		st->stdout_fd = new_pipe[1];

@@ -70,6 +70,7 @@ typedef struct s_struct
 	int					stdout_fd;
 	int					stdin_fd;
 	int					was_chevr;
+	int					was_lchevr;
 	int					stdin_copy;
 	int					stdout_copy;
 	char				*result;

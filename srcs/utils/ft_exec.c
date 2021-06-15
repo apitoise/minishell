@@ -29,11 +29,13 @@ void	ft_fork(char **cmd, char *filepath, t_struct *st)
 	forking = fork();
 	if (forking == 0)
 	{
-		if (st->pipe == 0 && st->chevrons == 0) {
+		if (st->pipe == -1) {
 			dup2(st->stdout_copy, 1);
-		} else
+		} else if (st->pipe > 0) {
 			dup2(st->stdout_fd, 1);
-		dup2(st->stdin_fd, 0);
+		}
+		if (st->pipe)
+			dup2(st->stdin_fd, 0);
 		ft_exec(cmd, filepath, st);
 		close(0);
 		close(1);
@@ -46,7 +48,7 @@ void	ft_fork(char **cmd, char *filepath, t_struct *st)
 		waitpid(forking, &st->childret, 0);
 		g_sig.pid = 0;
 		free(filepath);
-		if (st->pipe == 0) {
+		if (st->pipe == -1) {
 			dup2(st->stdin_copy, 0);
 		}
 	}

@@ -19,6 +19,10 @@ static void	reset_fd(t_struct *st)
 		close(STDOUT_FILENO);
 		st->was_chevr = 0;
 	}
+	if (st->was_lchevr) {
+		close(STDIN_FILENO);
+		st->was_lchevr = 0;
+	}
 	if (dup2(st->stdout_copy, STDOUT_FILENO) < 0)
 		return ;
 	if (dup2(st->stdin_copy, STDIN_FILENO) < 0)

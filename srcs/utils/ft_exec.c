@@ -29,7 +29,7 @@ void	ft_fork(char **cmd, char *filepath, t_struct *st)
 	forking = fork();
 	if (forking == 0)
 	{
-		if (st->pipe == -1) {
+		if (st->pipe == -1 && !st->chevrons) {
 			dup2(st->stdout_copy, 1);
 		} else if (st->pipe > 0) {
 			dup2(st->stdout_fd, 1);

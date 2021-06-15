@@ -55,7 +55,6 @@ static int	left_chevron(char **cmd, t_struct *st, int i)
 		ft_putstr_fd(": No such file or directory\n", 2);
 		return (1);
 	}
-	//close(STDIN_FILENO);
 	if (dup2(new_fd, STDIN_FILENO) < 0)
 		return (0);
 	st->was_lchevr = 1;

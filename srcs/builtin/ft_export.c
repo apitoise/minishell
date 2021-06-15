@@ -104,7 +104,7 @@ void	ft_export(char **cmd, t_struct *st, int f)
 	if (f == 2)
 	{
 		if (!cmd[1])
-			printlist_export(&st->lst);
+			printlist_export(st);
 		else
 			return (create_elem(cmd, 0, 1, st));
 	}

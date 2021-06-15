@@ -74,6 +74,7 @@ static void	editpath(char *cmd, t_struct *st, int par)
 	char	buff[PATH_MAX];
 	char	*oldpwd;
 	char	*path;
+	int	out = st->pipe ? st->stdout_fd : 1;
 
 	if (!cmd)
 		editpath_pathinit(&path, &par);
@@ -81,8 +82,8 @@ static void	editpath(char *cmd, t_struct *st, int par)
 	{
 		if (cd_getoldpwd(&path, st))
 			return ;
-		ft_putstr_fd(path, 1);
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd(path, out);
+		ft_putstr_fd("\n", out);
 	}
 	else
 		path = ft_strdup(cmd);

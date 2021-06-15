@@ -16,7 +16,7 @@
 static void	if_builtin(char **cmd, t_struct *st)
 {
 	if (!ft_strcmp(cmd[0], "pwd"))
-		ft_pwd(cmd);
+		ft_pwd(cmd, st);
 	else if (!ft_strcmp(cmd[0], "exit"))
 		ft_exit(cmd, st);
 	else if (!ft_strcmp(cmd[0], "echo"))

@@ -93,5 +93,24 @@ char	**get_env(char **env)
 
 void	ft_env(t_struct *st)
 {
-	printlist_env(&st->lst);
+	t_varlist	*current;
+	int	out = st->pipe ? st->stdout_fd : 1;
+
+	if (st->lst == NULL)
+		return ;
+	current = st->lst;
+	while (current != NULL)
+	{
+		if (current->visible == 1)
+		{
+			if (current->content != NULL)
+			{
+				ft_putstr_fd(current->name, out);
+				ft_putstr_fd("=", out);
+				ft_putstr_fd(current->content, out);
+				ft_putchar_fd('\n', out);
+			}
+		}
+		current = current->next;
+	}
 }

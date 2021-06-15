@@ -82,7 +82,9 @@ static void	exitwitharg(char **cmd, t_struct *st)
 
 void	ft_exit(char **cmd, t_struct *st)
 {
-	ft_putstr_fd("exit\n", 1);
+	int	out = st->pipe ? st->stdout_fd : 1;
+
+	ft_putstr_fd("exit\n", out);
 	if (cmd && cmd[1])
 		exitwitharg(cmd, st);
 	else

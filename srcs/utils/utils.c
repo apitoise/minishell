@@ -13,6 +13,7 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
+/*
 void	print_tab(char **map)
 {
 	int	i;
@@ -21,55 +22,34 @@ void	print_tab(char **map)
 	if (!map)
 		return ;
 	while (map && map[++i])
-		ft_putendl_fd(map[i], 1);
+		ft_putendl_fd(map[i], out);
 }
+*/
 
-void	printlist_env(t_varlist **lst)
-{
-	t_varlist	*current;
-
-	if (*lst == NULL)
-		return ;
-	current = *lst;
-	while (current != NULL)
-	{
-		if (current->visible == 1)
-		{
-			if (current->content != NULL)
-			{
-				ft_putstr_fd(current->name, 1);
-				ft_putstr_fd("=", 1);
-				ft_putstr_fd(current->content, 1);
-				ft_putchar_fd('\n', 1);
-			}
-		}
-		current = current->next;
-	}
-}
-
-static char	*print_it(t_varlist ***lst, t_varlist **cur, t_varlist *tmp)
+static char	*print_it(t_struct *st, t_varlist **cur, t_varlist *tmp)
 {
 	int	i;
+	int	out = st->pipe ? st->stdout_fd : 1;
 
-	*cur = **lst;
+	*cur = st->lst;
 	if (!ft_strcmp(tmp->name, "_"))
 		return (tmp->name);
-	ft_putstr_fd("declare -x ", 1);
-	ft_putstr_fd(tmp->name, 1);
+	ft_putstr_fd("declare -x ", out);
+	ft_putstr_fd(tmp->name, out);
 	if (tmp->content)
 	{
-		ft_putstr_fd("=\"", 1);
+		ft_putstr_fd("=\"", out);
 		i = -1;
 		while (tmp->content[++i])
 		{
 			if (tmp->content[i] == '\\' || tmp->content[i] == '"'
 				|| tmp->content[i] == '$')
-				write(1, "\\", 1);
-			write(1, &(tmp->content[i]), 1);
+				write(1, "\\", out);
+			write(1, &(tmp->content[i]), out);
 		}
-		ft_putstr_fd("\"", 1);
+		ft_putstr_fd("\"", out);
 	}
-	ft_putstr_fd("\n", 1);
+	ft_putstr_fd("\n", out);
 	return (tmp->name);
 }
 
@@ -89,16 +69,16 @@ static int	print_bis(t_varlist *tmp, t_varlist *current, char *lw, int i)
 	return (i);
 }
 
-void	printlist_export(t_varlist **lst)
+void	printlist_export(t_struct *st)
 {
 	t_varlist	*current;
 	t_varlist	tmp;
 	char		*lastwrit;
 	int			i;
 
-	if (*lst == NULL)
+	if (st->lst == NULL)
 		return ;
-	current = *lst;
+	current = st->lst;
 	lastwrit = "";
 	tmp.name = "";
 	while (current != NULL)
@@ -110,7 +90,7 @@ void	printlist_export(t_varlist **lst)
 		if (current->name[i] > lastwrit[i])
 			print_bis(&tmp, current, lastwrit, i);
 		if (current->next == NULL && tmp.name != lastwrit && tmp.visible == 1)
-			lastwrit = print_it(&lst, &current, &tmp);
+			lastwrit = print_it(st, &current, &tmp);
 		else
 			current = current->next;
 	}

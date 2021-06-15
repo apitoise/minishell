@@ -69,6 +69,7 @@ typedef struct s_struct
 	int					childret;
 	int					stdout_fd;
 	int					stdin_fd;
+	int					was_chevr;
 	int					stdin_copy;
 	int					stdout_copy;
 	char				*result;
@@ -86,9 +87,7 @@ typedef struct s_struct
 extern t_sig			g_sig;
 
 void					minishell(t_struct *st);
-void					print_tab(char **map);
-void					printlist_env(t_varlist **lst);
-void					printlist_export(t_varlist **lst);
+void					printlist_export(t_struct *st);
 void					shell_init(void);
 void					print_list(t_varlist **lst);
 int						do_chevrons(char **cmd, t_struct *st);
@@ -101,7 +100,7 @@ int						cd_getoldpwd(char **path, t_struct *st);
 void					cd_deltilde(char *path);
 int						ft_echo(char **cmd, t_struct *st);
 void					ft_exit(char **cmd, t_struct *st);
-int						ft_pwd(char **cmd);
+int						ft_pwd(char **cmd, t_struct *st);
 int						ft_unset(char **cmd, t_struct *st);
 void					ft_export(char **cmd, t_struct *st, int i);
 char					*xp_getname(char *cmd, char c);

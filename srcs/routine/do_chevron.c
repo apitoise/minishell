@@ -22,11 +22,9 @@ static void	single_chevron(char **cmd, t_struct *st, int i)
 	new_fd = open(cmd[i + 1], O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	if (new_fd < 0)
 		return ;
-	close(STDOUT_FILENO);
-	if (dup(new_fd) < 0)
+	if (dup2(new_fd, STDOUT_FILENO) < 0)
 		return ;
-	st->stdout_fd = new_fd;
-	close(new_fd);
+	st->was_chevr = 1;
 }
 
 static void	double_chevron(char **cmd, t_struct *st, int i)

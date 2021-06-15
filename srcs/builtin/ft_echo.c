@@ -40,6 +40,7 @@ int	ft_echo(char **cmd, t_struct *st)
 	int	i;
 	int	n;
 	int	option;
+	int	out = st->pipe ? st->stdout_fd : 1;
 
 	i = 1;
 	n = 0;
@@ -48,14 +49,14 @@ int	ft_echo(char **cmd, t_struct *st)
 	{
 		if (!(!option && option_n(cmd[i], &n, &option)))
 		{
-			ft_putstr_fd(cmd[i], 1);
+			ft_putstr_fd(cmd[i], out);
 			if (cmd[i + 1])
-				ft_putstr_fd(" ", 1);
+				ft_putstr_fd(" ", out);
 		}
 		i++;
 	}
 	if (!n)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", out);
 	st->ret = 0;
 	return (0);
 }

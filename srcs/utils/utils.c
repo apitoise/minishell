@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:28:04 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/15 15:50:16 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:58:09 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	print_it_loop(t_varlist *tmp, int i, int out)
 {
 	if (tmp->content[i] == '\\' || tmp->content[i] == '"'
 		|| tmp->content[i] == '$')
-		write(1, "\\", out);
-	write(1, &(tmp->content[i]), out);
+		write(out, "\\", 1);
+	write(out, &(tmp->content[i]), 1);
 }
 
 static char	*print_it(t_struct *st, t_varlist **cur, t_varlist *tmp)

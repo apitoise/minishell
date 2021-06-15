@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:58:41 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/12 15:07:48 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:34:19 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_fork(char **cmd, char *filepath, t_struct *st)
 		if (st->pipe)
 			dup2(st->stdin_fd, 0);
 		ft_exec(cmd, filepath, st);
-		ft_exit(cmd, st);
+		ft_exit(cmd, 1, st);
 	}
 	else
 	{

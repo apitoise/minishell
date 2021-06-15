@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/05 01:22:11 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:33:39 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,15 @@ static void	exitwitharg(char **cmd, t_struct *st)
 	}
 }
 
-void	ft_exit(char **cmd, t_struct *st)
+void	ft_exit(char **cmd, int child, t_struct *st)
 {
 	int			out;
 
 	out = 1;
 	if (st->pipe)
 		out = st->stdout_fd;
-	ft_putstr_fd("exit\n", out);
+	if (!child)
+		ft_putstr_fd("exit\n", out);
 	if (cmd && cmd[1])
 		exitwitharg(cmd, st);
 	else

@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/06/14 13:53:48 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:38:23 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ static void	ctrld(t_history *new, struct termios *restore, t_struct *st)
 	{
 		ft_freehs(new);
 		tcsetattr(STDIN_FILENO, TCSANOW, restore);
-		ft_putstr_fd("exit\n", 1);
-		ft_exit(NULL, st);
+		ft_exit(NULL, 0, st);
 	}
 }
 

@@ -13,6 +13,22 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
+static void	close_files(t_struct *st)
+{
+	if (st->was_chevr)
+	{
+		close(STDOUT_FILENO);
+		st->was_chevr = 0;
+		dup2(st->stdout_copy, 1);
+	}
+	if (st->was_lchevr)
+	{
+		close(STDIN_FILENO);
+		st->was_lchevr = 0;
+		dup2(st->stdin_copy, 0);
+	}
+}
+
 static void	exec_cmd(char **cmd, t_struct *st)
 {
 	ft_edit_cmd(cmd);
@@ -77,6 +93,7 @@ void	do_pipe(t_struct *st)
 			reset_in_out(new_pipe[0], 1, st);
 		}
 		ft_free_tab(cmd);
+		close_files(st);
 		pipe_nb++;
 	}
 	reset_in_out(0, 1, st);

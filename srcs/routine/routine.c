@@ -40,14 +40,12 @@ void	do_routine(t_struct *st)
 	}
 	else if (st->chevrons > 0)
 	{
+		ft_edit_cmd(st->cmd);
 		if (!do_chevrons(st->cmd, st))
 		{
 			st->cmd = del_chevron(st->cmd);
 			if (ft_strcmp(st->cmd[0], ""))
-			{
-				ft_edit_cmd(st->cmd);
 				do_builtin(st->cmd, st);
-			}
 		}
 	}
 	else

@@ -29,10 +29,12 @@ static void	close_files(t_struct *st)
 	}
 }
 
-static void	exec_cmd(char **cmd, t_struct *st)
+static int	check_pipe(int nb, int total)
 {
-	ft_edit_cmd(cmd);
-	do_builtin(cmd, st);
+	if (nb == total)
+		return (-1);
+	else
+		return (total);
 }
 
 static void	reset_in_out(int in, int out, t_struct *st)
@@ -79,17 +81,17 @@ void	do_pipe(t_struct *st)
 	pipe_nb = 0;
 	while (pipe_nb <= st->pipe)
 	{
-		if (pipe_nb == st->pipe)
-			st->pipe = -1;
+		st->pipe = check_pipe(pipe_nb, st->pipe);
 		if (pipe(new_pipe) != 0)
 			return ;
 		st->stdout_fd = new_pipe[1];
 		cmd = cmd_before_pipe(st->cmd, pipe_nb);
+		ft_edit_cmd(cmd);
 		if (!do_chevrons(cmd, st))
 		{
 			cmd = del_chevron(cmd);
 			if (ft_strcmp(cmd[0], ""))
-				exec_cmd(cmd, st);
+				do_builtin(cmd, st);
 			reset_in_out(new_pipe[0], 1, st);
 		}
 		ft_free_tab(cmd);

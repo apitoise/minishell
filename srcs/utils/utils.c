@@ -6,14 +6,14 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:28:04 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/15 15:47:32 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:50:16 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-static void	print_it_loop(t_varlist *tmp, int i; int out)
+static void	print_it_loop(t_varlist *tmp, int i, int out)
 {
 	if (tmp->content[i] == '\\' || tmp->content[i] == '"'
 		|| tmp->content[i] == '$')

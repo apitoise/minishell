@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 13:16:26 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/04/22 14:20:58 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/15 20:12:04 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ static int	new_line(char *s, t_struct *st)
 		--i;
 	if (((s[i] == '\\') && (!i || s[i - 1] != '\\')) || ft_tkorqt(s, i + 1))
 		return (ft_syntax_error("newline", st));
+	if (((s[i] == '>' || s[i] == '<' || s[i] == '|')
+			&& (!i || s[i - 1] != '\\')) || ft_tkorqt(s, i + 1))
+		return (ft_syntax_error(s + i, st));
 	return (0);
 }
 

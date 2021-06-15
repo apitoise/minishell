@@ -85,7 +85,7 @@ void	ft_exit(char **cmd, int child, t_struct *st)
 	int			out;
 
 	out = 1;
-	if (st->pipe)
+	if (st->pipe > 0)
 		out = st->stdout_fd;
 	if (!child)
 		ft_putstr_fd("exit\n", out);

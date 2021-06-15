@@ -19,7 +19,7 @@ int	ft_pwd(char **cmd, t_struct *st)
 	int		out;
 
 	out = 1;
-	if (st->pipe)
+	if (st->pipe > 0)
 		out = st->stdout_fd;
 	(void)cmd;
 	if (!(getcwd(path, PATH_MAX)))

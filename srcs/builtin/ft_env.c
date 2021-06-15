@@ -97,7 +97,7 @@ void	ft_env(t_struct *st)
 	int			out;
 
 	out = 1;
-	if (st->pipe)
+	if (st->pipe > 0)
 		out = st->stdout_fd;
 	if (st->lst == NULL)
 		return ;

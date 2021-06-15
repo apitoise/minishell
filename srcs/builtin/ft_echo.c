@@ -43,7 +43,7 @@ int	ft_echo(char **cmd, t_struct *st)
 	int	out;
 
 	out = 1;
-	if (st->pipe)
+	if (st->pipe > 0)
 		out = st->stdout_fd;
 	i = 1;
 	n = 0;

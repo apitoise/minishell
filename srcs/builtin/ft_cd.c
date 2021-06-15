@@ -77,7 +77,7 @@ static void	editpath(char *cmd, t_struct *st, int par, int ret)
 	int		out;
 
 	out = 1;
-	if (st->pipe)
+	if (st->pipe > 0)
 		out = st->stdout_fd;
 	if (!cmd)
 		editpath_pathinit(&path, &par);

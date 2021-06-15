@@ -15,11 +15,13 @@
 
 static void	reset_fd(t_struct *st)
 {
-	if (st->was_chevr) {
+	if (st->was_chevr)
+	{
 		close(STDOUT_FILENO);
 		st->was_chevr = 0;
 	}
-	if (st->was_lchevr) {
+	if (st->was_lchevr)
+	{
 		close(STDIN_FILENO);
 		st->was_lchevr = 0;
 	}

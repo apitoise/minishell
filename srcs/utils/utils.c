@@ -13,24 +13,14 @@
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
-/*
-void	print_tab(char **map)
-{
-	int	i;
-
-	i = -1;
-	if (!map)
-		return ;
-	while (map && map[++i])
-		ft_putendl_fd(map[i], out);
-}
-*/
-
 static char	*print_it(t_struct *st, t_varlist **cur, t_varlist *tmp)
 {
 	int	i;
-	int	out = st->pipe ? st->stdout_fd : 1;
+	int	out;
 
+	out = 1;
+	if (st->pipe)
+		out = st->stdout_fd;
 	*cur = st->lst;
 	if (!ft_strcmp(tmp->name, "_"))
 		return (tmp->name);

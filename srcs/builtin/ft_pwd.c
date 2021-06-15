@@ -16,8 +16,11 @@
 int	ft_pwd(char **cmd, t_struct *st)
 {
 	char	path[PATH_MAX];
-	int	out = st->pipe ? st->stdout_fd : 1;
+	int		out;
 
+	out = 1;
+	if (st->pipe)
+		out = st->stdout_fd;
 	(void)cmd;
 	if (!(getcwd(path, PATH_MAX)))
 		return (ft_error(""));

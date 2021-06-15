@@ -74,8 +74,11 @@ static void	editpath(char *cmd, t_struct *st, int par)
 	char	buff[PATH_MAX];
 	char	*oldpwd;
 	char	*path;
-	int	out = st->pipe ? st->stdout_fd : 1;
+	int		out;
 
+	out = 1;
+	if (st->pipe)
+		out = st->stdout_fd;
 	if (!cmd)
 		editpath_pathinit(&path, &par);
 	else if (!ft_strcmp(cmd, "-"))

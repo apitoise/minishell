@@ -40,8 +40,11 @@ int	ft_echo(char **cmd, t_struct *st)
 	int	i;
 	int	n;
 	int	option;
-	int	out = st->pipe ? st->stdout_fd : 1;
+	int	out;
 
+	out = 1;
+	if (st->pipe)
+		out = st->stdout_fd;
 	i = 1;
 	n = 0;
 	option = 0;

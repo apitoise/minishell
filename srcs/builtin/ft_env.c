@@ -94,8 +94,11 @@ char	**get_env(char **env)
 void	ft_env(t_struct *st)
 {
 	t_varlist	*current;
-	int	out = st->pipe ? st->stdout_fd : 1;
+	int			out;
 
+	out = 1;
+	if (st->pipe)
+		out = st->stdout_fd;
 	if (st->lst == NULL)
 		return ;
 	current = st->lst;

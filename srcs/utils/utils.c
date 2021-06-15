@@ -27,7 +27,7 @@ static char	*print_it(t_struct *st, t_varlist **cur, t_varlist *tmp)
 	int	out;
 
 	out = 1;
-	if (st->pipe)
+	if (st->pipe > 0)
 		out = st->stdout_fd;
 	*cur = st->lst;
 	if (!ft_strcmp(tmp->name, "_"))

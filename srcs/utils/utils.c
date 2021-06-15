@@ -6,12 +6,20 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:28:04 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/11 23:34:49 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:47:32 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
+
+static void	print_it_loop(t_varlist *tmp, int i; int out)
+{
+	if (tmp->content[i] == '\\' || tmp->content[i] == '"'
+		|| tmp->content[i] == '$')
+		write(1, "\\", out);
+	write(1, &(tmp->content[i]), out);
+}
 
 static char	*print_it(t_struct *st, t_varlist **cur, t_varlist *tmp)
 {
@@ -31,12 +39,7 @@ static char	*print_it(t_struct *st, t_varlist **cur, t_varlist *tmp)
 		ft_putstr_fd("=\"", out);
 		i = -1;
 		while (tmp->content[++i])
-		{
-			if (tmp->content[i] == '\\' || tmp->content[i] == '"'
-				|| tmp->content[i] == '$')
-				write(1, "\\", out);
-			write(1, &(tmp->content[i]), out);
-		}
+			print_it_loop(tmp, i, out);
 		ft_putstr_fd("\"", out);
 	}
 	ft_putstr_fd("\n", out);

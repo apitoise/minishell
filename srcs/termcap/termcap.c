@@ -6,7 +6,7 @@
 /*   By: lgimenez <lgimenez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:20:53 by lgimenez          #+#    #+#             */
-/*   Updated: 2021/06/15 15:38:23 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:32:36 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ char	*ft_termcap(t_struct *st)
 	if (!new->cmdline || !new->cmdline[0])
 	{
 		ft_freehs(new);
+		tcsetattr(STDIN_FILENO, TCSANOW, &restore);
 		return (NULL);
 	}
 	g_sig.cmdl = NULL;

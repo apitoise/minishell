@@ -6,7 +6,7 @@
 /*   By: apitoise <apitoise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 15:24:20 by apitoise          #+#    #+#             */
-/*   Updated: 2021/06/15 15:33:39 by lgimenez         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:44:03 by lgimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static int	isargvalid(char *arg)
 	if (!arg)
 		return (1);
 	i = -1;
+	if (arg[0] == '+' || arg[0] == '-')
+		++i;
 	while (arg[++i])
 	{
 		if (!ft_isdigit(arg[i]))
